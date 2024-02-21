@@ -75,22 +75,22 @@
                             <div class="tab-pane fade" id="pills-profiles" role="tabpanel"
                                  aria-labelledby="pills-profile-tab2">
                                 <div class="wsus__login">
-                                    <form>
+                                    <form method="post" action="{{route('signup')}}">
                                         <div class="wsus__login_input">
                                             <i class="fas fa-user-tie"></i>
-                                            <input type="text" placeholder="Name">
+                                            <input type="text" placeholder="Name" name="name">
                                         </div>
                                         <div class="wsus__login_input">
                                             <i class="far fa-envelope"></i>
-                                            <input type="text" placeholder="Email">
+                                            <input type="text" placeholder="Email" name="email">
                                         </div>
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
-                                            <input type="text" placeholder="Password">
+                                            <input type="password" placeholder="Password" name="password">
                                         </div>
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
-                                            <input type="text" placeholder="Confirm Password">
+                                            <input type="password" placeholder="Confirm Password" name="password_confirmation">
                                         </div>
                                         <div class="wsus__login_save">
                                             <div class="form-check form-switch">

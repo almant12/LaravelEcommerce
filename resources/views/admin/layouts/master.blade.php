@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('backend/assets/css/style.css')}}">
@@ -73,10 +75,12 @@
 <script src="{{asset('backend/assets/modules/summernote/summernote-bs4.js')}}"></script>
 <script src="{{asset('backend/assets/modules/chocolat/dist/js/jquery.chocolat.min.js')}}"></script>
 <script src="{{asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
+<script src="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src='https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js'></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 
 <!-- Page Specific JS File -->
 <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script>
@@ -145,6 +149,16 @@
                     })
                 }
             });
+        })
+    })
+
+    $(document).ready(function() {
+        $(document).on('click', '.imageContainer', function () {
+            var imgUrl = $(this).data('url');
+            $.fancybox.open({
+                src: imgUrl,
+                type: 'image'
+            })
         })
     })
 </script>

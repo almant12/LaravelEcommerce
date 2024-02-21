@@ -21,6 +21,11 @@
     <link rel="stylesheet" href="{{asset('frontend/css/ranger_style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/jquery.classycountdown.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/venobox.min.css')}}">
+    <link rel="stylesheet" href="{{asset('backend/assets/modules/summernote/summernote-bs4.css')}}">
+
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
@@ -98,9 +103,82 @@
 <script src="{{asset('frontend/js/venobox.min.js')}}"></script>
 <!--classycountdown js-->
 <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
+<script src="{{asset('backend/assets/modules/summernote/summernote-bs4.js')}}"></script>
+<script src='https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js'></script>
+<script src="{{asset('backend/assets/modules/moment.min.js')}}"></script>
+<script src="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!--main/custom js-->
 <script src="{{asset('frontend/js/main.js')}}"></script>
+<script>
+    $('.summernote').summernote({
+        height:150
+    })
+    $('.datepicker').daterangepicker({
+        locale: {
+            format: 'YYYY-MM-DD'
+        },
+        singleDatePicker: true
+    })
+
+
+    $(document).ready(function (){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('body').on('click','.delete-item',function (event){
+            event.preventDefault();
+
+            let deleteUrl = $(this).attr('href');
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+
+                    $.ajax({
+                        type: 'DELETE',
+                        url: deleteUrl,
+
+                        success: function (data){
+                            if (data.status == 'success'){
+                                Swal.fire(
+                                    'Deleted!',
+                                    data.message
+                                )
+                                window.location.reload();
+                            }else if(data.status == 'error'){
+                                Swal.fire(
+                                    "Can't Delete",
+                                    data.message,
+                                    'error'
+                                )
+                            }
+                        },
+                        error : function (xhr,status,error){
+                            console.log(error)
+                        }
+                    })
+                }
+            });
+        })
+    })
+
+</script>
+@stack('scripts')
+
 </body>
 
 </html>

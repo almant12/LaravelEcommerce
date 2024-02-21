@@ -1,10 +1,10 @@
-@extends('vendor.dashboard.layouts.master')
+@extends('vendor.layouts.master')
 
 
 @section('content')
     <section id="wsus__dashboard">
         <div class="container-fluid">
-            @include('vendor.dashboard.layouts.sidebar')
+            @include('vendor.layouts.sidebar')
 
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
@@ -14,7 +14,8 @@
                             <div class="wsus__dash_pro_area">
                                 <h4>basic information</h4>
 
-                                <form method="post" action="{{route('vendor.profile.update')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{route('vendor.profile.update')}}"
+                                      enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
@@ -23,26 +24,32 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="wsus__dash_pro_single">
                                                         <i class="fas fa-user-tie"></i>
-                                                        <input type="text" name="username" value="{{Auth::user()->username}}" placeholder="First Name">
+                                                        <input type="text" name="username"
+                                                               value="{{Auth::user()->username}}"
+                                                               placeholder="First Name">
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="wsus__dash_pro_single">
                                                         <i class="fas fa-user-tie"></i>
-                                                        <input type="text" name="lastname" value="{{Auth::user()->lastname}}" placeholder="Last Name">
+                                                        <input type="text" name="lastname"
+                                                               value="{{Auth::user()->lastname}}"
+                                                               placeholder="Last Name">
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="wsus__dash_pro_single">
                                                         <i class="fal fa-envelope-open"></i>
-                                                        <input type="email" name="email" value="{{Auth::user()->email}}" placeholder="Email">
+                                                        <input type="email" name="email" value="{{Auth::user()->email}}"
+                                                               placeholder="Email">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xl-3 col-sm-6 col-md-6">
                                             <div class="wsus__dash_pro_img">
-                                                <img src="{{Auth::user()->image ? asset('upload/'.Auth::user()->image) : asset('frontend/images/default.jpg')}}" alt="img" class="img-fluid w-100">
+                                                <img src="{{Auth::user()->image ? asset('upload/'.Auth::user()->image) : asset('frontend/images/default.jpg')}}"
+                                                     alt="img" class="img-fluid w-100">
                                                 <input type="file" name="image">
                                             </div>
                                         </div>
@@ -61,7 +68,8 @@
                                             <div class="col-xl-4 col-md-6">
                                                 <div class="wsus__dash_pro_single">
                                                     <i class="fas fa-unlock-alt"></i>
-                                                    <input type="password" placeholder="Current Password" name="current_password">
+                                                    <input type="password" placeholder="Current Password"
+                                                           name="current_password">
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-md-6">
@@ -73,7 +81,8 @@
                                             <div class="col-xl-4">
                                                 <div class="wsus__dash_pro_single">
                                                     <i class="fas fa-lock-alt"></i>
-                                                    <input type="password" placeholder="Confirm Password" name="password_confirmation">
+                                                    <input type="password" placeholder="Confirm Password"
+                                                           name="password_confirmation">
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">

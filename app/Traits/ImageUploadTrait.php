@@ -21,6 +21,20 @@ trait ImageUploadTrait{
             return $path.'/'.$imageName;
         }
     }
+    public function uploadMultipleImages(Request $request,$inputName){
+        $path = 'upload';
+        $imagesPaths = [];
+        if ($request->hasFile($inputName)){
+            $images = $request->{$inputName};
+            foreach ($images as $image) {
+                $ext = $image->getClientOriginalExtension();
+                $imageName = 'media_' . uniqid() . '.' . $ext;
+                $image->move(public_path($path), $imageName);
+                $imagesPaths[] = $path.'/'.$imageName;
+            }
+            return $imagesPaths;
+        }
+    }
 
     public function updateImage(Request $request,$inputName,$oldPath){
         $path = 'upload';

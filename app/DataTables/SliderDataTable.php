@@ -35,13 +35,20 @@ class SliderDataTable extends DataTable
                 return $img = "<img width='100px' src='".asset($query->banner)."'></img>";
             })
             ->addColumn('status',function ($query){
-                $active = '<i class="badge badge-success">Active</i>';
-                $inActive = '<i class="badge badge-danger">Inactive</i>';
                 if ($query->status == 1){
-                    return $active;
+                    $button = '<label class="custom-switch mt-2">
+              <input type="checkbox" checked name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+              <span class="custom-switch-indicator"></span>
+              <span class="custom-switch-description"></span>
+                  </label>';
                 }else{
-                    return $inActive;
+                    $button = '<label class="custom-switch mt-2">
+              <input type="checkbox" name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+              <span class="custom-switch-indicator"></span>
+              <span class="custom-switch-description"></span>
+                  </label>';
                 }
+                return $button;
             })
 
             ->rawColumns(['banner','action','status'])

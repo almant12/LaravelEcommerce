@@ -28,4 +28,34 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(event) {
+                if (event.target.classList.contains('change-status')) {
+                    let isChecked = event.target.checked;
+                    let id = event.target.getAttribute('data-id');
+
+                    fetch('{{ route('admin.slider.update-status') }}', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            status: isChecked,
+                            id: id
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            toastr.success(data.message);
+                        })
+                        .catch(error => {
+                            toastr.error(error);
+                        });
+                }
+            });
+        });
+    </script>
 @endpush

@@ -109,6 +109,15 @@ class SliderController extends Controller
         return redirect()->route('admin.slider.index');
     }
 
+    public function updateStatus(Request $request){
+
+        $slider = Slider::findOrFail($request->id);
+        $slider->status = $request->status == 'true' ? 1 : 0;
+        $slider->save();
+
+        return response(['status'=>'success','message'=>'Status Updated Successfully']);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
