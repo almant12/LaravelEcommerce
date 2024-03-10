@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\ProductDataTable;
+use App\DataTables\Admin\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
@@ -13,7 +13,6 @@ use App\Models\SubCategory;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Psy\Util\Str;
 
 class ProductController extends Controller{
 
@@ -112,7 +111,6 @@ class ProductController extends Controller{
      */
     public function update(Request $request, string $id)
     {
-
         $request->validate([
             'image' => ['nullable', 'image', 'max:3000'],
             'name' => ['required', 'max:200'],

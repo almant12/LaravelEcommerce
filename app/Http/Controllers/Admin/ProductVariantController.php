@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\ProductVariantDataTable;
-use App\DataTables\ProductDataTable;
+use App\DataTables\Admin\ProductVariantDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariant;

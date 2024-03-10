@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\SubCategoryDataTable;
+use App\DataTables\Admin\SubCategoryDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use function Termwind\render;
 
 class SubCategoryController extends Controller
 {

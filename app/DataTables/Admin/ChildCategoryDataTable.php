@@ -1,18 +1,16 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Admin;
 
-use App\Models\Category;
+use App\Models\ChildCategory;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoryDataTable extends DataTable
+class ChildCategoryDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,41 +21,45 @@ class CategoryDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query){
-                $editBtn = "<a href='".route('admin.category.edit',$query->id)."' class='btn btn-primary mr-2'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='".route('admin.category.destroy',$query->id)."' class='btn btn-danger delete-item '><i class='fas fa-trash-alt'></i>/</a>";
+                $editBtn = "<a href='".route('admin.child-category.edit',$query->id)."' class='btn btn-primary mr-2'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='".route('admin.child-category.destroy',$query->id)."' class='btn btn-danger delete-item '><i class='fas fa-trash-alt'></i>/</a>";
                 $horizontalButtons = "<div class='btn-group' role='group' aria-label='Edit and Delete buttons'>
                      $editBtn
                      $deleteBtn
                      </div>";
                 return $horizontalButtons;
             })
-            ->addColumn('icon', function ($query){
-                return '<i style="font-size:40px" class="'.$query->icon.'"></i>';
-            })
-            ->addColumn('status', function ($query){
-                if ($query->status == 1){
+            ->addColumn('status', function ($query) {
+                if ($query->status == 1) {
                     $button = '<label class="custom-switch mt-2">
-              <input type="checkbox" checked name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+              <input type="checkbox" checked name="custom-switch-checkbox" data-id="' . $query->id . '" class="custom-switch-input change-status">
               <span class="custom-switch-indicator"></span>
               <span class="custom-switch-description"></span>
                   </label>';
-                }else{
+                } else {
                     $button = '<label class="custom-switch mt-2">
-              <input type="checkbox" name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+              <input type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="custom-switch-input change-status">
               <span class="custom-switch-indicator"></span>
               <span class="custom-switch-description"></span>
                   </label>';
                 }
-             return $button;
+                return $button;
             })
-            ->rawColumns(['icon','action','status'])
+            ->addColumn('category', function ($query) {
+                return $query->category->name;
+            })
+            ->addColumn('subCategory', function ($query) {
+                return $query->subCategory->name;
+            })
+            ->rawColumns(['action','status','category','subCategory'])
             ->setRowId('id');
     }
+
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Category $model): QueryBuilder
+    public function query(ChildCategory $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -68,11 +70,11 @@ class CategoryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('category-table')
+                    ->setTableId('childcategory-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -90,15 +92,17 @@ class CategoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id')->width(100),
-            Column::make('icon')->width(300),
+            Column::make('id'),
             Column::make('name'),
-            Column::make('status')->width(100),
+            Column::make('slug'),
+            Column::make('category'),
+            Column::make('subCategory'),
+            Column::make('status'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center')
         ];
     }
 
@@ -107,6 +111,6 @@ class CategoryDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Category_' . date('YmdHis');
+        return 'ChildCategory_' . date('YmdHis');
     }
 }

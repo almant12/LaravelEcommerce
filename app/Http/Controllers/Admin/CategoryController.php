@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\Admin\CategoryDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
-use App\DataTables\CategoryDataTable;
 
 class CategoryController extends Controller
 {

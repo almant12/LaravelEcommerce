@@ -32,6 +32,7 @@ Route::group(['middleware'=>['auth','role:vendor'],'prefix'=>'vendor','as'=>'ven
     Route::put('product-variant/change-status',[VendorProductVariantController::class,'updateStatus'])->name('product-variant.update-status');
     Route::resource('product-variant',VendorProductVariantController::class);
 
+    //Vendor-product-variant-item
     Route::get('product-variant-item/edit/{variantItemId}',[VendorProductVariantItemController::class,'edit'])->name('product-variant-item.edit');
     Route::get('product-variant-item/{productId}/{variantId}',[VendorProductVariantItemController::class,'index'])->name('product-variant-item.index');
     Route::get('product-variant-item/create/{productId}/{variantId}',[VendorProductVariantItemController::class,'create'])->name('product-variant-item.create');

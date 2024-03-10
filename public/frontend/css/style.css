@@ -539,7 +539,6 @@ header {
 .wsus__mini_cart .wsus__cart_img {
   width: 70px;
   float: left;
-  height: 70px;
   position: relative;
   border-radius: 3px;
   border: none;
@@ -1458,7 +1457,6 @@ PRODUCT MODAL VIEW END
 #wsus__brand_sleder .prv_arr {
   position: absolute;
   top: 50%;
-  left: -15px;
   width: 35px;
   height: 35px;
   background: #08C;
@@ -1657,7 +1655,7 @@ PRODUCT MODAL VIEW END
 }
 
 .wsus__product_item .wsus__pro_link img {
-  width: 100%;
+  width: 100% !important;
   height: 100%;
   object-fit: cover;
 }
@@ -1811,6 +1809,7 @@ PRODUCT MODAL VIEW END
   width: 100%;
   text-align: center;
   border-radius: 0;
+    border: 1px;
 }
 
 /* .wsus__product_item:hover
@@ -8655,7 +8654,6 @@ header .wsus__call_text a:hover {
 }
 
 /* product start */
-.wsus__new,
 .wsus__minus {
   width: 50px;
   border-radius: 30px;
@@ -9514,4 +9512,80 @@ a:not([href]):not([class]):hover {
 .variant-button{
     margin-right: 5px;
     border-radius: 5px !important;
+}
+
+li.page-item.disabled > .page-link{
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    text-align: center;
+    line-height: 35px;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all linear 0.3s;
+    -webkit-transition: all linear 0.3s;
+    -moz-transition: all linear 0.3s;
+    -ms-transition: all linear 0.3s;
+    -o-transition: all linear 0.3s;
+    border-radius: 50%;
+    border: 1px solid #08C;
+    margin-right: 10px;
+}
+
+li.page-item.active > .page-link{
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    text-align: center;
+    line-height: 35px;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all linear 0.3s;
+    -webkit-transition: all linear 0.3s;
+    -moz-transition: all linear 0.3s;
+    -ms-transition: all linear 0.3s;
+    -o-transition: all linear 0.3s;
+    border-radius: 50%;
+    border: 1px solid #08C;
+    margin-right: 10px;
+}
+
+li.page-item > .page-link{
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    text-align: center;
+    line-height: 35px;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all linear 0.3s;
+    -webkit-transition: all linear 0.3s;
+    -moz-transition: all linear 0.3s;
+    -ms-transition: all linear 0.3s;
+    -o-transition: all linear 0.3s;
+    border-radius: 50%;
+    border: 1px solid #08C;
+    margin-right: 10px;
+}
+
+.page-item > .page-link{
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    text-align: center;
+    line-height: 35px;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all linear 0.3s;
+    -webkit-transition: all linear 0.3s;
+    -moz-transition: all linear 0.3s;
+    -ms-transition: all linear 0.3s;
+    -o-transition: all linear 0.3s;
+    border-radius: 50% !important;
+    border: 1px solid #08C;
+    margin-right: 10px;
+}
+
+.border-radius{
+    border-radius: 30px !important;
 }

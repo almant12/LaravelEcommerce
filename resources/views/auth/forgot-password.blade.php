@@ -25,7 +25,9 @@
 {{--</x-guest-layout>--}}
 
 @extends('frontend.layout.master')
-
+@section('title')
+    {{$settings->site_name}} || Forget-Password
+@endsection
 @section('content')
     <section id="wsus__login_register">
         <div class="container">

@@ -1,18 +1,22 @@
 <?php
 
-use App\DataTables\ProductImageGalleryDataTable;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminVendorProfileController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\FlashSaleController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageGalleryController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\ProductVariantItemController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ShippingRuleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\VendorProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin.'],function (){
@@ -67,4 +71,30 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     Route::put('product-variant-item-update/{variantItemId}',[ProductVariantItemController::class,'update'])->name('product-variant-item.update');
     Route::delete('product-variant-item/{variantItemId}',[ProductVariantItemController::class,'destroy'])->name('product-variant-item.destroy');
     Route::put('product-variant-item/update-status',[ProductVariantItemController::class,'updateStatus'])->name('product-variant-item.update-status');
+
+    //Vendor-products
+    Route::get('vendor-products',[VendorProductController::class,'index'])->name('vendor-products.index');
+    Route::get('vendor-pending-products',[VendorProductController::class,'pendingProducts'])->name('vendor-pending-products.index');
+    Route::put('vendor-change-approve-status',[VendorProductController::class,'changeApproveStatus'])->name('vendor-change-approve-status');
+
+    //Flash-sale
+    Route::get('flash-sale',[FlashSaleController::class,'index'])->name('flash-sale.index');
+    Route::put('flash-sale',[FlashSaleController::class,'update'])->name('flash-sale.update');
+    Route::post('flash-sale-item/add-product',[FlashSaleController::class,'addProduct'])->name('flash-sale.add-product');
+    Route::put('flash-sale-item/update-show-at-home',[FlashSaleController::class,'updateShowAtHome'])->name('flash-sale.update-show-at-home');
+    Route::put('flash-sale-item/update-status',[FlashSaleController::class,'updateStatus'])->name('flash-sale.update-status');
+    Route::delete('flash-sale-item/delete/{flashId}',[FlashSaleController::class,'destroy'])->name('flash-sale.destroy');
+
+
+    //Settings-routes
+    Route::get('settings',[SettingController::class,'index'])->name('settings.index');
+    Route::put('general-setting-update',[SettingController::class,'generalSettingUpdate'])->name('general-setting.update');
+
+    //Coupons
+    Route::put('coupon/change-status',[CouponController::class,'updateStatus'])->name('coupon.update-status');
+    Route::resource('coupon',CouponController::class);
+
+    //Shipping-rule
+    Route::put('shipping-rule/change-status',[ShippingRuleController::class,'updateStatus'])->name('shipping-rule.update-status');
+    Route::resource('shipping-rule',ShippingRuleController::class);
 });

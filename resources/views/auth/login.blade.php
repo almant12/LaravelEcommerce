@@ -1,6 +1,7 @@
 @extends('frontend.layout.master')
-
-
+@section('title')
+    {{$settings->site_name}} || Login
+@endsection
 @section('content')
     <!--============================
          BREADCRUMB START

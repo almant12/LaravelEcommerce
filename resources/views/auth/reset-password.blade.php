@@ -41,7 +41,9 @@
 
 @extends('frontend.layout.master')
 
-
+@section('title')
+    {{$settings->site_name}} || Reset-Password
+@endsection
 @section('content')
     <section id="wsus__breadcrumb">
         <div class="wsus_breadcrumb_overlay">

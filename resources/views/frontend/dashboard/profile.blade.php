@@ -1,6 +1,7 @@
 @extends('frontend.dashboard.layouts.master')
-
-
+@section('title')
+    {{$settings->site_name}} || Profile
+@endsection
 @section('content')
     <section id="wsus__dashboard">
         <div class="container-fluid">

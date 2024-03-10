@@ -55,8 +55,6 @@
     left: 0;
 
     display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 .slick-track:before,
 .slick-track:after
@@ -89,7 +87,9 @@
 .slick-slide img {
 	display: block;
 	height: 100%;
-	width: 100% !important;
+}
+.img-fluid-1{
+    margin-left: 50px;
 }
 .slick-slide.slick-loading img
 {

@@ -1,18 +1,16 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Admin;
 
-use App\Models\ProductVariant;
+use App\Models\Slider;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class VendorProductVariantDataTable extends DataTable
+class SliderDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,40 +21,44 @@ class VendorProductVariantDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query){
-                $moreBtn = '<a href="'.route('vendor.product-variant-item.index',['productId'=>$this->request()->product,'variantId'=>$query->id],).'" class="btn btn-info variant-button">
-                              <i class="fas fa-edit">VariantItems</i>
-                               </a>';
-                $editBtn = "<a href='".route('vendor.product-variant.edit',$query->id)."' class='btn btn-primary edit-button'><i class='far fa-edit'></i></a>";
-                $deleteBtn = "<a href='".route('vendor.product-variant.destroy',$query->id)."' class='btn btn-danger delete-item'><i class='fas fa-trash-alt'></i></a>";
+                 $editBtn = "<a href='".route('admin.slider.edit',$query->id)."' class='btn btn-primary mr-2'><i class='far fa-edit'></i></a>";
+                 $deleteBtn = "<a href='".route('admin.slider.destroy',$query->id)."' class='btn btn-danger delete-item '><i class='fas fa-trash-alt'></i>/</a>";
                 $horizontalButtons = "<div class='btn-group' role='group' aria-label='Edit and Delete buttons'>
-                     $moreBtn
                      $editBtn
                      $deleteBtn
                      </div>";
-                return $horizontalButtons;
+                 return $horizontalButtons;
+            })
+            ->addColumn('banner',function ($query){
+                return $img = "<img width='100px' src='".asset($query->banner)."'></img>";
             })
             ->addColumn('status',function ($query){
-                if ($query->status == 1) {
-                    $button = '<div class="form-check form-switch">
-                          <input checked class="form-check-input change-status" type="checkbox" id="flexSwitchCheckDefault" data-id="'.$query->id.'">
-                          </div>';
-                } else {
-                    $button = '<div class="form-check form-switch">
-                          <input class="form-check-input change-status" type="checkbox" id="flexSwitchCheckDefault" data-id="'.$query->id.'">
-                          </div>';
+                if ($query->status == 1){
+                    $button = '<label class="custom-switch mt-2">
+              <input type="checkbox" checked name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+              <span class="custom-switch-indicator"></span>
+              <span class="custom-switch-description"></span>
+                  </label>';
+                }else{
+                    $button = '<label class="custom-switch mt-2">
+              <input type="checkbox" name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+              <span class="custom-switch-indicator"></span>
+              <span class="custom-switch-description"></span>
+                  </label>';
                 }
                 return $button;
             })
-            ->rawColumns(['action','status'])
+
+            ->rawColumns(['banner','action','status'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(ProductVariant $model): QueryBuilder
+    public function query(Slider $model): QueryBuilder
     {
-        return $model->where('product_id',$this->request()->product)->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -65,11 +67,11 @@ class VendorProductVariantDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('vendorproductvariant-table')
+                    ->setTableId('slider-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -87,13 +89,15 @@ class VendorProductVariantDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
-            Column::make('name'),
+            Column::make('id')->width(100),
+            Column::make('banner')->width(200),
+            Column::make('title'),
+            Column::make('serial'),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(60)
+                ->width(200)
                 ->addClass('text-center')
         ];
     }
@@ -103,6 +107,6 @@ class VendorProductVariantDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'VendorProductVariant_' . date('YmdHis');
+        return 'Slider_' . date('YmdHis');
     }
 }

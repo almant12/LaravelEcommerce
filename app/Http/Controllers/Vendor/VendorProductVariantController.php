@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Vendor;
 
-use App\DataTables\VendorProductVariantDataTable;
+use App\DataTables\Vendor\VendorProductVariantDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function Symfony\Component\Translation\t;
 
 class VendorProductVariantController extends Controller
 {

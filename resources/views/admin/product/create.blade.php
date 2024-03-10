@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <label for="inputState">Brand</label>
                                         <select id="inputState" class="form-control child-category" name="brand">
-                                            <option value="">Select</option>
+                                            <option value=""></option>
                                             @foreach($brands as $brand)
                                                 <option value="{{$brand->id}}">{{$brand->name}}</option>
                                             @endforeach

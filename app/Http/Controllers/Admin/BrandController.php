@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\BrandDataTable;
+use App\DataTables\Admin\BrandDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use function Symfony\Component\String\b;
-use function Termwind\render;
 
 class BrandController extends Controller
 {
