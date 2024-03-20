@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\CheckOutController;
 use App\Http\Controllers\User\FlashSaleController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\UserAddressController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\UserProfileController;
@@ -49,6 +51,9 @@ Route::get('cart/content',[CartController::class,'getCartProducts'])->name('cart
 Route::get('cart/sidebar-product-total',[CartController::class,'cartTotal'])->name('cart.sidebar-product-total');
 Route::post('cart/sidebar-remove-product',[CartController::class,'removeSidebarProduct'])->name('cart.sidebar-remove-product');
 
+Route::get('apply-coupon',[CartController::class,'applyCoupon'])->name('apply-coupon');
+Route::get('coupon-calculation',[CartController::class,'couponCalculation'])->name('coupon-calculation');
+
 Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],function (){
     Route::get('dashboard',[UserDashboardController::class,'index'])->name('dashboard');
     Route::get('profile',[UserProfileController::class,'index'])->name('profile');
@@ -57,4 +62,17 @@ Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],
 
     //UserAddress
     Route::resource('address',UserAddressController::class);
+
+    //UserCheckout
+    Route::get('checkout',[CheckOutController::class,'index'])->name('checkout');
+    Route::post('checkout',[CheckOutController::class,'addAddress'])->name('checkout.address.create');
+    Route::post('checkout/form-submit', [CheckOutController::class, 'checkOutFormSubmit'])->name('checkout.form-submit');
+
+    //Payment
+    Route::get('payment',[PaymentController::class,'index'])->name('payment');
+
+    //PayPal
+    Route::get('paypal/payment',[PaymentController::class,'payWithPaypal'])->name('paypal.payment');
+    Route::get('paypal/success',[PaymentController::class,'paypalSuccess'])->name('paypal.success');
+    Route::get('paypal/cancel',[PaymentController::class,'paypalCancel'])->name('paypal.cancel');
 });

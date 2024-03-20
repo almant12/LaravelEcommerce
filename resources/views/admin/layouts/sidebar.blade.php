@@ -33,13 +33,14 @@
                     <li class="{{setActive(['admin.vendor-pending-products.*'])}}"><a class="nav-link" href="{{route('admin.vendor-pending-products.index')}}">Vendor Pending Products</a></li>
                 </ul>
             </li>
-            <li class="dropdown {{setActive(['admin.vendor-profile.*','admin.coupon.*','admin.shipping-rule.*'])}}">
+            <li class="dropdown {{setActive(['admin.vendor-profile.*','admin.coupon.*','admin.shipping-rule.*','payment-setting.*'])}}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Ecommerce</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{setActive(['admin.vendor-profile.*'])}}"><a class="nav-link" href="{{route('admin.vendor-profile.index')}}">Vendero Profile</a></li>
+                    <li class="{{setActive(['admin.vendor-profile.*'])}}"><a class="nav-link" href="{{route('admin.vendor-profile.index')}}">Vendor Profile</a></li>
                     <li class="{{setActive(['admin.coupon.*'])}}"><a class="nav-link" href="{{route('admin.coupon.index')}}">Coupons</a></li>
                     <li class="{{setActive(['admin.shipping-rule.*'])}}"><a class="nav-link" href="{{route('admin.shipping-rule.index')}}">Shipping Rule</a></li>
                     <li class="{{setActive(['admin.flash-sale.*'])}}"><a class="nav-link" href="{{route('admin.flash-sale.index')}}">Flash Sale</a></li>
+                    <li class="{{setActive(['admin.payment-setting.*'])}}"><a class="nav-link" href="{{route('admin.payment-setting.index')}}">Payment Settings</a></li>
                 </ul>
             </li>
             <li class="dropdown {{setActive(['admin.slider.*'])}}">

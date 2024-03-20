@@ -3,6 +3,7 @@
         $('.shopping-cart-form').on('submit',function (e){
             e.preventDefault();
             let formData = $(this).serialize();
+            console.log(formData)
             $.ajax({
                 method:'POST',
                 url: "{{route('add-to-cart')}}",
@@ -11,10 +12,11 @@
                 success: function (data){
                     if (data.status === 'error'){
                         toastr.error(data.message)
+                    }else if (data.status === 'success'){
+                        getCartCount();
+                        fetchCartItemProduct();
+                        $('.mini_cart_actions').removeClass('d-none')
                     }
-                    getCartCount();
-                    fetchCartItemProduct();
-                    $('.mini_cart_actions').removeClass('d-none')
                 },
                 error: function (data){
                     console.error(data)
@@ -44,6 +46,8 @@
                     var html = '';
                     for (let item in data){
                         let product = data[item];
+                        let price = Number(product.price).toLocaleString(undefined,{minimumFractionDigits:0})
+                        let variants_total = Number(product.options.variants_total).toLocaleString(undefined,{minimumFractionDigits:0})
                         html += `
                         <li id="mini-cart-${product.rowId}">
                             <div class="wsus__cart_img">
@@ -52,8 +56,8 @@
                             </div>
                             <div class="wsus__cart_text">
                                 <a class="wsus__cart_title" href="{{ url('product-detail') }}/${product.options.slug}">${product.name}</a>
-                                <p>{{ $settings->currency_icon }}${product.price}</p>
-                                <small>Variants total: {{ $settings->currency_icon }}${product.options.variants_total}</small>
+                                <p>${price}{{$settings->currency_icon }}</p>
+                                <small>Variants total: ${variants_total}{{ $settings->currency_icon }}</small>
                                 <br>
                                 <small>Qty: ${product.qty}</small>
                             </div>
@@ -74,7 +78,7 @@
                 url: "{{route('cart.sidebar-product-total')}}",
                 success: function (data){
                     console.log(data)
-                    $('#mini-cart-subtotal').text("{{$settings->currency_icon}}" + data)
+                    $('#mini-cart-subtotal').text(data+"{{$settings->currency_icon}}")
                 },error: function (data){
                     console.error(data)
                 }

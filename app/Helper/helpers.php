@@ -1,4 +1,11 @@
 <?php
+use Illuminate\Support\Facades\Session;
+
+
+function priceFormat(float $price){
+    $formatted_price = number_format($price, 0, '.', ' '); // Adds thousand separators
+    return $formatted_price;
+}
 function setActive(array $route){
     if (array($route)){
         foreach ($route as $r){
@@ -53,4 +60,59 @@ function getCartTotal(){
         $total += ($product->price + $product->options->variants_total) * $product->qty;
     }
     return $total;
+}
+
+function getMainCartTotal(){
+    if (Session::has('coupon')){
+        $coupon = Session::get('coupon');
+        $subTotal = getCartTotal();
+        if ($coupon['discount_type'] === 'amount'){
+            $total = $subTotal - $coupon['discount'];
+            return $total;
+        }elseif ($coupon['discount_type'] === 'percent'){
+            $discount = $subTotal * $coupon['discount'] / 100;
+            $total = $subTotal - $discount;
+            return $total;
+        }
+    }else{
+        return getCartTotal();
+    }
+}
+
+function getCartDiscount(){
+    if (Session::has('coupon')){
+        $coupon = Session::get('coupon');
+        $subTotal = getCartTotal();
+        if ($coupon['discount_type'] === 'amount'){
+            return $coupon['discount'];
+        }elseif ($coupon['discount_type'] === 'percent'){
+            return $coupon['discount'];
+        }
+    }else{
+        return 0;
+    }
+}
+function getCouponType(){
+    if (Session::has('coupon')){
+        $coupon = Session::get('coupon');
+        if ($coupon['discount_type'] === 'percent'){
+            return 'percent';
+        }elseif ($coupon['discount_type'] === 'amount'){
+            return 'amount';
+        }
+    }else{
+        return null;
+    }
+}
+
+function getShppingFee(){
+    if(Session::has('shipping_method')){
+        return Session::get('shipping_method')['cost'];
+    }else {
+        return 0;
+    }
+}
+
+function getFinalPayableAmount(){
+    return  getMainCartTotal() + getShppingFee();
 }

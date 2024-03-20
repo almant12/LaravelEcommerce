@@ -32,106 +32,111 @@
     ==============================-->
     <section id="wsus__cart_view">
         <div class="container">
-            <div class="row">
-                <div class="col-xl-9">
-                    <div class="wsus__cart_list">
-                        <div class="table-responsive">
-                            <table>
-                                <tbody>
-                                <tr class="d-flex">
-                                    <th class="wsus__pro_img">
-                                        product item
-                                    </th>
-
-                                    <th class="wsus__pro_name">
-                                        product details
-                                    </th>
-
-                                    <th class="wsus__pro_tk">
-                                        unit price
-                                    </th>
-
-                                    <th class="wsus__pro_tk">
-                                        total
-                                    </th>
-
-                                    <th class="wsus__pro_select">
-                                        quantity
-                                    </th>
-
-                                    <th class="wsus__pro_icon">
-                                        <a class="common_btn border-radius clear-cart">clear cart</a>
-                                    </th>
-                                </tr>
-                                @foreach($cartItems as $item)
-                                    @php
-                                    $product = \App\Models\Product::find($item->id)
-                                    @endphp
+            @if(count($cartItems) === 0)
+                <div>
+                    <h1 class="text-center">
+                        Cart is Empty!
+                    </h1>
+                </div>
+            @else
+                <div class="row">
+                    <div class="col-xl-9">
+                        <div class="wsus__cart_list">
+                            <div class="table-responsive">
+                                <table>
+                                    <tbody>
                                     <tr class="d-flex">
-                                        <td class="wsus__pro_img"><img src="{{asset($item->options->image)}}" alt="product"
-                                                                       class="img-fluid w-100">
-                                        </td>
+                                        <th class="wsus__pro_img">
+                                            product item
+                                        </th>
 
-                                        <td class="wsus__pro_name">
-                                            <p>{!! $item->name !!}</p>
+                                        <th class="wsus__pro_name">
+                                            product details
+                                        </th>
+
+                                        <th class="wsus__pro_tk">
+                                            unit price
+                                        </th>
+
+                                        <th class="wsus__pro_tk">
+                                            total
+                                        </th>
+
+                                        <th class="wsus__pro_select">
+                                            quantity
+                                        </th>
+
+                                        <th class="wsus__pro_icon">
+                                            <a class="common_btn border-radius clear-cart">clear cart</a>
+                                        </th>
+                                    </tr>
+                                    @foreach($cartItems as $item)
+                                        @php
+                                            $product = \App\Models\Product::find($item->id)
+                                        @endphp
+                                        <tr class="d-flex">
+                                            <td class="wsus__pro_img"><img src="{{asset($item->options->image)}}" alt="product"
+                                                                           class="img-fluid w-100">
+                                            </td>
+
+                                            <td class="wsus__pro_name">
+                                                <p>{!! $item->name !!}</p>
                                                 @foreach($item->options->variants as $key => $variant)
-                                                <span>{{$key}}: {{$variant['name']}} ({{$settings->currency_icon}}{{$variant['price']}})</span>
+                                                    <span>{{$key}}: {{$variant['name']}} ({{priceFormat($variant['price'])}}{{$settings->currency_icon}})</span>
                                                 @endforeach
 
-                                        </td>
+                                            </td>
 
-                                        <td class="wsus__pro_tk">
-                                            <h6>{{$settings->currency_icon.$item->price}}</h6>
-                                        </td>
+                                            <td class="wsus__pro_tk">
+                                                <h6>{{priceFormat($item->price).$settings->currency_icon}}</h6>
+                                            </td>
 
-                                        <td class="wsus__pro_tk">
-                                            <h6 id="{{$item->rowId}}">{{$settings->currency_icon.($item->price + $item->options->variants_total) * $item->qty}}</h6>
-                                        </td>
+                                            <td class="wsus__pro_tk">
+                                                <h6 id="{{$item->rowId}}">{{priceFormat(($item->price + $item->options->variants_total) * $item->qty).$settings->currency_icon}}</h6>
+                                            </td>
 
-                                        <td class="wsus__pro_select">
-                                            <div class="input-group product-qyt-wrapper">
-                                        <button type="button" class="btn btn-secondary border-radius decrement"  data-type="minus" data-field="">-</button>
-                                                <input type="number" data-rowid="{{$item->rowId}}" name="quantity" class="form-control border-radius product-qty" value="{{$item->qty}}" readonly min="1">
-                                        <button type="button" class="btn btn-secondary border-radius increment" data-type="plus" data-field="">+</button>
-                                            </div>
-                                        </td>
+                                            <td class="wsus__pro_select">
+                                                <div class="input-group product-qyt-wrapper">
+                                                    <button type="button" class="btn btn-secondary border-radius decrement"  data-type="minus" data-field="">-</button>
+                                                    <input type="number" data-rowid="{{$item->rowId}}" name="quantity" class="form-control border-radius product-qty" value="{{$item->qty}}" readonly min="1">
+                                                    <button type="button" class="btn btn-secondary border-radius increment" data-type="plus" data-field="">+</button>
+                                                </div>
+                                            </td>
 
-                                        <td class="wsus__pro_icon">
-                                            <a href="{{route('cart.remove',$item->rowId)}}"><i class="far fa-times"></i></a>
-                                        </td>
+                                            <td class="wsus__pro_icon">
+                                                <a href="{{route('cart.remove',$item->rowId)}}"><i class="far fa-times"></i></a>
+                                            </td>
 
-                                    </tr>
-                                @endforeach
-                                @if(count($cartItems) === 0)
-                                    <tr class="d-flex">
-                                        <td class="wsus__pro_icon" rowspan="2" style="width: 100%">
-                                            Cart is Empty!
-                                        </td>
-                                    </tr>
-                                @endif
-                                </tbody>
-                            </table>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
+                            <h6>total cart</h6>
+                            <p>subtotal: <span id="sub-total">{{priceFormat(getCartTotal())}}{{$settings->currency_icon}}</span></p>
+                            @if(getCouponType() === 'percent')
+                                <p>coupon(-): <span id="discount">{{priceFormat(getCartDiscount())}}%</span></p>
+                            @else
+                                <p>coupon(-): <span id="discount">{{priceFormat(getCartDiscount())}}{{$settings->currency_icon}}</span></p>
+                            @endif
+                            <p class="total"><span>total:</span> <span id="cart_total">{{priceFormat(getMainCartTotal())}}{{$settings->currency_icon}}</span></p>
+
+                            <form id="coupon_form">
+                                <input type="text" placeholder="Coupon Code" name="coupon_code"
+                                       value="{{session()->has('coupon') ? session()->get('coupon')['coupon_code'] : ''}}">
+                                <button type="submit" class="common_btn">apply</button>
+                            </form>
+                            <a class="common_btn mt-4 w-100 text-center" href="{{route('user.checkout')}}">checkout</a>
+                            <a class="common_btn mt-1 w-100 text-center" href="{{route('home')}}"><i
+                                    class="fab fa-shopify"></i> Keep Shopping</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3">
-                    <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
-                        <h6>total cart</h6>
-                        <p>subtotal: <span>$124.00</span></p>
-                        <p>delivery: <span>$00.00</span></p>
-                        <p>discount: <span>$10.00</span></p>
-                        <p class="total"><span>total:</span> <span>$134.00</span></p>
-
-                        <form>
-                            <input type="text" placeholder="Coupon Code">
-                            <button type="submit" class="common_btn">apply</button>
-                        </form>
-                        <a class="common_btn mt-4 w-100 text-center" href="check_out.html">checkout</a>
-                        <a class="common_btn mt-1 w-100 text-center" href="product_grid_view.html"><i
-                                class="fab fa-shopify"></i> go shop</a>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </section>
     <section id="wsus__single_banner">
@@ -185,10 +190,17 @@
                         quantity : quantity
                     },
                     success: function (data){
-                        toastr.success(data.message)
-                        let productId = '#'+rowId
-                        let totalAmount = "{{$settings->currency_icon}}" + data.product_total
-                        $(productId).text(totalAmount)
+                        if (data.status === 'error'){
+                            toastr.error(data.message)
+                        }else if (data.status === 'success'){
+                            toastr.success(data.message)
+                            let productId = '#'+rowId
+                            let totalAmount = data.product_total + "{{$settings->currency_icon}}"
+                            $(productId).text(totalAmount)
+                            renderCartSubTotal()
+                            couponCalculation()
+
+                        }
                     },
                     error: function (data){
                         console.error(data);
@@ -215,10 +227,16 @@
                             quantity : quantity
                         },
                         success: function (data){
-                            toastr.success(data.message)
-                            let productId = '#'+rowId
-                            let totalAmount = "{{$settings->currency_icon}}" + data.product_total
-                            $(productId).text(totalAmount)
+                            if (data.status === 'error'){
+                                toastr.error(data.message)
+                            }else if (data.status === 'success'){
+                                toastr.success(data.message)
+                                let productId = '#'+rowId
+                                let totalAmount = data.product_total+"{{$settings->currency_icon}}"
+                                $(productId).text(totalAmount)
+                                renderCartSubTotal()
+                                couponCalculation()
+                            }
                         },
                         error: function (data){
                             console.error(data);
@@ -226,6 +244,7 @@
                     })
                 }
             });
+
 
             $('.clear-cart').on('click',function (e){
                 e.preventDefault();
@@ -267,6 +286,55 @@
                     }
                 });
             })
+
+            $('#coupon_form').on('submit',function (e){
+                e.preventDefault()
+                let formData = $(this).serialize();
+                $.ajax({
+                    method: "GET",
+                    url: "{{route('apply-coupon')}}",
+                    data: formData,
+                    success: function (data){
+                        if (data.status === 'success'){
+                            toastr.success(data.message)
+                            couponCalculation()
+                        }else {
+                            toastr.error(data.message)
+                        }
+                    }
+                })
+            })
+
+            function couponCalculation(){
+                $.ajax({
+                    method: "GET",
+                    url: "{{route('coupon-calculation')}}",
+                    success:function (data){
+                        if (data.status === 'success'){
+                            if (data.coupon_type === 'percent'){
+                                $('#discount').text(data.discount + '%')
+                            }else {
+                                $('#discount').text(data.discount + '{{$settings->currency_icon}}')
+                            }
+                            $('#cart_total').text(data.cart_total + '{{$settings->currency_icon}}')
+                        }
+                    },error:function (data){
+                        console.error(data)
+                    }
+                })
+            }
+
+            function renderCartSubTotal(){
+                $.ajax({
+                    method: "GET",
+                    url: '{{route('cart.sidebar-product-total')}}',
+                    success: function (data){
+                        $('#sub-total').text(data+"{{$settings->currency_icon}}")
+                    },error: function (data){
+                        console.error(data)
+                    }
+                })
+            }
         })
     </script>
 @endpush

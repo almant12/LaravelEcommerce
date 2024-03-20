@@ -49,9 +49,9 @@
                             </p>
                             <a class="wsus__pro_name" href="{{route('product-detail',$product->slug)}}">{{$product->name}}</a>
                             @if(chackDiscount($product))
-                                <p class="wsus__price">{{$product->offer_price}} {{$settings->currency_icon}}<del>{{$product->price}} {{$settings->currency_icon}}</del></p>
+                                <p class="wsus__price">{{priceFormat($product->offer_price)}} {{$settings->currency_icon}}<del>{{priceFormat($product->price)}} {{$settings->currency_icon}}</del></p>
                             @else
-                            <p class="wsus__price">{{$product->price}} {{$settings->currency_icon}}</p>
+                            <p class="wsus__price">{{priceFormat($product->price)}} {{$settings->currency_icon}}</p>
                             @endif
                             <form class="shopping-cart-form">
                                 <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -128,12 +128,16 @@ PRODUCT MODAL VIEW START
                             <div class="col-xl-6 col-12 col-sm-12 col-md-12 col-lg-6">
                                 <div class="wsus__pro_details_text">
                                     <a class="title" href="{{route('product-detail',$product->slug)}}">{{$product->name}}</a>
-                                    <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
+                                    @if($product->qty === 0)
+                                        <p class="wsus__stock_area"><span class="stock_out">in stock</span> ({{$product->qty}} item)</p>
+                                    @elseif($product->qty > 0)
+                                        <p class="wsus__stock_area"><span class="in_stock">in stock</span> ({{$product->qty}} item)</p>
+                                    @endif
                                     @if(chackDiscount($product))
-                                        <h4>{{$settings->currency_icon}}{{$product->offer_price}}
-                                            <del>{{$settings->currency_icon}}{{$product->price}}</del></h4>
+                                        <h4>{{priceFormat($product->offer_price)}}{{$settings->currency_icon}}
+                                            <del>{{priceFormat($product->price)}}{{$settings->currency_icon}}</del></h4>
                                     @else
-                                        <h4>{{$settings->currency_icon}}{{$product->price}}</h4>
+                                        <h4>{{priceFormat($product->price)}}{{$settings->currency_icon}}</h4>
                                     @endif
                                     <p class="review">
                                         <i class="fas fa-star"></i>
@@ -157,7 +161,7 @@ PRODUCT MODAL VIEW START
                                                                 @foreach($variant->productVariantItems as $item)
                                                                     @if($item->status != 0)
                                                                         <option value="{{$item->id}}"
-                                                                            {{$item->is_default == 1 ? 'selected' : ''}}>{{$item->name}} (${{$item->price}})</option>
+                                                                            {{$item->is_default == 1 ? 'selected' : ''}}>{{$item->name}} ({{priceFormat($item->price)}}{{$settings->currency_icon}})</option>
                                                                     @endif
                                                                 @endforeach
                                                             </select>
