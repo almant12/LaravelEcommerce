@@ -70,6 +70,8 @@ Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],
 
     //Payment
     Route::get('payment',[PaymentController::class,'index'])->name('payment');
+    Route::get('payment/success',[PaymentController::class,'paymentSuccess'])->name('payment.success');
+    Route::get('payment/payByDeliver',[PaymentController::class,'payByDeliver'])->name('payment.pay-by-deliver');
 
     //PayPal
     Route::get('paypal/payment',[PaymentController::class,'payWithPaypal'])->name('paypal.payment');

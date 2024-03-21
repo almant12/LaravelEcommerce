@@ -64,6 +64,9 @@
                                         <div class="wsus__payment_area">
                                             <a class="nav-link common_btn text-center" href="{{route('user.paypal.payment')}}">Pay with Paypal</a>
                                         </div>
+                                        <div class="wsus__payment_area" style="margin-top: 10px;">
+                                            <a class="nav-link common_btn text-center" href="{{route('user.payment.pay-by-deliver')}}">Pay By Deliver</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
