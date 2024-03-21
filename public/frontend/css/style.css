@@ -9589,3 +9589,19 @@ li.page-item > .page-link{
 .border-radius{
     border-radius: 30px !important;
 }
+
+:root {
+    --bg-color: white;
+    --text-color: black;
+}
+
+.dark-mode {
+    --bg-color: black;
+    --text-color: white;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+

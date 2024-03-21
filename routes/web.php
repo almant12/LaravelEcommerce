@@ -4,12 +4,16 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckOutController;
 use App\Http\Controllers\User\FlashSaleController;
+use App\Http\Controllers\User\FrontendProductController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\UserAddressController;
 use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\User\UserOrderController;
+use App\Http\Controllers\User\UserProductController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +40,11 @@ require __DIR__.'/auth.php';
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::get('flash-sale',[FlashSaleController::class,'index'])->name('flash-sale.index');
-Route::get('product-detail/{slug}',[\App\Http\Controllers\User\UserProductController::class,'showProduct'])->name('product-detail');
+
+//Products
+Route::get('products',[FrontendProductController::class,'productIndex'])->name('products.index');
+Route::get('product-detail/{slug}',[UserProductController::class,'showProduct'])->name('product-detail');
+Route::get('change-product-list-view',[FrontendProductController::class,'changeListView'])->name('change-product-list-view');
 
 Route::get('/send-email',[\App\Http\Controllers\EmailController::class,'sendEmail']);
 
@@ -60,6 +68,11 @@ Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],
     Route::put('profile',[UserProfileController::class,'updateProfile'])->name('profile.update');
     Route::post('profile',[UserProfileController::class,'updatePassword'])->name('profile.update.password');
 
+    //Wishlist
+    Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist.index');
+    Route::post('wishlist/add-product',[WishlistController::class,'addToWishlist'])->name('wishlist.add-product');
+    Route::get('wishlist/remove-product/{id}',[WishlistController::class,'destroy'])->name('wishlist.destroy');
+
     //UserAddress
     Route::resource('address',UserAddressController::class);
 
@@ -70,9 +83,18 @@ Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],
 
     //Payment
     Route::get('payment',[PaymentController::class,'index'])->name('payment');
+    Route::get('payment/success',[PaymentController::class,'paymentSuccess'])->name('payment.success');
+    Route::get('payment/payByDeliver',[PaymentController::class,'payByDeliver'])->name('payment.pay-by-deliver');
 
-    //PayPal
+    //PayPal-payment
     Route::get('paypal/payment',[PaymentController::class,'payWithPaypal'])->name('paypal.payment');
     Route::get('paypal/success',[PaymentController::class,'paypalSuccess'])->name('paypal.success');
     Route::get('paypal/cancel',[PaymentController::class,'paypalCancel'])->name('paypal.cancel');
+
+    //Stripe-payment
+    Route::post('stripe/payment',[PaymentController::class,'payWithStripe'])->name('stripe.payment');
+
+    //Order
+    Route::get('orders',[UserOrderController::class,'index'])->name('orders');
+    Route::get('order/show/{id}',[UserOrderController::class,'show'])->name('order.show');
 });

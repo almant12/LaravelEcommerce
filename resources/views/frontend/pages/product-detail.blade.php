@@ -204,16 +204,16 @@
                     </div>
                     <div class="col-xl-5 col-md-7 col-lg-7">
                         <div class="wsus__pro_details_text">
-                            <a class="title" href="javascript:;">{{$product->name}}</a>
+                            <h1 class="title">{{$product->name}}</h1>
                             @if($product->qty > 0)
                                 <p class="wsus__stock_area"><span class="in_stock">in stock</span> ({{$product->qty}} item)</p>
                             @elseif($product->qty === 0)
                                 <p class="wsus__stock_area"><span class="stock_out">in stock</span> ({{$product->qty}} item)</p>
                             @endif
                             @if(chackDiscount($product))
-                                <h4>{{$settings->currency_icon}}{{$product->offer_price}}<del>{{$settings->currency_icon}}{{$product->price}}</del></h4>
+                                <h4>{{priceFormat($product->offer_price)}} {{$settings->currency_icon}}<del>{{priceFormat($product->price)}} {{$settings->currency_icon}}</del></h4>
                             @else
-                                <h4>{{$settings->currency_icon}}{{$product->price}}</h4>
+                                <h4>{{priceFormat($product->price)}} {{$settings->currency_icon}}</h4>
                             @endif
                             <p class="review">
                                 <i class="fas fa-star"></i>
@@ -255,7 +255,7 @@
                             <ul class="wsus__button_area">
                                 <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
                                 <li><a class="buy_now" href="#">buy now</a></li>
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
                                 <li><a href="#"><i class="far fa-random"></i></a></li>
                             </ul>
                             </form>

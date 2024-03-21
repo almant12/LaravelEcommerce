@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/ranger_style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/jquery.classycountdown.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/venobox.min.css')}}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
@@ -66,7 +67,6 @@
   SCROLL BUTTON  END
 ==============================-->
 
-
 <!--jquery library js-->
 <script src="{{asset('frontend/js/jquery-3.6.0.min.js')}}"></script>
 <!--bootstrap js-->
@@ -101,12 +101,14 @@
 <script src="{{asset('frontend/js/venobox.min.js')}}"></script>
 <!--classycountdown js-->
 <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!--Sweetalert js-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 <!--main/custom js-->
 <script src="{{asset('frontend/js/main.js')}}"></script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     @if($errors->any())

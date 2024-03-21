@@ -13,6 +13,7 @@
                     if (data.status === 'error'){
                         toastr.error(data.message)
                     }else if (data.status === 'success'){
+                        toastr.success(data.message)
                         getCartCount();
                         fetchCartItemProduct();
                         $('.mini_cart_actions').removeClass('d-none')
@@ -114,5 +115,28 @@
                 }
             })
         })
+
+        $('.add_to_wishlist').on('click',function (e){
+            e.preventDefault();
+            let id = $(this).data('id');
+
+            $.ajax({
+                method: 'POST',
+                url: '{{route('user.wishlist.add-product')}}',
+                data:{
+                    id:id
+                },success:function (data){
+                    if (data.status === 'success'){
+                        $('.wishlist_count').text(data.count)
+                        toastr.success(data.message)
+                    }else if (data.status === 'error'){
+                        toastr.error(data.message)
+                    }
+                },error:function (data){
+                    console.error(data)
+                }
+            })
+        })
     })
+
 </script>

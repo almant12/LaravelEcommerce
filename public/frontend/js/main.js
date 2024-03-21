@@ -487,16 +487,6 @@ $(function () {
     });
 
 
-    //*==========PRICE SLIDER=========
-    jQuery(function () {
-        jQuery("#slider_range").flatslider({
-            min: 0, max: 10000,
-            step: 100,
-            values: [0, 8000],
-            range: true,
-            einheit: '$'
-        });
-    });
 
 
     //*========IMG & VIDEO UPLOAD=======

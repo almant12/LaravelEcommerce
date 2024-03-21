@@ -93,7 +93,7 @@
                                 <ul class="wsus__single_pro_icon">
                                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$product->id}}"><i
                                                 class="far fa-eye"></i></a></li>
-                                    <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                    <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
                                     <li><a href="#"><i class="far fa-random"></i></a>
                                 </ul>
                                 <div class="wsus__product_details">
@@ -108,9 +108,9 @@
                                     </p>
                                     <a class="wsus__pro_name" href="{{route('product-detail',$product->slug)}}">{{$product->name}}</a>
                                     @if(chackDiscount($product))
-                                        <p class="wsus__price">{{$settings->currency_icon}}{{$product->offer_price}}<del>{{$settings->currency_icon}}{{$product->price}}</del></p>
+                                        <p class="wsus__price">{{priceFormat($product->offer_price)}} {{$settings->currency_icon}}<del>{{priceFormat($product->price)}} {{$settings->currency_icon}}</del></p>
                                     @else
-                                        <p class="wsus__price">{{$settings->currency_icon}}{{$product->price}}</p>
+                                        <p class="wsus__price">{{priceFormat($product->price)}} {{$settings->currency_icon}}</p>
                                     @endif
                                     <form class="shopping-cart-form">
                                         <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -200,10 +200,10 @@ PRODUCT MODAL VIEW START
                                         <a class="title" href="{{route('product-detail',$product->slug)}}">{{$product->name}}</a>
                                         <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                                         @if(chackDiscount($product))
-                                            <h4>{{$settings->currency_icon}}{{$product->offer_price}}
-                                                <del>{{$settings->currency_icon}}{{$product->price}}</del></h4>
+                                            <h4>{{priceFormat($product->offer_price)}} {{$settings->currency_icon}}
+                                                <del>{{priceFormat($product->price)}} {{$settings->currency_icon}}</del></h4>
                                         @else
-                                            <h4>{{$settings->currency_icon}}{{$product->price}}</h4>
+                                            <h4>{{priceFormat($product->price)}} {{$settings->currency_icon}}</h4>
                                         @endif
                                         <p class="review">
                                             <i class="fas fa-star"></i>
@@ -245,7 +245,7 @@ PRODUCT MODAL VIEW START
                                             <ul class="wsus__button_area">
                                                 <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
                                                 <li><a class="buy_now" href="#">buy now</a></li>
-                                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                                <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="far fa-random"></i></a></li>
                                             </ul>
                                         </form>

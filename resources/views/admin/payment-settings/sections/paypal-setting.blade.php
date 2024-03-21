@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="general-settings">
+<div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
     <div class="card border">
         <div class="card-body">
             <form action="{{route('admin.paypal-setting.update',1)}}" method="POST">

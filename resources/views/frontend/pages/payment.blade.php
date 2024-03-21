@@ -3,6 +3,9 @@
     {{$settings->site_name}} || Payment
 @endsection
 @section('content')
+    @php
+        $stripeSetting = \App\Models\StripeSetting::first();
+    @endphp
     <!--============================
         BREADCRUMB START
     ==============================-->
@@ -41,32 +44,49 @@
                                         data-bs-target="#v-pills-paypal" type="button" role="tab" aria-controls="v-pills-paypal"
                                         aria-selected="true">Paypal</button>
 
-                                <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                        data-bs-target="#v-pills-stripe" type="button" role="tab"
-                                        aria-controls="v-pills-stripe" aria-selected="false">Stripe</button>
+                                @if($stripeSetting->status === 1)
+                                    <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                            data-bs-target="#v-pills-stripe" type="button" role="tab"
+                                            aria-controls="v-pills-stripe" aria-selected="false">Stripe</button>
+                                @endif
 
-                                <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                        data-bs-target="#v-pills-razorpay" type="button" role="tab"
-                                        aria-controls="v-pills-stripe" aria-selected="false">RazorPay</button>
+{{--                                <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"--}}
+{{--                                        data-bs-target="#v-pills-razorpay" type="button" role="tab"--}}
+{{--                                        aria-controls="v-pills-stripe" aria-selected="false">RazorPay</button>--}}
 
-                                <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                        data-bs-target="#v-pills-cod" type="button" role="tab"
-                                        aria-controls="v-pills-stripe" aria-selected="false">COD</button>
+{{--                                <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"--}}
+{{--                                        data-bs-target="#v-pills-cod" type="button" role="tab"--}}
+{{--                                        aria-controls="v-pills-stripe" aria-selected="false">COD</button>--}}
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-5 col-lg-5">
                         <div class="tab-content" id="v-pills-tabContent" id="sticky_sidebar">
-                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+
+
+                            <div class="tab-pane fade show active" id="v-pills-paypal" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
                                 <div class="row">
                                     <div class="col-xl-12 m-auto">
                                         <div class="wsus__payment_area">
                                             <a class="nav-link common_btn text-center" href="{{route('user.paypal.payment')}}">Pay with Paypal</a>
                                         </div>
+                                        <div class="wsus__payment_area" style="margin-top: 10px;">
+                                            <a class="nav-link common_btn text-center" href="{{route('user.payment.pay-by-deliver')}}">Pay By Deliver</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            @if($stripeSetting->status === 1)
+                                @include('frontend.pages.payment-gateway.stripe')
+                            @endif
+
+{{--                            @include('frontend.pages.payment-gateway.razorpay')--}}
+
+{{--                            @include('frontend.pages.payment-gateway.cod')--}}
+
+
+
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4">

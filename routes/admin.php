@@ -7,6 +7,12 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FlashSaleController;
+use App\Http\Controllers\Admin\FooterGridOneController;
+use App\Http\Controllers\Admin\FooterGridTwoController;
+use App\Http\Controllers\Admin\FooterInfoController;
+use App\Http\Controllers\Admin\FooterSocialController;
+use App\Http\Controllers\Admin\HomePageSettingController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentSettingController;
 use App\Http\Controllers\Admin\PaypalSettingController;
 use App\Http\Controllers\Admin\ProductController;
@@ -17,7 +23,9 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ShippingRuleController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\StripeSettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\VendorProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -88,10 +96,6 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     Route::delete('flash-sale-item/delete/{flashId}',[FlashSaleController::class,'destroy'])->name('flash-sale.destroy');
 
 
-    //Settings-routes
-    Route::get('settings',[SettingController::class,'index'])->name('settings.index');
-    Route::put('general-setting-update',[SettingController::class,'generalSettingUpdate'])->name('general-setting.update');
-
     //Coupons
     Route::put('coupon/change-status',[CouponController::class,'updateStatus'])->name('coupon.update-status');
     Route::resource('coupon',CouponController::class);
@@ -100,7 +104,46 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     Route::put('shipping-rule/change-status',[ShippingRuleController::class,'updateStatus'])->name('shipping-rule.update-status');
     Route::resource('shipping-rule',ShippingRuleController::class);
 
+    //Order-routes
+    Route::put('order/update-status',[OrderController::class,'updateOrderStatus'])->name('order.status');
+    Route::get('order/update-payment-status',[OrderController::class,'updatePaymentStatus'])->name('payment.status');
+    Route::get('order/pending',[OrderController::class,'pendingOrder'])->name('pending-orders');
+    Route::get('order/processed',[OrderController::class,'processedOrder'])->name('processed-orders');
+    Route::get('order/dropped-off-orders',[OrderController::class,'droppedOff'])->name('dropped-off-orders');
+    Route::get('order/shipped',[OrderController::class,'shipped'])->name('shipped-orders');
+    Route::get('order/out-for-delivery',[OrderController::class,'outForDelivery'])->name('out-for-delivery-orders');
+    Route::get('order/delivered',[OrderController::class,'delivered'])->name('delivered-orders');
+    Route::get('order/canceled',[OrderController::class,'canceled'])->name('canceled-orders');
+    Route::resource('order',OrderController::class);
+
+    //Transaction
+    Route::get('transaction',[TransactionController::class,'index'])->name('transaction');
+
+    //Settings-routes
+    Route::get('settings',[SettingController::class,'index'])->name('settings.index');
+    Route::put('general-setting-update',[SettingController::class,'generalSettingUpdate'])->name('general-setting.update');
+
+    //HomePageSetting
+    Route::get('home-page-setting',[HomePageSettingController::class,'index'])->name('home-page-setting.index');
+    Route::put('popular-category-sections',[HomePageSettingController::class,'updatePopularCategorySection'])->name('update.popular-category-section');
+    Route::put('product-slider-section-one',[HomePageSettingController::class,'updateProductSliderSectionOne'])->name('update.product-slider-section-one');
+    Route::put('product-slider-section-two',[HomePageSettingController::class,'updateProductSliderSectionTwo'])->name('update.product-slider-section-two');
+    Route::put('product-slider-section-three',[HomePageSettingController::class,'updateProductSliderSectionThree'])->name('update.product-slider-section-three');
+
     //Payment-settings
     Route::get('payment-setting',[PaymentSettingController::class,'index'])->name('payment-setting.index');
     Route::put('paypal-setting/{id}',[PaypalSettingController::class,'update'])->name('paypal-setting.update');
+    Route::put('stripe-setting/{id}',[StripeSettingController::class,'update'])->name('stripe-setting.update');
+
+    //FooterInfo
+    Route::resource('footer-info',FooterInfoController::class);
+    Route::put('footer-socials/update-status',[FooterSocialController::class,'updateStatus'])->name('footer-socials.update-status');
+    Route::resource('footer-socials',FooterSocialController::class);
+
+    Route::put('footer-grid-one/change-status',[FooterGridOneController::class,'changeStatus'])->name('footer-grid-one.change-status');
+    Route::put('footer-grid-one/change-title',[FooterGridOneController::class,'changeTitle'])->name('footer-grid-one.change-title');
+    Route::resource('footer-grid-one',FooterGridOneController::class);
+
+    Route::resource('footer-grid-two',FooterGridTwoController::class);
+
 });

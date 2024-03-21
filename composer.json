@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "srmklive/paypal": "~3.0",
+        "stripe/stripe-php": "^13.15",
         "yajra/laravel-datatables": "^10.0",
         "yoeunes/toastr": "^2.3"
     },

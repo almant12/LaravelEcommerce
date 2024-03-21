@@ -28,7 +28,7 @@ function chackDiscount($product){
 function calculateDiscountPercent($originalPrice,$discountPrice){
     $discountAmount = $originalPrice - $discountPrice;
     $discountPercent = ($discountAmount / $originalPrice) * 100;
-    return $discountPercent;
+    return round($discountPercent,0);
 
 }
 
@@ -115,4 +115,9 @@ function getShppingFee(){
 
 function getFinalPayableAmount(){
     return  getMainCartTotal() + getShppingFee();
+}
+
+function limitText($text, $limit = 20)
+{
+    return \Str::limit($text, $limit);
 }

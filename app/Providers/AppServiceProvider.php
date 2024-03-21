@@ -7,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
+use Yajra\DataTables\Html\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
        Paginator::useBootstrap();
+       Builder::useVite();
 
        $generalSetting = GeneralSetting::first();
        Config::set('app.timezone',$generalSetting->time_zone);

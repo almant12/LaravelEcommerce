@@ -34,7 +34,7 @@
                         <ul class="wsus__single_pro_icon">
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$product->id}}"><i
                                         class="far fa-eye"></i></a></li>
-                            <li><a href="#"><i class="far fa-heart"></i></a></li>
+                            <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
                             <li><a href="#"><i class="far fa-random"></i></a>
                         </ul>
                         <div class="wsus__product_details">
@@ -179,7 +179,7 @@ PRODUCT MODAL VIEW START
                                         <ul class="wsus__button_area">
                                             <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
                                             <li><a class="buy_now" href="#">buy now</a></li>
-                                            <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                            <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
                                             <li><a href="#"><i class="far fa-random"></i></a></li>
                                         </ul>
                                     </form>
@@ -196,17 +196,19 @@ PRODUCT MODAL VIEW START
   PRODUCT MODAL VIEW END
 ===========================-->
 @endforeach
-@push('scripts')
-    <script>
-        $(document).ready(function (){
-            var d = new Date(),
-                countUpDate = new Date();
-            d.setDate(d.getDate() + 90);
-            simplyCountdown('.simply-countdown-one', {
-                year: {{date('Y',strtotime($flashSaleDate->end_date))}},
-                month: {{date('m',strtotime($flashSaleDate->end_date))}},
-                day: {{date('d',strtotime($flashSaleDate->end_date))}},
-            });
-        })
-    </script>
-@endpush
+@if(isset($flashSaleDate))
+    @push('scripts')
+        <script>
+            $(document).ready(function (){
+                var d = new Date(),
+                    countUpDate = new Date();
+                d.setDate(d.getDate() + 90);
+                simplyCountdown('.simply-countdown-one', {
+                    year: {{date('Y',strtotime($flashSaleDate->end_date))}},
+                    month: {{date('m',strtotime($flashSaleDate->end_date))}},
+                    day: {{date('d',strtotime($flashSaleDate->end_date))}},
+                });
+            })
+        </script>
+    @endpush
+@endif

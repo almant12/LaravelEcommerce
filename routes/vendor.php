@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Vendor\VendorController;
+use App\Http\Controllers\Vendor\VendorOrderController;
 use App\Http\Controllers\Vendor\VendorProductController;
 use App\Http\Controllers\Vendor\VendorProductImageGalleryController;
 use App\Http\Controllers\Vendor\VendorProductVariantController;
@@ -40,5 +41,10 @@ Route::group(['middleware'=>['auth','role:vendor'],'prefix'=>'vendor','as'=>'ven
     Route::put('product-variant-item/update/{variantItemId}',[VendorProductVariantItemController::class,'update'])->name('product-variant-item.update');
     Route::delete('product-variant-item/delete/{variantItemId}',[VendorProductVariantItemController::class,'destroy'])->name('product-variant-item.destroy');
     Route::put('product-variant-item/update-status/{variantItemId}',[VendorProductVariantItemController::class,'updateStatus'])->name('product-variant-item.update-status');
+
+    //Vendor-Order
+    Route::get('order',[VendorOrderController::class,'index'])->name('orders.index');
+    Route::get('order/show/{id}',[VendorOrderController::class,'show'])->name('order.show');
+    Route::put('order/update/{id}',[VendorOrderController::class,'updateStatus'])->name('order.status');
 });
 

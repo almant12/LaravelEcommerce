@@ -5,19 +5,17 @@
             <div class="col-xl-3 col-sm-7 col-md-6 col-lg-3">
                 <div class="wsus__footer_content">
                     <a class="wsus__footer_2_logo" href="#">
-                        <img src="images/logo_2.png" alt="logo">
+                        <img src="{{asset($footerInfo->logo)}}" alt="logo">
                     </a>
                     <a class="action" href="callto:+8896254857456"><i class="fas fa-phone-alt"></i>
-                        +8896254857456</a>
+                        {{$footerInfo->phone}}</a>
                     <a class="action" href="mailto:example@gmail.com"><i class="far fa-envelope"></i>
-                        example@gmail.com</a>
-                    <p><i class="fal fa-map-marker-alt"></i> San Francisco City Hall, San Francisco, CA</p>
+                        {{$footerInfo->email}}</a>
+                    <p><i class="fal fa-map-marker-alt"></i>{{$footerInfo->address}}</p>
                     <ul class="wsus__footer_social">
-                        <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a class="whatsapp" href="#"><i class="fab fa-whatsapp"></i></a></li>
-                        <li><a class="pinterest" href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                        <li><a class="behance" href="#"><i class="fab fa-behance"></i></a></li>
+                        @foreach($footerSocials as $link)
+                            <li><a class="behance" href="{{$link->url}}"><i class="{{$link->icon}}"></i></a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
