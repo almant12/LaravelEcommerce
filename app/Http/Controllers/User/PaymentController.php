@@ -13,7 +13,6 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Psy\Util\Json;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Cart;
 use Stripe\Charge;
@@ -224,6 +223,12 @@ class PaymentController extends Controller{
         }
     }
 
+    public function payByDeliver(){
+        $this->orderByDeliver('payByDeliver',0);
+        $this->clearSession();
+        return redirect()->route('user.payment.success');
+    }
+
     public function payWithStripe(Request $request){
 
         $stripeSetting = StripeSetting::first();
@@ -231,28 +236,23 @@ class PaymentController extends Controller{
         $paidAmount = round($total * $stripeSetting->currency_rate,2);
 
         Stripe::setApiKey($stripeSetting->secret_key);
-       $response = Charge::create([
+        $response = Charge::create([
             'amount'=>$paidAmount * 100,
             'currency'=>$stripeSetting->currency_name,
             'source'=>$request->stripe_token,
             'description'=>'bobe'
         ]);
 
-       if ($response->status === 'succeeded'){
-           $this->storeOrder('stripe','1',$response->id,$paidAmount,$stripeSetting->currency_name);
-           $this->clearSession();
-           return redirect()->route('user.payment.success');
-       }else{
-           toastr('Someting went wrong try agin later!', 'error', 'Error');
-           return redirect()->route('user.payment');
-       }
+        if ($response->status === 'succeeded'){
+            $this->storeOrder('stripe','1',$response->id,$paidAmount,$stripeSetting->currency_name);
+            $this->clearSession();
+            return redirect()->route('user.payment.success');
+        }else{
+            toastr('Something went wrong try aging later!', 'error', 'Error');
+            return redirect()->route('user.payment');
+        }
     }
 
-    public function payByDeliver(){
-        $this->orderByDeliver('payByDeliver',0);
-        $this->clearSession();
-        return redirect()->route('user.payment.success');
-    }
 
 
 }

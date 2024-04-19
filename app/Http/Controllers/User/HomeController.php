@@ -16,8 +16,6 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-        $footerSocials = FooterSocial::all();
-        $footerInfo = FooterInfo::first();
         $categoryProductSectionThree = HomePageSetting::where('key','product_slider_section_three')->first();
         $categoryProductSectionTwo = HomePageSetting::where('key','product_slider_section_two')->first();
         $categoryProductSectionOne = HomePageSetting::where('key','product_slider_section_one')->first();
@@ -37,8 +35,6 @@ class HomeController extends Controller
             'categoryProductSectionOne',
             'categoryProductSectionTwo',
             'categoryProductSectionThree',
-            'footerInfo',
-            'footerSocials'
         ]));
     }
 

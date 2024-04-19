@@ -22,7 +22,31 @@ class FooterGridTwoDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'footergridtwo.action')
+            ->addColumn('action', function($query){
+                $editBtn = "<a href='".route('admin.footer-grid-two.edit', $query->id)."' class='btn btn-primary'><i class='far fa-edit'></i></a>";
+                $deleteBtn = "<a href='".route('admin.footer-grid-two.destroy', $query->id)."' class='btn btn-danger ml-2 delete-item'><i class='far fa-trash-alt'></i></a>";
+                $horizontalButtons = "<div class='btn-group' role='group' aria-label='Edit and Delete buttons'>
+                     $editBtn
+                     $deleteBtn
+                     </div>";
+                return $horizontalButtons;
+            })
+            ->addColumn('status', function($query){
+                if($query->status == 1){
+                    $button = '<label class="custom-switch mt-2">
+                        <input type="checkbox" checked name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status" >
+                        <span class="custom-switch-indicator"></span>
+                    </label>';
+                }else {
+                    $button = '<label class="custom-switch mt-2">
+                        <input type="checkbox" name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+                        <span class="custom-switch-indicator"></span>
+                    </label>';
+                }
+                return $button;
+            })
+            ->rawColumns(['action', 'status'])
+
             ->setRowId('id');
     }
 
@@ -62,15 +86,14 @@ class FooterGridTwoDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('status'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center')
         ];
     }
 

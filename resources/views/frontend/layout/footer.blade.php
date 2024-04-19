@@ -1,17 +1,23 @@
-
+@php
+       $footerInfo = \App\Models\FooterInfo::first();
+       $footerTitle = \App\Models\FooterTitle::first();
+       $footerSocials = \App\Models\FooterSocial::all();
+       $footerGridOne = \App\Models\FooterGridOne::all();
+       $footerGridTwo = \App\Models\FooterGridTwo::all();
+@endphp
 <footer class="footer_2">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-xl-3 col-sm-7 col-md-6 col-lg-3">
                 <div class="wsus__footer_content">
                     <a class="wsus__footer_2_logo" href="#">
-                        <img src="{{asset($footerInfo->logo)}}" alt="logo">
+                        <img src="{{asset(@$footerInfo->logo)}}" alt="logo">
                     </a>
                     <a class="action" href="callto:+8896254857456"><i class="fas fa-phone-alt"></i>
-                        {{$footerInfo->phone}}</a>
+                        {{@$footerInfo->phone}}</a>
                     <a class="action" href="mailto:example@gmail.com"><i class="far fa-envelope"></i>
-                        {{$footerInfo->email}}</a>
-                    <p><i class="fal fa-map-marker-alt"></i>{{$footerInfo->address}}</p>
+                        {{@$footerInfo->email}}</a>
+                    <p><i class="fal fa-map-marker-alt"></i>{{@$footerInfo->address}}</p>
                     <ul class="wsus__footer_social">
                         @foreach($footerSocials as $link)
                             <li><a class="behance" href="{{$link->url}}"><i class="{{$link->icon}}"></i></a></li>
@@ -21,29 +27,21 @@
             </div>
             <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                 <div class="wsus__footer_content">
-                    <h5>Company</h5>
+                    <h5>{{$footerTitle->footer_grid_one_title}}</h5>
                     <ul class="wsus__footer_menu">
-                        <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Career</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
+                        @foreach($footerGridOne as $link)
+                            <li><a href="{{$link->url}}"><i class="fas fa-caret-right"></i>{{$link->name}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
             <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                 <div class="wsus__footer_content">
-                    <h5>Company</h5>
+                    <h5>{{$footerTitle->footer_grid_two_title}}</h5>
                     <ul class="wsus__footer_menu">
-                        <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Career</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
+                        @foreach($footerGridTwo as $link)
+                            <li><a href="{{$link->url}}"><i class="fas fa-caret-right"></i>{{$link->name}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -69,7 +67,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="wsus__copyright d-flex justify-content-center">
-                        <p>Copyright © 2021 Sazao shop. All Rights Reserved.</p>
+                        <p>{{@$footerInfo->copyright}}</p>
                     </div>
                 </div>
             </div>

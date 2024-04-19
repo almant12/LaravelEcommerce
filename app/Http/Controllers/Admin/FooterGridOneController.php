@@ -16,7 +16,7 @@ class FooterGridOneController extends Controller
     public function index(FooterGridOneDataTable $dataTable){
 
         $footerTitle = FooterTitle::first();
-      
+
         return $dataTable->render('admin.footer.footer-grid-one.index',compact('footerTitle'));
     }
 
@@ -93,7 +93,7 @@ class FooterGridOneController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id){
-        $footer = FooterGridTwo::findOrFail($id);
+        $footer = FooterGridOne::findOrFail($id);
         $footer->delete();
 
         return response(['status' => 'success', 'message' => 'Deleted successfully!']);
