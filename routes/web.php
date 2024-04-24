@@ -10,6 +10,7 @@ use App\Http\Controllers\User\NewsletterController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\UserAddressController;
 use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\User\UserMessageController;
 use App\Http\Controllers\User\UserOrderController;
 use App\Http\Controllers\User\UserProductController;
 use App\Http\Controllers\User\UserProductReviewController;
@@ -72,6 +73,9 @@ Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],
     Route::get('profile',[UserProfileController::class,'index'])->name('profile');
     Route::put('profile',[UserProfileController::class,'updateProfile'])->name('profile.update');
     Route::post('profile',[UserProfileController::class,'updatePassword'])->name('profile.update.password');
+
+    //Messenger
+    Route::get('messages', [UserMessageController::class, 'index'])->name('messages.index');
 
     //Wishlist
     Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist.index');

@@ -11,16 +11,21 @@ foreach ($productSectionTwo as $key => $category){
 
 if (array_keys($lastKey)[0] === 'category'){
     $category = \App\Models\Category::find($lastKey['category']);
-    $products = \App\Models\Product::where('category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
+    $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
+    ->with(['productVariants','category','imageGalleries'])
+    ->where('category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
 }elseif (array_keys($lastKey)[0] === 'sub_category'){
     $category = \App\Models\SubCategory::find($lastKey['sub_category']);
-    $products = \App\Models\Product::where('sub_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
+  $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
+    ->with(['productVariants','category','imageGalleries'])
+    ->where('sub_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
 }else{
     $category = \App\Models\ChildCategory::find($lastKey['child_category']);
-    $products = \App\Models\Product::where('child_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
+    $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
+    ->with(['productVariants','category','imageGalleries'])
+    ->where('child_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
 }
 @endphp
-
 
 <section id="wsus__electronic2">
     <div class="container">
@@ -58,12 +63,14 @@ if (array_keys($lastKey)[0] === 'category'){
                         <div class="wsus__product_details">
                             <a class="wsus__category" href="#">{{$product->category->name}}</a>
                             <p class="wsus__pro_rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(133 review)</span>
+                                @for($i = 0 ; $i <= 5 ; $i++)
+                                    @if($i <= $product->reviews_avg_rating)
+                                        <i class="fas fa-star"></i>
+                                    @else
+                                        <i class="fas fa-star"></i>
+                                    @endif
+                                @endfor
+                                <span>({{$product->reviews_count}} review)</span>
                             </p>
                             <a class="wsus__pro_name" href="{{route('product-detail',$product->slug)}}">{{$product->name}}</a>
                             @if(chackDiscount($product))

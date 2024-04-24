@@ -216,12 +216,19 @@
                                 <h4>{{priceFormat($product->price)}} {{$settings->currency_icon}}</h4>
                             @endif
                             <p class="review">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>20 review</span>
+                                @php
+                                    $ratingAvg = $product->reviews->avg('rating');
+                                    $fullRating = round($ratingAvg);
+                                @endphp
+
+                                @for($i = 1 ; $i <= 5 ; $i++)
+                                    @if($i <= $fullRating)
+                                        <i class="fas fa-star"></i>
+                                    @else
+                                        <i class="fas fa-star"></i>
+                                    @endif
+                                @endfor
+                                <span>({{count($product->reviews)}} review)</span>
                             </p>
                              <p class="description">{!! $product->short_description !!}</p>
 

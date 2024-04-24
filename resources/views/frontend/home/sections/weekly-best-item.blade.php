@@ -16,16 +16,28 @@
                   $lastKey = [$key => $category];
               }
 
-              if (array_keys($lastKey)[0] === 'category'){
-                  $category = \App\Models\Category::find($lastKey['category']);
-                  $products = \App\Models\Product::where('category_id',$category->id)->orderBy('id','DESC')->take(6)->get();
-              }elseif (array_keys($lastKey)[0] === 'sub_category'){
-                  $category = \App\Models\SubCategory::find($lastKey['sub_category']);
-                  $products = \App\Models\Product::where('sub_category_id',$category->id)->orderBy('id','DESC')->take(6)->get();
-              }else{
-                  $category = \App\Models\ChildCategory::find($lastKey['child_category']);
-                  $products = \App\Models\Product::where('child_category_id',$category->id)->orderBy('id','DESC')->take(6)->get();
-              }
+              if (array_keys($lastKey)[0] === 'category') {
+                        $category = \App\Models\Category::find($lastKey['category']);
+                        $products = \App\Models\Product::withAvg('reviews', 'rating')->withCount('reviews')
+                        ->where('category_id', $category->id)
+                            ->orderBy('id', 'DESC')
+                            ->take(6)
+                            ->get();
+                    } elseif (array_keys($lastKey)[0] === 'sub_category') {
+                        $category = \App\Models\SubCategory::find($lastKey['sub_category']);
+                        $products = \App\Models\Product::withAvg('reviews', 'rating')->withCount('reviews')
+                        ->where('sub_category_id', $category->id)
+                            ->orderBy('id', 'DESC')
+                            ->take(6)
+                            ->get();
+                    } else {
+                        $category = \App\Models\ChildCategory::find($lastKey['child_category']);
+                        $products = \App\Models\Product::withAvg('reviews', 'rating')->withCount('reviews')
+                        ->where('child_category_id', $category->id)
+                            ->orderBy('id', 'DESC')
+                            ->take(6)
+                            ->get();
+                    }
               @endphp
             <div class="col-xl-6 col-sm-6">
                 <div class="wsus__section_header">
@@ -41,8 +53,13 @@
                                 <div class="wsus__hot_deals__single_text">
                                     <h5>{!! limitText($item->name) !!}</h5>
                                     <p class="wsus__rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        @for($i = 1 ; $i <= 5 ; $i++)
+                                            @if($i <= $item->reviews_avg_rating)
+                                                <i class="fas fa-star"></i>
+                                            @else
+                                                <i class="fas fa-star"></i>
+                                            @endif
+                                        @endfor
                                     </p>
                                     @if(chackDiscount($item))
                                         <p class="wsus__tk">{{priceFormat($item->offer_price)}} {{$settings->currency_icon}} <del>{{priceFormat($item->price)}}</del></p>
