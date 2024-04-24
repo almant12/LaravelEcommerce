@@ -78,7 +78,7 @@ class FooterGridOneController extends Controller
             'status'=>['required']
         ]);
 
-        $footer = FooterGridTwo::findOrFail($id);
+        $footer = FooterGridOne::findOrFail($id);
         $footer->name = $request->name;
         $footer->url = $request->url;
         $footer->status = $request->status;

@@ -406,466 +406,92 @@
                                         <div class="wsus__pro_det_review_single">
                                             <div class="row">
                                                 <div class="col-xl-8 col-lg-7">
-                                                    <div class="wsus__comment_area">
-                                                        <h4>Reviews <span>02</span></h4>
-                                                        <div class="wsus__main_comment">
-                                                            <div class="wsus__comment_img">
-                                                                <img src="images/client_img_3.jpg" alt="user"
-                                                                     class="img-fluid w-100">
-                                                            </div>
-                                                            <div class="wsus__comment_text reply">
-                                                                <h6>Shopnil mahadi <span>4 <i
-                                                                            class="fas fa-star"></i></span></h6>
-                                                                <span>09 Jul 2021</span>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                                    elit.
-                                                                    Cupiditate sint molestiae eos? Officia, fuga eaque.
-                                                                </p>
-                                                                <ul class="">
-                                                                    <li><img src="images/headphone_1.jpg" alt="product"
-                                                                             class="img-fluid w-100"></li>
-                                                                    <li><img src="images/headphone_2.jpg" alt="product"
-                                                                             class="img-fluid w-100"></li>
-                                                                    <li><img src="images/kids_1.jpg" alt="product"
-                                                                             class="img-fluid w-100"></li>
-                                                                </ul>
-                                                                <a href="#" data-bs-toggle="collapse"
-                                                                   data-bs-target="#flush-collapsetwo">reply</a>
-                                                                <div class="accordion accordion-flush"
-                                                                     id="accordionFlushExample2">
-                                                                    <div class="accordion-item">
-                                                                        <div id="flush-collapsetwo"
-                                                                             class="accordion-collapse collapse"
-                                                                             aria-labelledby="flush-collapsetwo"
-                                                                             data-bs-parent="#accordionFlushExample">
-                                                                            <div class="accordion-body">
-                                                                                <form>
-                                                                                    <div
-                                                                                        class="wsus__riv_edit_single text_area">
-                                                                                        <i class="far fa-edit"></i>
-                                                                                        <textarea cols="3" rows="1"
-                                                                                                  placeholder="Your Text"></textarea>
-                                                                                    </div>
-                                                                                    <button type="submit"
-                                                                                            class="common_btn">submit</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                    @foreach($reviews as $review)
+                                                        <div class="wsus__comment_area">
+                                                            <h4>Reviews <span>{{count($reviews)}}</span></h4>
+                                                            <div class="wsus__main_comment">
+                                                                <div class="wsus__comment_img">
+                                                                    <img src="{{$review->user->image}}" alt="user"
+                                                                         class="img-fluid w-100">
+                                                                </div>
+                                                                <div class="wsus__comment_text reply">
+                                                                    <h6>{{$review->user->name}}<span>{{$review->rating}} <i
+                                                                                class="fas fa-star"></i></span></h6>
+                                                                    <span>{{date('d M Y h:i A',strtotime($review->created_at))}}</span>
+                                                                    <p>{{$review->review}}</p>
+                                                                    <ul class="">
+                                                                        @if (count($review->productReviewGalleries) > 0)
+
+                                                                            @foreach ($review->productReviewGalleries as $image)
+
+                                                                                <li><img src="{{asset($image->image)}}" alt="product"
+                                                                                         class="img-fluid "></li>
+                                                                            @endforeach
+                                                                        @endif
+
+                                                                    </ul>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="wsus__main_comment">
-                                                            <div class="wsus__comment_img">
-                                                                <img src="images/client_img_1.jpg" alt="user"
-                                                                     class="img-fluid w-100">
-                                                            </div>
-                                                            <div class="wsus__comment_text reply">
-                                                                <h6>Smith jhon <span>5 <i
-                                                                            class="fas fa-star"></i></span>
-                                                                </h6>
-                                                                <span>09 Jul 2021</span>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                                    elit.
-                                                                    Cupiditate sint molestiae eos? Officia, fuga eaque.
-                                                                </p>
-                                                                <a href="#" data-bs-toggle="collapse"
-                                                                   data-bs-target="#flush-collapsetwo2">reply</a>
-                                                                <div class="accordion accordion-flush"
-                                                                     id="accordionFlushExample2">
-                                                                    <div class="accordion-item">
-                                                                        <div id="flush-collapsetwo2"
-                                                                             class="accordion-collapse collapse"
-                                                                             aria-labelledby="flush-collapsetwo"
-                                                                             data-bs-parent="#accordionFlushExample">
-                                                                            <div class="accordion-body">
-                                                                                <form>
-                                                                                    <div
-                                                                                        class="wsus__riv_edit_single text_area">
-                                                                                        <i class="far fa-edit"></i>
-                                                                                        <textarea cols="3" rows="1"
-                                                                                                  placeholder="Your Text"></textarea>
-                                                                                    </div>
-                                                                                    <button type="submit"
-                                                                                            class="common_btn">submit</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="mt-5">
+                                                                @if ($reviews->hasPages())
+                                                                    {{$reviews->links()}}
+                                                                @endif
                                                             </div>
                                                         </div>
-                                                        <div id="pagination">
-                                                            <nav aria-label="Page navigation example">
-                                                                <ul class="pagination">
-                                                                    <li class="page-item">
-                                                                        <a class="page-link" href="#"
-                                                                           aria-label="Previous">
-                                                                            <i class="fas fa-chevron-left"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="page-item"><a
-                                                                            class="page-link page_active" href="#">1</a>
-                                                                    </li>
-                                                                    <li class="page-item"><a class="page-link"
-                                                                                             href="#">2</a></li>
-                                                                    <li class="page-item"><a class="page-link"
-                                                                                             href="#">3</a></li>
-                                                                    <li class="page-item"><a class="page-link"
-                                                                                             href="#">4</a></li>
-                                                                    <li class="page-item">
-                                                                        <a class="page-link" href="#" aria-label="Next">
-                                                                            <i class="fas fa-chevron-right"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </nav>
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
                                                 <div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
-                                                    <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
-                                                        <h4>write a Review</h4>
-                                                        <form action="#">
-                                                            <p class="rating">
-                                                                <span>select your rating : </span>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </p>
-                                                            <div class="row">
-                                                                <div class="col-xl-12">
-                                                                    <div class="wsus__single_com">
-                                                                        <input type="text" placeholder="Name">
+                                                    @auth
+                                                        @php
+                                                        $isBrought = false;
+                                                        $orders = \App\Models\Order::where(['user_id'=>auth()->user()->id,'order_status'=>'delivered'])->get();
+                                                        foreach ($orders as $key => $order){
+                                                            $existItem = $order->orderProducts()->where('product_id',$product->id)->first();
+
+                                                            if ($existItem){
+                                                                $isBrought = true;
+                                                            }
+                                                        }
+                                                        @endphp
+
+                                                        @if($isBrought === true)
+                                                            <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
+                                                                <h4>write a Review</h4>
+                                                                <form action="{{route('user.product-review.create')}}" method="POST" enctype="multipart/form-data">
+                                                                    <div class="rating">
+                                                                        <span class="rating__result"></span>
+                                                                        <i class="rating__star far fa-star"></i>
+                                                                        <i class="rating__star far fa-star"></i>
+                                                                        <i class="rating__star far fa-star"></i>
+                                                                        <i class="rating__star far fa-star"></i>
+                                                                        <i class="rating__star far fa-star"></i>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-xl-12">
-                                                                    <div class="wsus__single_com">
-                                                                        <input type="email" placeholder="Email">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-12">
-                                                                    <div class="col-xl-12">
-                                                                        <div class="wsus__single_com">
+                                                                    <div class="row">
+                                                                        <div class="col-xl-12">
+                                                                            <div class="col-xl-12">
+                                                                                <div class="wsus__single_com">
                                                                             <textarea cols="3" rows="3"
-                                                                                      placeholder="Write your review"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="img_upload">
-                                                                <div class="gallery">
-                                                                    <a class="cam" href="javascript:void(0)"><span><i
-                                                                                class="fas fa-image"></i></span>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <button class="common_btn" type="submit">submit
-                                                                review</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="pills-contact23" role="tabpanel"
-                                     aria-labelledby="pills-contact-tab23">
-                                    <div class="wsus__pro_det_comment">
-                                        <div class="row">
-                                            <div class="col-xl-7 col-lg-6">
-                                                <div class="wsus__comment_area">
-                                                    <h4>comment <span>03</span></h4>
-                                                    <div class="wsus__main_comment">
-                                                        <div class="wsus__comment_img">
-                                                            <img src="images/dashboard_user.jpg" alt="user"
-                                                                 class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="wsus__comment_text reply">
-                                                            <h6>Shopnil mahadi <span>09 Jul 2021</span></h6>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Cupiditate sint molestiae eos? Officia, fuga eaque.</p>
-                                                            <a href="#" data-bs-toggle="collapse"
-                                                               data-bs-target="#flush-collapsetwo2">reply</a>
-                                                            <div class="accordion accordion-flush"
-                                                                 id="accordionFlushExample2">
-                                                                <div class="accordion-item">
-                                                                    <div id="flush-collapsetwo2"
-                                                                         class="accordion-collapse collapse"
-                                                                         aria-labelledby="flush-collapsetwo"
-                                                                         data-bs-parent="#accordionFlushExample">
-                                                                        <div class="accordion-body">
-                                                                            <form>
-                                                                                <div
-                                                                                    class="wsus__riv_edit_single text_area">
-                                                                                    <i class="far fa-edit"></i>
-                                                                                    <textarea cols="3" rows="1"
-                                                                                              placeholder="Your Text"></textarea>
+                                                                                      placeholder="Write your review" name="review"></textarea>
                                                                                 </div>
-                                                                                <button type="submit"
-                                                                                        class="common_btn">submit</button>
-                                                                            </form>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wsus__main_comment wsus__com_reply">
-                                                        <div class="wsus__comment_img">
-                                                            <img src="images/ts-3.jpg" alt="user"
-                                                                 class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="wsus__comment_text reply">
-                                                            <h6>Smith jhon <span>09 Jul 2021</span></h6>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Cupiditate sint molestiae eos? Officia, fuga eaque.</p>
-                                                            <a href="#" data-bs-toggle="collapse"
-                                                               data-bs-target="#flush-collapsetwo">reply</a>
-                                                            <div class="accordion accordion-flush"
-                                                                 id="accordionFlushExample">
-                                                                <div class="accordion-item">
-                                                                    <div id="flush-collapsetwo"
-                                                                         class="accordion-collapse collapse"
-                                                                         aria-labelledby="flush-collapsetwo"
-                                                                         data-bs-parent="#accordionFlushExample">
-                                                                        <div class="accordion-body">
-                                                                            <form>
-                                                                                <div
-                                                                                    class="wsus__riv_edit_single text_area">
-                                                                                    <i class="far fa-edit"></i>
-                                                                                    <textarea cols="3" rows="1"
-                                                                                              placeholder="Your Text"></textarea>
-                                                                                </div>
-                                                                                <button type="submit"
-                                                                                        class="common_btn">submit</button>
-                                                                            </form>
+                                                                    <div class="img_upload">
+                                                                        <div class="gallery">
+                                                                            <div class="">
+                                                                                <input type="file" name="images[]" multiple>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                    <input class="star_input" type="hidden" name="rating">
+                                                                    <input type="hidden" name="product_id" id="" value="{{$product->id}}">
+                                                                    <input type="hidden" name="vendor_id" id="" value="{{$product->vendor_id}}">
+                                                                    <button class="common_btn" type="submit">submit
+                                                                        review</button>
+                                                                </form>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wsus__main_comment">
-                                                        <div class="wsus__comment_img">
-                                                            <img src="images/team_1.jpg" alt="user"
-                                                                 class="img-fluid w-100">
-                                                        </div>
-                                                        <div class="wsus__comment_text reply">
-                                                            <h6>Smith jhon <span>09 Jul 2021</span></h6>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Cupiditate sint molestiae eos? Officia, fuga eaque.</p>
-                                                            <a href="#" data-bs-toggle="collapse"
-                                                               data-bs-target="#flush-collapsetwo3">reply</a>
-                                                            <div class="accordion accordion-flush"
-                                                                 id="accordionFlushExample3">
-                                                                <div class="accordion-item">
-                                                                    <div id="flush-collapsetwo3"
-                                                                         class="accordion-collapse collapse"
-                                                                         aria-labelledby="flush-collapsetwo"
-                                                                         data-bs-parent="#accordionFlushExample">
-                                                                        <div class="accordion-body">
-                                                                            <form>
-                                                                                <div
-                                                                                    class="wsus__riv_edit_single text_area">
-                                                                                    <i class="far fa-edit"></i>
-                                                                                    <textarea cols="3" rows="1"
-                                                                                              placeholder="Your Text"></textarea>
-                                                                                </div>
-                                                                                <button type="submit"
-                                                                                        class="common_btn">submit</button>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="pagination">
-                                                        <nav aria-label="Page navigation example">
-                                                            <ul class="pagination">
-                                                                <li class="page-item">
-                                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                                        <i class="fas fa-chevron-left"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link page_active"
-                                                                                         href="#">1</a></li>
-                                                                <li class="page-item"><a class="page-link"
-                                                                                         href="#">2</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link"
-                                                                                         href="#">3</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link"
-                                                                                         href="#">4</a>
-                                                                </li>
-                                                                <li class="page-item">
-                                                                    <a class="page-link" href="#" aria-label="Next">
-                                                                        <i class="fas fa-chevron-right"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </nav>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-5 col-lg-6 mt-4 mt-lg-0">
-                                                <div class="wsus__post_comment" id="sticky_sidebar2">
-                                                    <h4>post a comment</h4>
-                                                    <form action="#">
-                                                        <div class="row">
-                                                            <div class="col-xl-6">
-                                                                <div class="wsus__single_com">
-                                                                    <input type="text" placeholder="Name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6">
-                                                                <div class="wsus__single_com">
-                                                                    <input type="email" placeholder="Email">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-12">
-                                                                <div class="wsus__single_com">
-                                                                    <textarea cols="3" rows="3"
-                                                                              placeholder="Your Comment"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <button class="common_btn" type="submit">post comment</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="pills-contact239" role="tabpanel"
-                                     aria-labelledby="pills-contact-tab239">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="wsus__contact_question">
-                                                <h5>People usually ask these</h5>
-                                                <div class="accordion" id="accordionExample">
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="headingOne">
-                                                            <button class="accordion-button" type="button"
-                                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                                                    aria-expanded="true" aria-controls="collapseOne">
-                                                                How can I cancel my order?
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapseOne" class="accordion-collapse collapse show"
-                                                             aria-labelledby="headingOne"
-                                                             data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body">
-                                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit.
-                                                                    Voluptatum voluptas ea hic excepturi sit, sapiente
-                                                                    optio
-                                                                    deleniti pariatur. Dolorum in quos magni?
-                                                                    Necessitatibus
-                                                                    recusandae cupiditate iste expedita amet voluptatem
-                                                                    laudantium.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="headingTwo">
-                                                            <button class="accordion-button collapsed" type="button"
-                                                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                                    aria-expanded="false" aria-controls="collapseTwo">
-                                                                Why is my registration delayed?
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapseTwo" class="accordion-collapse collapse"
-                                                             aria-labelledby="headingTwo"
-                                                             data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body">
-                                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit.
-                                                                    Voluptatum voluptas ea hic excepturi sit, sapiente
-                                                                    optio
-                                                                    deleniti pariatur. Dolorum in quos magni?
-                                                                    Necessitatibus
-                                                                    recusandae cupiditate iste expedita amet voluptatem
-                                                                    laudantium.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="headingThree">
-                                                            <button class="accordion-button collapsed" type="button"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target="#collapseThree" aria-expanded="false"
-                                                                    aria-controls="collapseThree">
-                                                                What do I need to buy products?
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapseThree" class="accordion-collapse collapse"
-                                                             aria-labelledby="headingThree"
-                                                             data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body">
-                                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit.
-                                                                    Voluptatum voluptas ea hic excepturi sit, sapiente
-                                                                    optio
-                                                                    deleniti pariatur. Dolorum in quos magni?
-                                                                    Necessitatibus
-                                                                    recusandae cupiditate iste expedita amet voluptatem
-                                                                    laudantium.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="headingThreet1">
-                                                            <button class="accordion-button collapsed" type="button"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target="#collapseThreet1" aria-expanded="false"
-                                                                    aria-controls="collapseThreet1">
-                                                                How can I track an order?
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapseThreet1" class="accordion-collapse collapse"
-                                                             aria-labelledby="headingThreet1"
-                                                             data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body">
-                                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit.
-                                                                    Voluptatum voluptas ea hic excepturi sit, sapiente
-                                                                    optio
-                                                                    deleniti pariatur. Dolorum in quos magni?
-                                                                    Necessitatibus
-                                                                    recusandae cupiditate iste expedita amet voluptatem
-                                                                    laudantium.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="headingThreet2">
-                                                            <button class="accordion-button collapsed" type="button"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target="#collapseThreet2" aria-expanded="false"
-                                                                    aria-controls="collapseThreet2">
-                                                                How can I get money back?
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapseThreet2" class="accordion-collapse collapse"
-                                                             aria-labelledby="headingThreet2"
-                                                             data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body">
-                                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit.
-                                                                    Voluptatum voluptas ea hic excepturi sit, sapiente
-                                                                    optio
-                                                                    deleniti pariatur. Dolorum in quos magni?
-                                                                    Necessitatibus
-                                                                    recusandae cupiditate iste expedita amet voluptatem
-                                                                    laudantium.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        @endif
+                                                    @endauth
                                                 </div>
                                             </div>
                                         </div>
@@ -1053,3 +679,40 @@
         RELATED PRODUCT END
     ==============================-->
 @endsection
+
+@push('scripts')
+    <script>
+        const ratingStars = [...document.getElementsByClassName("rating__star")];
+        const ratingResult = document.querySelector(".rating__result");
+        const startInput = document.querySelector('.star_input');
+
+        printRatingResult(ratingResult);
+
+        function executeRating(stars, result) {
+            const starClassActive = "rating__star fas fa-star";
+            const starClassUnactive = "rating__star far fa-star";
+            const starsLength = stars.length;
+            let i;
+            stars.map((star) => {
+                star.onclick = () => {
+                    i = stars.indexOf(star);
+
+                    if (star.className.indexOf(starClassUnactive) !== -1) {
+                        printRatingResult(result, i + 1);
+                        for (i; i >= 0; --i) stars[i].className = starClassActive;
+                    } else {
+                        printRatingResult(result, i);
+                        for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+                    }
+                };
+            });
+        }
+
+        function printRatingResult(result, num = 0) {
+            result.textContent = `${num}/5`;
+            startInput.value = num;
+        }
+
+        executeRating(ratingStars, ratingResult);
+    </script>
+@endpush

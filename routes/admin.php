@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminVendorProfileController;
+use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\Admin\ShippingRuleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StripeSettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\VendorProductController;
 use Illuminate\Support\Facades\Route;
@@ -144,6 +146,26 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     Route::put('footer-grid-one/change-title',[FooterGridOneController::class,'changeTitle'])->name('footer-grid-one.change-title');
     Route::resource('footer-grid-one',FooterGridOneController::class);
 
+    Route::put('footer-grid-two/change-status',[FooterGridTwoController::class,'changeStatus'])->name('footer-grid-two.change-status');
+    Route::put('footer-grid-two/change-title',[FooterGridTwoController::class,'changeTitle'])->name('footer-grid-two.change-title');
     Route::resource('footer-grid-two',FooterGridTwoController::class);
+
+
+    //EmailConfig
+    Route::put('email-config/update',[SettingController::class,'emailConfigSettingUpdate'])->name('email-setting-update');
+
+    //Subscriber
+    Route::get('subscribers',[SubscribersController::class,'index'])->name('subscriber.index');
+    Route::post('subscriber/send-email',[SubscribersController::class,'sendEmail'])->name('subscriber.send-email');
+    Route::delete('subscribers/{id}', [SubscribersController::class, 'destory'])->name('subscriber.destory');
+
+    //Advertisement
+    Route::get('advertisement',[AdvertisementController::class,'index'])->name('advertisement.index');
+    Route::put('advertisement/homepage-section-banner-one',[AdvertisementController::class,'homepageBannerSectionOne'])->name('homepage-banner-section-one');
+    Route::put('advertisement/homepage-section-banner-two',[AdvertisementController::class,'homepageSectionBannerTwo'])->name('homepage-banner-section-two');
+    Route::put('advertisement/homepage-section-banner-three',[AdvertisementController::class,'homepageBannerSectionThree'])->name('homepage-banner-section-three');
+    Route::put('advertisement/homepage-section-banner-four',[AdvertisementController::class,'homepageBannerSectionFour'])->name('homepage-banner-section-four');
+    Route::put('advertisement/productpage-banner', [AdvertisementController::class, 'productPageBanner'])->name('productpage-banner');
+    Route::put('advertisement/cartpage-banner', [AdvertisementController::class, 'cartPageBanner'])->name('cartpage-banner');
 
 });

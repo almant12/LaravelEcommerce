@@ -137,6 +137,40 @@
                 }
             })
         })
+
+        $('#newsletter').on('submit',function (e){
+            e.preventDefault();
+            let data = $(this).serialize();
+
+
+            $.ajax({
+                method: 'POST',
+                url: '{{route('newsletter-signup')}}',
+                data: data,
+                beforeSend: function (){
+                    $('.subscribe_btn').text('Loading...')
+                },
+                success: function (data){
+                    if (data.status === 'success'){
+                        $('.subscribe_btn').text('Subscribe')
+                        $('.newsletter').val('')
+                        toastr.success(data.message);
+                    }else if (data.status === 'error'){
+                        $('.subscribe_btn').text('Subscribe')
+                        toastr.error(data.message)
+                    }
+                },
+                error: function (data){
+                    let errors = data.responseJSON.errors;
+                    if (errors){
+                        $.each(errors,function (key,value){
+                            toastr.error(value)
+                        })
+                        $('.subscribe_btn').text('Subscribe')
+                    }
+                }
+            })
+        })
     })
 
 </script>

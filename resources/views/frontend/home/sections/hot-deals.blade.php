@@ -75,6 +75,53 @@
                 @endforeach
             </div>
         </div>
+
+        @if($homepage_section_banner_three !== null)
+            <section id="wsus__single_banner" class="home_2_single_banner">
+                <div class="container">
+                    <div class="row">
+                        @if ($homepage_section_banner_three->banner_one->status == 1)
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="wsus__single_banner_content banner_1">
+                                    <a href="{{ $homepage_section_banner_three->banner_one->banner_url }}">
+                                        <img class="img-gluid"
+                                             src="{{ asset($homepage_section_banner_three->banner_one->banner_image) }}"
+                                             alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    @if ($homepage_section_banner_three->banner_two->status == 1)
+                                        <div class="wsus__single_banner_content single_banner_2">
+                                            <a href="{{ $homepage_section_banner_three->banner_two->banner_url }}">
+                                                <img class="img-gluid"
+                                                     src="{{ asset($homepage_section_banner_three->banner_two->banner_image) }}"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-12 mt-lg-4">
+                                    <div class="wsus__single_banner_content">
+                                        @if ($homepage_section_banner_three->banner_three->status == 1)
+                                            <a href="{{ $homepage_section_banner_three->banner_three->banner_url }}">
+                                                <img class="img-gluid"
+                                                     src="{{ asset($homepage_section_banner_three->banner_three->banner_image) }}"
+                                                     alt="">
+                                            </a>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
         @foreach($typeBaseProducts as $key => $products)
             @foreach($products as $product)
                 <section class="product_popup_modal">
@@ -186,54 +233,6 @@
                 </section>
             @endforeach
         @endforeach
-
-
-{{--        <section id="wsus__single_banner" class="home_2_single_banner">--}}
-{{--            <div class="container">--}}
-{{--                <div class="row">--}}
-{{--                    <div class="col-xl-6 col-lg-6">--}}
-{{--                        <div class="wsus__single_banner_content banner_1">--}}
-{{--                            <div class="wsus__single_banner_img">--}}
-{{--                                <img src="images/single_banner_44.jpg" alt="banner" class="img-fluid w-100">--}}
-{{--                            </div>--}}
-{{--                            <div class="wsus__single_banner_text">--}}
-{{--                                <h6>sell on <span>35% off</span></h6>--}}
-{{--                                <h3>smart watch</h3>--}}
-{{--                                <a class="shop_btn" href="#">shop now</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-xl-6 col-lg-6">--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-12">--}}
-{{--                                <div class="wsus__single_banner_content single_banner_2">--}}
-{{--                                    <div class="wsus__single_banner_img">--}}
-{{--                                        <img src="images/single_banner_55.jpg" alt="banner" class="img-fluid w-100">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="wsus__single_banner_text">--}}
-{{--                                        <h6>New Collection</h6>--}}
-{{--                                        <h3>kid's fashion</h3>--}}
-{{--                                        <a class="shop_btn" href="#">shop now</a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-12 mt-lg-4">--}}
-{{--                                <div class="wsus__single_banner_content">--}}
-{{--                                    <div class="wsus__single_banner_img">--}}
-{{--                                        <img src="images/single_banner_66.jpg" alt="banner" class="img-fluid w-100">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="wsus__single_banner_text">--}}
-{{--                                        <h6>sell on <span>42% off</span></h6>--}}
-{{--                                        <h3>winter collection</h3>--}}
-{{--                                        <a class="shop_btn" href="#">shop now</a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </section>--}}
     </div>
 </section>
 

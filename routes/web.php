@@ -6,11 +6,13 @@ use App\Http\Controllers\User\CheckOutController;
 use App\Http\Controllers\User\FlashSaleController;
 use App\Http\Controllers\User\FrontendProductController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\NewsletterController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\UserAddressController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\UserOrderController;
 use App\Http\Controllers\User\UserProductController;
+use App\Http\Controllers\User\UserProductReviewController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\WishlistController;
@@ -48,6 +50,9 @@ Route::get('change-product-list-view',[FrontendProductController::class,'changeL
 
 Route::get('/send-email',[\App\Http\Controllers\EmailController::class,'sendEmail']);
 
+Route::post('newsletter-signup',[NewsletterController::class,'newsletterSignup'])->name('newsletter-signup');
+Route::get('newsletter-verify/{token}',[NewsletterController::class,'newsletterEmailVerify'])->name('newsletter-verify');
+
 //Cart Routes
 Route::post('add-to-cart',[CartController::class,'addToCart'])->name('add-to-cart');
 Route::get('cart-detail',[CartController::class,'cartDetails'])->name('cart-detail');
@@ -80,6 +85,10 @@ Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],
     Route::get('checkout',[CheckOutController::class,'index'])->name('checkout');
     Route::post('checkout',[CheckOutController::class,'addAddress'])->name('checkout.address.create');
     Route::post('checkout/form-submit', [CheckOutController::class, 'checkOutFormSubmit'])->name('checkout.form-submit');
+
+    //ProductReview
+    Route::get('product-review',[UserProductReviewController::class,'index'])->name('product-review.index');
+    Route::post('product-review/create',[UserProductReviewController::class,'create'])->name('product-review.create');
 
     //Payment
     Route::get('payment',[PaymentController::class,'index'])->name('payment');

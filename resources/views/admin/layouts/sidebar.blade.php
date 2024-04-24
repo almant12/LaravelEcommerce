@@ -93,6 +93,10 @@
                     <li class="{{setActive(['admin.home-page-setting.*'])}}"><a  class="nav-link" href="{{route('admin.home-page-setting.index')}}">Home Page Setting</a></li>
                 </ul>
             </li>
+            <li><a class="nav-link {{ setActive(['admin.advertisement.*']) }}"
+                   href="{{ route('admin.advertisement.index') }}"><i class="fas fa-ad"></i>
+                    <span>Advertisement</span></a>
+            </li>
             <li class="dropdown {{setActive(['admin.footer-info.*',
                       'admin.footer-socials.*',
                       'admin.footer-grid-one.*'.
@@ -105,6 +109,7 @@
                     <li class="{{setActive(['admin.footer-grid-two.*'])}}"><a  class="nav-link"  href="{{route('admin.footer-grid-two.index')}}">Footer Grid Two</a></li>
                 </ul>
             </li>
+            <li><a class="nav-link" href="{{route('admin.subscriber.index')}}"><i class="far fa-square"></i> <span>Subscriber</span></a></li>
             <li><a class="nav-link" href="{{route('admin.settings.index')}}"><i class="far fa-square"></i> <span>Settings</span></a></li>
         </ul>
 

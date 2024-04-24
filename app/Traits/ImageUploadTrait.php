@@ -36,7 +36,7 @@ trait ImageUploadTrait{
         }
     }
 
-    public function updateImage(Request $request,$inputName,$oldPath){
+    public function updateImage(Request $request,$inputName,$oldPath=null){
         $path = 'upload';
         if ($request->hasFile($inputName)){
             if (File::exists(public_path($oldPath))){

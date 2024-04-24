@@ -21,7 +21,7 @@
                                 @method('PUT')
                                 <div class="col-4">
                                     <div class="form-group d-flex">
-                                        <input type="text" class="form-control" name="title" value="{{@$footerTitle->footer_grid_one_title}}">
+                                        <input type="text" class="form-control" name="title" value="{{@$footerTitle->footer_grid_two_title}}">
                                         <button type="submit" class="btn btn-primary ml-4">Save</button>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                         <div class="card-header">
                             <h4>Footer Grid Two</h4>
                             <div class="card-header-action">
-                                <a href="{{route('admin.footer-grid-one.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
+                                <a href="{{route('admin.footer-grid-two.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
                             </div>
                         </div>
                         <div class="card-body">

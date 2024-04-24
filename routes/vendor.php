@@ -5,6 +5,7 @@ use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Vendor\VendorOrderController;
 use App\Http\Controllers\Vendor\VendorProductController;
 use App\Http\Controllers\Vendor\VendorProductImageGalleryController;
+use App\Http\Controllers\Vendor\VendorProductReviewController;
 use App\Http\Controllers\Vendor\VendorProductVariantController;
 use App\Http\Controllers\Vendor\VendorProductVariantItemController;
 use App\Http\Controllers\Vendor\VendorProfileController;
@@ -46,5 +47,8 @@ Route::group(['middleware'=>['auth','role:vendor'],'prefix'=>'vendor','as'=>'ven
     Route::get('order',[VendorOrderController::class,'index'])->name('orders.index');
     Route::get('order/show/{id}',[VendorOrderController::class,'show'])->name('order.show');
     Route::put('order/update/{id}',[VendorOrderController::class,'updateStatus'])->name('order.status');
+
+    //Vendor-ProductReview
+    Route::get('product-review',[VendorProductReviewController::class,'index'])->name('product-review.index');
 });
 
