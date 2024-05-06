@@ -9,15 +9,27 @@
                    <input type="text" class="form-control" name="site_name" value="{{@$generalSetting->site_name}}">
                </div>
                <div class="form-group">
+                   <label>Contact Email</label>
+                   <input type="email" class="form-control" name="contact_email" value="{{@$generalSetting->contact_email}}">
+               </div>
+               <div class="form-group">
+                   <label>Phone Number</label>
+                   <input type="text" class="form-control" name="phone_number" value="{{@$generalSetting->phone_number}}">
+               </div>
+               <div class="form-group">
+                   <label>Address</label>
+                   <input type="text" class="form-control" name="address" value="{{@$generalSetting->address}}">
+               </div>
+               <div class="form-group">
+                   <label>Map Url</label>
+                   <input type="url" class="form-control" name="map_url" value="{{@$generalSetting->map_url}}">
+               </div>
+               <div class="form-group">
                    <label>Layout</label>
                    <select name="layout" class="form-control" id="">
                        <option {{@$generalSetting->layout == 'LTR' ? 'selected' : ''}} value="LTR">LTR</option>
                        <option {{@$generalSetting->layout == 'RTL' ? 'selected' : ''}} value="RTL">RTL</option>
                    </select>
-               </div>
-               <div class="form-group">
-                   <label>Contact Email</label>
-                   <input type="email" class="form-control" name="contact_email" value="{{@$generalSetting->contact_email}}">
                </div>
                <div class="form-group">
                    <label>Default Currency Name </label>

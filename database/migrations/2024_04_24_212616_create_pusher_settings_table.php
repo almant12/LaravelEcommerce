@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('pusher_settings', function (Blueprint $table) {
             $table->id();
+            $table->string('pusher_app_id');
+            $table->string('pusher_key');
+            $table->string('pusher_secret');
+            $table->string('pusher_cluster');
             $table->timestamps();
         });
     }

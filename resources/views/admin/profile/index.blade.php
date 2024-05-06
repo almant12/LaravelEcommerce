@@ -25,7 +25,7 @@
                                     <div class="form-group  col-12">
                                         <label>Image</label>
                                         <div class="mb-3">
-                                            <img width="100px" src="/upload/{{Auth::user()->image}}">
+                                            <img width="100px" src="{{asset(Auth::user()->image)}}">
                                         </div>
                                         <input type="file" name="image" class="form-control">
                                         <div class="invalid-feedback">
@@ -35,6 +35,12 @@
                                     <div class="form-group col-md-6 col-12">
                                         <label>Name</label>
                                         <input type="text" name="name" class="form-control" value="{{Auth::user()->name}}" required="">
+                                        <div class="invalid-feedback">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-12">
+                                        <label>Last Name</label>
+                                        <input type="text" name="lastname" class="form-control" value="{{Auth::user()->lastname}}" required="">
                                         <div class="invalid-feedback">
                                         </div>
                                     </div>

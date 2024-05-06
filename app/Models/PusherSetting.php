@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class PusherSetting extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = [
+        'pusher_app_id',
+        'pusher_key',
+        'pusher_secret',
+        'pusher_cluster'
+    ];
 }

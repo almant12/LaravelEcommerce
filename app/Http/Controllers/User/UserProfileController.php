@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Traits\ImageUploadTrait;
 use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
+
+    use ImageUploadTrait;
     public function index(){
         return view('frontend.dashboard.profile');
     }
@@ -17,30 +20,20 @@ class UserProfileController extends Controller
     public function updateProfile(Request $request){
 
         $request->validate([
-            'username'=>['required','max:100'],
+            'name'=>['required','max:100'],
             'lastname'=>['required','max:100'],
             'email'=>['required','email','unique:users,email,'.Auth::user()->id],
             'image'=>['image','max:2048']
         ]);
 
+        $user=Auth::user();
 
-        $user = Auth::user();
+        $pathImage = $this->updateImage($request,'image',$user->image);
 
-        if ($request->hasFile('image')){
-            if (\Illuminate\Support\Facades\File::exists(public_path($user->image))){
-                \Illuminate\Support\Facades\File::delete(public_path($user->image));
-            }
-            $image = $request->image;
-            $imageName = rand().'_'.$image->getClientOriginalName();
-            $image->move(public_path('upload'),$imageName);
-            $path = $imageName;
-
-            $user->image = $path;
-        }
-
-        $user->username = $request->username;
+        $user->name = $request->name;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
+        $user->image = empty(!$pathImage) ? $pathImage : $user->image;
         $user->save();
 
         toastr()->success('Profile updated successfully');

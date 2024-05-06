@@ -25,8 +25,8 @@
                                                 <div class="col-xl-6 col-md-6">
                                                     <div class="wsus__dash_pro_single">
                                                         <i class="fas fa-user-tie"></i>
-                                                        <input type="text" name="username"
-                                                               value="{{Auth::user()->username}}"
+                                                        <input type="text" name="name"
+                                                               value="{{Auth::user()->name}}"
                                                                placeholder="First Name">
                                                     </div>
                                                 </div>
@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="col-xl-3 col-sm-6 col-md-6">
                                             <div class="wsus__dash_pro_img">
-                                                <img src="{{Auth::user()->image ? asset('upload/'.Auth::user()->image) : asset('frontend/images/default.jpg')}}"
+                                                <img src="{{Auth::user()->image ? asset(Auth::user()->image) : asset('frontend/images/default.jpg')}}"
                                                      alt="img" class="img-fluid w-100">
                                                 <input type="file" name="image">
                                             </div>

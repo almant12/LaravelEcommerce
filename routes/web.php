@@ -7,6 +7,7 @@ use App\Http\Controllers\User\FlashSaleController;
 use App\Http\Controllers\User\FrontendProductController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\NewsletterController;
+use App\Http\Controllers\User\PageController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\UserAddressController;
 use App\Http\Controllers\User\UserDashboardController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\User\UserProductController;
 use App\Http\Controllers\User\UserProductReviewController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UserVendorRequestController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,8 +43,17 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/admin/login',[AdminController::class,'login'])->name('admin.login');
 Route::get('flash-sale',[FlashSaleController::class,'index'])->name('flash-sale.index');
+
+//AboutPage
+Route::get('about',[PageController::class,'about'])->name('about.index');
+
+//
+Route::get('terms-and-condition',[PageController::class,'termsAndCondition'])->name('terms-and-condition.index');
+
+//VendorPage
+Route::get('vendor-page',[HomeController::class,'vendorPage'])->name('vendor.index');
+Route::get('vendor-products/{id}',[HomeController::class,'vendorProductPage'])->name('vendor-products');
 
 //Products
 Route::get('products',[FrontendProductController::class,'productIndex'])->name('products.index');
@@ -65,8 +76,13 @@ Route::get('cart/content',[CartController::class,'getCartProducts'])->name('cart
 Route::get('cart/sidebar-product-total',[CartController::class,'cartTotal'])->name('cart.sidebar-product-total');
 Route::post('cart/sidebar-remove-product',[CartController::class,'removeSidebarProduct'])->name('cart.sidebar-remove-product');
 
+//Coupon
 Route::get('apply-coupon',[CartController::class,'applyCoupon'])->name('apply-coupon');
 Route::get('coupon-calculation',[CartController::class,'couponCalculation'])->name('coupon-calculation');
+
+//Pages
+Route::get('contact',[PageController::class,'contact'])->name('contact.index');
+Route::post('contact',[PageController::class,'handleContactForm'])->name('handle-contact-form');
 
 Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],function (){
     Route::get('dashboard',[UserDashboardController::class,'index'])->name('dashboard');
@@ -76,7 +92,8 @@ Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],
 
     //Messenger
     Route::get('messages', [UserMessageController::class, 'index'])->name('messages.index');
-
+    Route::post('send-message',[UserMessageController::class,'sendMessage'])->name('send-message');
+    Route::get('get-messages',[UserMessageController::class,'getMessages'])->name('get-messages');
     //Wishlist
     Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist.index');
     Route::post('wishlist/add-product',[WishlistController::class,'addToWishlist'])->name('wishlist.add-product');
@@ -110,4 +127,9 @@ Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],
     //Order
     Route::get('orders',[UserOrderController::class,'index'])->name('orders');
     Route::get('order/show/{id}',[UserOrderController::class,'show'])->name('order.show');
+
+    //RequestToBeVendor
+    Route::get('vendor-request',[UserVendorRequestController::class,'index'])->name('vendor-request.index');
+    Route::post('vendor-request',[UserVendorRequestController::class,'create'])->name('vendor-request.create');
+
 });

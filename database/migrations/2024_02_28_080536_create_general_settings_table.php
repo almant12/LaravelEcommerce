@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('layout');
             $table->string('contact_email');
             $table->string('currency_name');
+            $table->string('phone_number');
+            $table->string('address');
+            $table->text('map_url');
             $table->string('currency_icon');
             $table->string('time_zone');
             $table->timestamps();

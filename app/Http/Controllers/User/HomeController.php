@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
 use App\Models\FooterInfo;
@@ -13,6 +14,7 @@ use App\Models\FooterSocial;
 use App\Models\HomePageSetting;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +26,7 @@ class HomeController extends Controller
         $popularCategory = HomePageSetting::where('key','popular_category_section')->first();
         $sliders = Slider::where('status',1)->orderBy('serial','asc')->get();
         $flashSaleDate = FlashSale::first();
-        $flashSaleItems = FlashSaleItem::where('show_at_home',1)->where('status',1)->get();
+        $flashSaleItems = FlashSaleItem::where('show_at_home',1)->where('status',1)->pluck('product_id')->toArray();
         $brands = Brand::where('status',1)->get();
         $typeBaseProducts = $this->getProductsByType();
 
@@ -68,5 +70,22 @@ class HomeController extends Controller
         $typeBaseProducts['best_product'] = Product::where(['product_type'=>'best_product','is_approved'=>1])->orderBy('id','DESC')->take(8)->get();
 
         return $typeBaseProducts;
+    }
+
+
+    public function vendorPage(){
+        $vendors = Vendor::where('status',1)->paginate(20);
+        return view('frontend.pages.vendor',compact('vendors'));
+    }
+
+    public function vendorProductPage(string $id){
+
+        $vendor = Vendor::findOrFail($id);
+
+        $products = Product::where(['status'=>1,'is_approved'=>1,'vendor_id'=>$vendor->id])->orderBy('id','DESC')->paginate(12);
+        $categories = Category::where('status',1)->get();
+        $brands = Brand::where('status',1)->get();
+
+        return view('frontend.pages.vendor-product',compact('products','categories','brands','vendor'));
     }
 }

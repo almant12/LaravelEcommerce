@@ -20,8 +20,9 @@ Route::group(['middleware'=>['auth','role:vendor'],'prefix'=>'vendor','as'=>'ven
     Route::post('profile',[VendorProfileController::class,'updatePassword'])->name('profile.update.password');
 
     //Messenger
-    Route::get('messenger',[VendorMessageController::class,'index'])->name('messages.index');
-
+    Route::get('messages',[VendorMessageController::class,'index'])->name('messages.index');
+    Route::post('send-message',[VendorMessageController::class,'sendMessages'])->name('send-message');
+    Route::get('get-messages',[VendorMessageController::class,'getMessages'])->name('get-messages');
     //Shop-profile-vendor
     Route::resource('shop-profile',VendorShopProfileController::class);
 

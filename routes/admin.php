@@ -1,18 +1,23 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminVendorProfileController;
+use App\Http\Controllers\Admin\AdminVendorRequestController;
 use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\CustomerListController;
 use App\Http\Controllers\Admin\FlashSaleController;
 use App\Http\Controllers\Admin\FooterGridOneController;
 use App\Http\Controllers\Admin\FooterGridTwoController;
 use App\Http\Controllers\Admin\FooterInfoController;
 use App\Http\Controllers\Admin\FooterSocialController;
 use App\Http\Controllers\Admin\HomePageSettingController;
+use App\Http\Controllers\Admin\ManageUserController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentSettingController;
 use App\Http\Controllers\Admin\PaypalSettingController;
@@ -27,7 +32,10 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StripeSettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubscribersController;
+use App\Http\Controllers\Admin\TermsAndConditionController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\VendorConditionController;
+use App\Http\Controllers\Admin\VendorListController;
 use App\Http\Controllers\Admin\VendorProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -124,6 +132,8 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     //Settings-routes
     Route::get('settings',[SettingController::class,'index'])->name('settings.index');
     Route::put('general-setting-update',[SettingController::class,'generalSettingUpdate'])->name('general-setting.update');
+    Route::put('email-config/update',[SettingController::class,'emailConfigSettingUpdate'])->name('email-setting-update');
+    Route::put('pusher-setting/update',[SettingController::class,'pusherSettingUpdate'])->name('pusher-setting.update');
 
     //HomePageSetting
     Route::get('home-page-setting',[HomePageSettingController::class,'index'])->name('home-page-setting.index');
@@ -150,10 +160,6 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     Route::put('footer-grid-two/change-title',[FooterGridTwoController::class,'changeTitle'])->name('footer-grid-two.change-title');
     Route::resource('footer-grid-two',FooterGridTwoController::class);
 
-
-    //EmailConfig
-    Route::put('email-config/update',[SettingController::class,'emailConfigSettingUpdate'])->name('email-setting-update');
-
     //Subscriber
     Route::get('subscribers',[SubscribersController::class,'index'])->name('subscriber.index');
     Route::post('subscriber/send-email',[SubscribersController::class,'sendEmail'])->name('subscriber.send-email');
@@ -167,5 +173,39 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     Route::put('advertisement/homepage-section-banner-four',[AdvertisementController::class,'homepageBannerSectionFour'])->name('homepage-banner-section-four');
     Route::put('advertisement/productpage-banner', [AdvertisementController::class, 'productPageBanner'])->name('productpage-banner');
     Route::put('advertisement/cartpage-banner', [AdvertisementController::class, 'cartPageBanner'])->name('cartpage-banner');
+
+    //VendorRequest
+    Route::get('vendor-request',[AdminVendorRequestController::class,'index'])->name('vendor-request.index');
+    Route::get('vendor-request/show/{id}',[AdminVendorRequestController::class,'show'])->name('vendor-request.show');
+    Route::put('vendor-request/change-status/{id}',[AdminVendorRequestController::class,'changeStatus'])->name('vendor-request.change-status');
+
+    //CustomersList
+    Route::get('customer', [CustomerListController::class, 'index'])->name('customer.index');
+    Route::put('customer/status-change', [CustomerListController::class, 'changeStatus'])->name('customer.status-change');
+
+    //VendorsList
+    Route::get('vendor-list', [VendorListController::class, 'index'])->name('vendor-list.index');
+    Route::put('vendor-list/status-change', [VendorListController::class, 'changeStatus'])->name('vendor-list.status-change');
+
+    //ManageUser
+    Route::get('manage-user',[ManageUserController::class,'index'])->name('manage-user.index');
+    Route::post('manage-user',[ManageUserController::class,'create'])->name('manage-user.create');
+
+    //VendorCondition
+    Route::get('vendor-condition', [VendorConditionController::class, 'index'])->name('vendor-condition.index');
+    Route::put('vendor-condition/update', [VendorConditionController::class, 'update'])->name('vendor-condition.update');
+
+    //About
+    Route::get('about',[AboutController::class,'index'])->name('about.index');
+    Route::put('about',[AboutController::class,'update'])->name('about.update');
+
+    //TermsAndCondition
+    Route::get('terms-and-condition',[TermsAndConditionController::class,'index'])->name('terms-and-condition.index');
+    Route::put('terms-and-condition',[TermsAndConditionController::class,'update'])->name('terms-and-condition.update');
+
+    //Messengers
+    Route::get('messages',[MessageController::class,'index'])->name('messages.index');
+    Route::post('send-message',[MessageController::class,'sendMessage'])->name('send-message');
+    Route::get('get-messages',[MessageController::class,'getMessages'])->name('get-messages');
 
 });

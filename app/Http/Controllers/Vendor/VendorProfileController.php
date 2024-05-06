@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VendorProfileController extends Controller
 {
 
+    use ImageUploadTrait;
     public function index(){
         return view('vendor.dashboard.profile');
     }
@@ -16,7 +18,7 @@ class VendorProfileController extends Controller
     public function updateProfile(Request $request){
 
         $request->validate([
-            'username'=>['required','max:100'],
+            'name'=>['required','max:100'],
             'lastname'=>['required','max:100'],
             'email'=>['required','email','unique:users,email,'.Auth::user()->id],
             'image'=>['image','max:2048']
@@ -25,21 +27,12 @@ class VendorProfileController extends Controller
 
         $user = Auth::user();
 
-        if ($request->hasFile('image')){
-            if (\Illuminate\Support\Facades\File::exists(public_path($user->image))){
-                \Illuminate\Support\Facades\File::delete(public_path($user->image));
-            }
-            $image = $request->image;
-            $imageName = rand().'_'.$image->getClientOriginalName();
-            $image->move(public_path('upload'),$imageName);
-            $path = $imageName;
+        $pathImage = $this->updateImage($request,'image',$user->image);
 
-            $user->image = $path;
-        }
-
-        $user->username = $request->username;
+        $user->name = $request->name;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
+        $user->image = empty(!$pathImage) ? $pathImage : $user->image;
         $user->save();
 
         toastr()->success('Profile updated successfully');

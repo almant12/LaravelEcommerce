@@ -9231,7 +9231,6 @@ DASHBOARD CHAT START
   max-height: 591px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #08C #0b172d;
 }
 
 .wsus__chat_single {
@@ -9613,4 +9612,8 @@ body {
 .rating__star {
     cursor: pointer;
     color: #dabd18b2;
+}
+
+.msg-notification {
+    border: 5px solid #08c !important;
 }

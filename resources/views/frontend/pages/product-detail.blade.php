@@ -263,7 +263,15 @@
                                 <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
                                 <li><a class="buy_now" href="#">buy now</a></li>
                                 <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="far fa-random"></i></a></li>
+                                <li>
+                                    <button type="button" style="border: 1px solid gray;
+                                        padding: 7px 11px;
+                                        margin-left: 7px;
+                                        border-radius: 100%; background-color: #0088cc" class="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="far fa-comment-alt text-light"></i>
+                                    </button>
+
+                                </li>
                             </ul>
                             </form>
                             <p class="brand_model"><span>brand :</span> {{$product->brand->name}}</p>
@@ -516,6 +524,33 @@
         PRODUCT DETAILS END
     ==============================-->
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="message_modal">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Message</label>
+                            <textarea name="message" class="form-control mt-2 message-box"></textarea>
+                            <input type="hidden" name="receiver_id" value="{{ $product->vendor->user_id }}">
+                        </div>
+
+                        <button type="submit" class="btn add_cart mt-4 send-button">Send</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
     <!--============================
         RELATED PRODUCT START
@@ -688,6 +723,39 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function (){
+            $('.message_modal').on('submit',function(e){
+                e.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{route('user.send-message')}}',
+                    data: formData,
+                    beforeSend: function (){
+                        let html = `<span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span> Sending..`
+
+                        $('.send-button').html(html);
+                        $('.send-button').prop('disabled',true)
+
+                    },success:function (data){
+                        $('.message-box').val('')
+                        $('.modal-body').append(`<div class="alert alert-success mt-2"><a href="{{ route('user.messages.index') }}" class="text-primary">Click here</a> for go to messenger.</div>`)
+                        toastr.success(data.message)
+                    },error: function(xhr, status, error) {
+                        toastr.error(xhr.responseJSON.message);
+                        $('.send-button').html('Send');
+                        $('.send-button').prop('disabled', false);
+                    },
+                    complete:function (){
+                        $('.send-button').html('Send')
+                        $('.send-button').prop('disabled',false)
+                    }
+                })
+            })
+        })
+    </script>
     <script>
         const ratingStars = [...document.getElementsByClassName("rating__star")];
         const ratingResult = document.querySelector(".rating__result");

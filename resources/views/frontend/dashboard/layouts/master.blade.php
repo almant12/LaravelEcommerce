@@ -28,6 +28,22 @@
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script>
+    const USER = {
+    id: "{{ auth()->user()->id }}",
+    name: "{{ auth()->user()->name}}",
+        lastname: "{{auth()->user()->lastname}}",
+    image: "{{ asset(auth()->user()->image) }}"
+    }
+
+    const PUSHER = {
+        key: "{{ $pusherSetting->pusher_key }}",
+        cluster: "{{ $pusherSetting->pusher_cluster }}"
+    }
+    </script>
+
+    @vite(['resources/js/app.js','resources/js/frontend.js'])
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -40,7 +56,7 @@
 <div class="wsus__dashboard_menu">
     <div class="wsusd__dashboard_user">
         <img src="images/dashboard_user.jpg" alt="img" class="img-fluid">
-        <p>anik roy</p>
+        <p>{{auth()->user()->name}} {{auth()->user()->lastname}}</p>
     </div>
 </div>
 <!--=============================
@@ -66,6 +82,7 @@
 <!--============================
   SCROLL BUTTON  END
 ==============================-->
+
 
 <!--jquery library js-->
 <script src="{{asset('frontend/js/jquery-3.6.0.min.js')}}"></script>
@@ -101,15 +118,15 @@
 <script src="{{asset('frontend/js/venobox.min.js')}}"></script>
 <!--classycountdown js-->
 <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
+<script src="{{asset('backend/assets/modules/summernote/summernote-bs4.js')}}"></script>
+<script src='https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js'></script>
+<script src="{{asset('backend/assets/modules/moment.min.js')}}"></script>
+<script src="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<!--Sweetalert js-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 <!--main/custom js-->
 <script src="{{asset('frontend/js/main.js')}}"></script>
-
-
 <script>
     @if($errors->any())
     @foreach($errors->all() as $error)
@@ -171,6 +188,7 @@
         })
     })
 </script>
+@stack('scripts')
 </body>
 
 </html>

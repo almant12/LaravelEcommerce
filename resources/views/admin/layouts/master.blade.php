@@ -29,13 +29,19 @@
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-94034622-3');
+        const USER = {
+            id: "{{ auth()->user()->id }}",
+            name: "{{ auth()->user()->name}}",
+            lastname: "{{auth()->user()->lastname}}",
+            image: "{{ asset(auth()->user()->image) }}"
+        }
+        const PUSHER = {
+            key: "{{ $pusherSetting->pusher_key }}",
+            cluster: "{{ $pusherSetting->pusher_cluster }}"
+        }
     </script>
-    <!-- /END GA --></head>
+    @vite(['resources/js/app.js', 'resources/js/admin.js'])
+</head>
 
 <body>
 <div id="app">
@@ -50,7 +56,7 @@
         </div>
         <footer class="main-footer">
             <div class="footer-left">
-                Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+                Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/"></a>
             </div>
             <div class="footer-right">
 

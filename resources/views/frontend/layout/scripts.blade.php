@@ -153,7 +153,7 @@
                 success: function (data){
                     if (data.status === 'success'){
                         $('.subscribe_btn').text('Subscribe')
-                        $('.newsletter').val('')
+                        $('.newsletter_email').val('')
                         toastr.success(data.message);
                     }else if (data.status === 'error'){
                         $('.subscribe_btn').text('Subscribe')

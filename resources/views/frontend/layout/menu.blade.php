@@ -109,7 +109,7 @@ $categories = \App\Models\Category::where('status',1)
                                 </div>
                             </div>
                         </li>
-                        <li><a href="vendor.html">vendor</a></li>
+                        <li><a href="{{route('vendor.index')}}">vendor</a></li>
                         <li><a href="blog.html">blog</a></li>
                         <li><a href="daily_deals.html">campain</a></li>
                         <li class="wsus__relative_li"><a href="#">pages <i class="fas fa-caret-down"></i></a>
@@ -117,7 +117,7 @@ $categories = \App\Models\Category::where('status',1)
                                 <li><a href="404.html">404</a></li>
                                 <li><a href="faqs.html">faq</a></li>
                                 <li><a href="invoice.html">invoice</a></li>
-                                <li><a href="about_us.html">about</a></li>
+                                <li><a href="{{ route('about.index') }}">about</a></li>
                                 <li><a href="product_grid_view.html">product</a></li>
                                 <li><a href="check_out.html">check out</a></li>
                                 <li><a href="team.html">team</a></li>
@@ -133,7 +133,7 @@ $categories = \App\Models\Category::where('status',1)
                         <li><a href="{{route('flash-sale.index')}}">daily deals</a></li>
                     </ul>
                     <ul class="wsus__menu_item wsus__menu_item_right">
-                        <li><a href="contact.html">contact</a></li>
+                        <li><a href="{{route('contact.index')}}">contact</a></li>
                         <li><a href="dsahboard.html">my account</a></li>
                         <li><a href='{{route('login')}}'>login</a></li>
                     </ul>
@@ -219,7 +219,7 @@ $categories = \App\Models\Category::where('status',1)
                                 </div>
                             </div>
                         </li>
-                        <li><a href="vendor.html">vendor</a></li>
+                        <li><a href="{{route('vendor.index')}}">vendor</a></li>
                         <li><a href="blog.html">blog</a></li>
                         <li><a href="daily_deals.html">campain</a></li>
                         <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"
