@@ -23,12 +23,13 @@ class ManageUserController extends Controller{
 
     public function create(Request $request){
 
+        
         $request->validate([
-            'name'=>['required'],
-            'lastname'=>['required'],
-            'email'=>['requried','email','unique:users,email'],
-            'password'=>['requried'],
-            'role'=>['required']
+            'name' => ['required', 'max:200'],
+            'lastname'=>['required','max:200'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:8', 'confirmed'],
+            'role' => ['required']
         ]);
 
         $user = new User();

@@ -34,6 +34,7 @@ class AccountCreatedMail extends Mailable
         $generalSettings = GeneralSetting::first();
 
         return new Envelope(
+            from: $generalSettings->contact_email,
             subject: 'Welcome to '.$generalSettings->site_name,
         );
     }
@@ -44,7 +45,7 @@ class AccountCreatedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.mail.account-created',
+            view: 'mail.account-created',
         );
     }
 
