@@ -139,7 +139,7 @@ p {
   font-weight: 600;
   color: #fff;
   padding: 10px 15px;
-  background: #08C;
+  background: #000;
   border-radius: 3px;
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s ease;
@@ -301,7 +301,7 @@ p {
 ========================*/
 header {
   width: 100%;
-  background: #08C;
+  background: #000;
   padding: 19px 0px;
   height: 90px;
   border-bottom: 1px solid #fff;
@@ -9032,7 +9032,7 @@ header .wsus__call_text a:hover {
 
 .footer_2 {
   margin-top: 70px;
-  background: #0b2c3d;
+  background: #000;
 }
 
 .footer_2 form {
