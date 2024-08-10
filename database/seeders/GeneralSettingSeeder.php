@@ -17,6 +17,9 @@ class GeneralSettingSeeder extends Seeder
         $generalSetting->site_name = 'Doko Shop';
         $generalSetting->layout = 'LTR';
         $generalSetting->contact_email = 'dokokalmant123@gmail.com';
+        $generalSetting->phone_number = '+355693734567';
+        $generalSetting->address = 'Tirana,AL';
+        $generalSetting->map_url = 'http://example.com';
         $generalSetting->currency_name = 'Albania Lek';
         $generalSetting->currency_icon = 'ALL';
         $generalSetting->time_zone = 'UTC';

@@ -18,9 +18,20 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call(GeneralSettingSeeder::class);
+
         $this->call(UserSeeder::class);
         $this->call(AdminProfileSeeder::class);
-        $this->call(VendorShopProfileSeeder::class);
+        // $this->call(VendorShopProfileSeeder::class);
+        $this->call(HomePageSettingSeeder::class);
+        $this->call(ProductSliderSectionOneSeeder::class);
+        $this->call(ProductSliderSectionTwoSeeder::class);
+        $this->call(ProductSliderSectionThreeSeeder::class);
+        $this->call(HomePageSectionBannerOneSeeder::class);
+        $this->call(StripeSettingSeeder::class);
+        $this->call(PaypalSettingSeeder::class);
+
+        $this->call(GeneralSettingSeeder::class);
+        $this->call(LogoSettingsSeeder::class);
+        $this->call(PusherSettingsSeeder::class);
     }
 }
