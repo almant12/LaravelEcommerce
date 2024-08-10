@@ -34,6 +34,7 @@ $popularCategories = json_decode($popularCategory->value,true);
                                     }
                                     $lastKey = [$key => $category];
                                 }
+                             
 
                                 if(array_keys($lastKey)[0] === 'category'){
                                     $category = \App\Models\Category::find($lastKey['category']);
@@ -46,6 +47,7 @@ $popularCategories = json_decode($popularCategory->value,true);
                                      ->with(['productVariants','category','imageGalleries'])
                                       ->where('sub_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
                                 }else {
+                                    @dd($lastkey);
                                     $category = \App\Models\ChildCategory::find($lastKey['child_category']);
                                    $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
                                      ->with(['productVariants','category','imageGalleries'])

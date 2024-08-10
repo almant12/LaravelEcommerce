@@ -73,9 +73,9 @@
     <script>
         $(document).ready(function (){
             simplyCountdown('.simply-countdown-one', {
-                year: {{date('Y',strtotime($flashSaleDate->end_date))}},
-                month: {{date('m',strtotime($flashSaleDate->end_date))}},
-                day: {{date('d',strtotime($flashSaleDate->end_date))}},
+                year: {{date('Y',strtotime(@$flashSaleDate->end_date))}},
+                month: {{date('m',strtotime(@$flashSaleDate->end_date))}},
+                day: {{date('d',strtotime(@$flashSaleDate->end_date))}},
             });
         })
     </script>
