@@ -41,12 +41,12 @@
 
                                     <tr class="d-flex">
                                         <td class="wsus__pro_img"><img src="{{asset($item->product->thumb_image)}}" alt="product"
-                                                                       class="img-fluid w-100">
+                                                                       class="img-fluid w-70">
                                             <a href="{{route('user.wishlist.destroy', $item->id)}}"><i class="far fa-times"></i></a>
                                         </td>
 
                                         <td class="wsus__pro_name">
-                                            <p>{{$item->product->name}}</p>
+                                            <p>{{limitText($item->product->name)}}</p>
                                         </td>
 
                                         <td class="wsus__pro_status">

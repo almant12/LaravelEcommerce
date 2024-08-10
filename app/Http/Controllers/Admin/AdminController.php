@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\NewsletterSubscriber;
 use App\Models\Order;
+use App\Models\ProductReview;
+use App\Models\User;
+use App\Models\Vendor;
 use Carbon\Carbon;
+use Stripe\Review;
 
 class AdminController extends Controller
 {
@@ -32,6 +39,13 @@ class AdminController extends Controller
             ->whereDate('created_at',Carbon::today()->year)
             ->sum('sub_total');
 
+        $totalReviews = ProductReview::count();   
+        $totalBrands = Brand::count();
+        $totalCategories = Category::count();
+        $totalSubscriber = NewsletterSubscriber::count();
+        $totalVendors = User::where('role','vendor')->count();
+        $totalUsers = User::where('role','user')->count();
+
         return view('admin.dashboard',compact(
             'todayOrders',
             'todayPendingOrders',
@@ -41,7 +55,13 @@ class AdminController extends Controller
             'totalDeliveredOrders',
             'todayEarnings',
             'monthEarnings',
-            'yearEarnings'
+            'yearEarnings',
+            'totalReviews',
+            'totalBrands',
+            'totalCategories',
+            'totalSubscriber',
+            'totalVendors',
+            'totalUsers'
         ));
     }
 

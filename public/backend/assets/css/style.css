@@ -2734,60 +2734,87 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
   padding-left: 61px;
   background-color: #fff; }
 
-@media (max-width: 1024px) {
-  .sidebar-gone-hide {
-    display: none !important; }
-
-  .sidebar-gone-show {
-    display: block !important; }
-
-  .main-sidebar {
-    position: fixed !important;
-    margin-top: 0 !important;
-    z-index: 891; }
-
-  body.layout-2 .main-wrapper,
-  body.layout-3 .main-wrapper {
-    width: 100%;
-    padding: 0;
-    display: block; }
-
-  .main-content {
-    padding-left: 30px;
-    padding-right: 30px;
-    width: 100% !important; }
-
-  .main-footer {
-    padding-left: 30px; }
-
-  body.search-show {
-    overflow: hidden; }
+  @media (max-width: 1024px) {
+    .sidebar-gone-hide {
+      display: none !important; 
+    }
+  
+    .sidebar-gone-show {
+      display: block !important; 
+    }
+  
+    .main-sidebar {
+      position: fixed !important;
+      margin-top: 0 !important;
+      z-index: 891; 
+      width: 100%; /* Ensure the sidebar covers the full width on smaller screens */
+      height: 100%; /* Ensure the sidebar covers the full height on smaller screens */
+      overflow-y: auto; /* Allow scrolling if the sidebar content exceeds the viewport height */
+    }
+  
+    body.layout-2 .main-wrapper,
+    body.layout-3 .main-wrapper {
+      width: 100%;
+      padding: 0;
+      display: block; 
+    }
+  
+    .main-content {
+      padding-left: 15px; /* Adjust padding for smaller screens */
+      padding-right: 15px; /* Adjust padding for smaller screens */
+      width: 100% !important; 
+    }
+  
+    .main-footer {
+      padding-left: 15px; /* Adjust padding for smaller screens */
+      padding-right: 15px; /* Ensure consistent padding */
+    }
+  
+    body.search-show {
+      overflow: hidden; 
+    }
+  
     body.search-show .navbar {
-      z-index: 892; }
-  body.sidebar-show {
-    overflow: hidden; }
-  body.search-show:before, body.sidebar-show:before {
-    content: '';
-    position: fixed;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    opacity: 0;
-    z-index: 891;
-    -webkit-animation-name: fadeinbackdrop;
-    animation-name: fadeinbackdrop;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards; }
-  @-webkit-keyframes fadeinbackdrop {
-    to {
-      opacity: .6; } }
-  @keyframes fadeinbackdrop {
-    to {
-      opacity: .6; } } }
+      z-index: 892; 
+    }
+  
+    body.sidebar-show {
+      overflow: hidden; 
+    }
+  
+    body.search-show:before, 
+    body.sidebar-show:before {
+      content: '';
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0; /* Ensure the backdrop covers the entire viewport */
+      bottom: 0; /* Ensure the backdrop covers the entire viewport */
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      opacity: 0;
+      z-index: 891;
+      -webkit-animation-name: fadeinbackdrop;
+      animation-name: fadeinbackdrop;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards; 
+    }
+  
+    @-webkit-keyframes fadeinbackdrop {
+      to {
+        opacity: .6; 
+      } 
+    }
+  
+    @keyframes fadeinbackdrop {
+      to {
+        opacity: .6; 
+      } 
+    } 
+  }
 /* 4.5 Animation */
 .pulsate {
   animation: pulsate 1s ease-out;

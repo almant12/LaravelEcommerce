@@ -25,8 +25,7 @@ class UserOrderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
-                $showBtn = "<a href='".route('user.orders.show', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
-
+                $showBtn = "<a href='".route('user.order.show', $query->id)."' class='btn btn-primary'><i class='far fa-eye'></i></a>";
                 return $showBtn;
             })
             ->addColumn('customer', function($query){
@@ -115,7 +114,7 @@ class UserOrderDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('invocie_id'),
+            Column::make('invoice_id'),
             Column::make('customer'),
             Column::make('date'),
             Column::make('product_qty'),

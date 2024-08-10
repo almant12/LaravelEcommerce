@@ -1,4 +1,5 @@
 <?php
+use App\Models\GeneralSetting;
 use Illuminate\Support\Facades\Session;
 
 
@@ -120,4 +121,12 @@ function getFinalPayableAmount(){
 function limitText($text, $limit = 30)
 {
     return \Str::limit($text, $limit);
+}
+
+
+function getCurrencyIcon()
+{
+    $icon = GeneralSetting::first();
+
+    return $icon->currency_icon;
 }

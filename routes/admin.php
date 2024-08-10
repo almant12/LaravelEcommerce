@@ -1,43 +1,46 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AdminVendorProfileController;
-use App\Http\Controllers\Admin\AdminVendorRequestController;
-use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ChildCategoryController;
-use App\Http\Controllers\Admin\CouponController;
-use App\Http\Controllers\Admin\CustomerListController;
-use App\Http\Controllers\Admin\FlashSaleController;
-use App\Http\Controllers\Admin\FooterGridOneController;
-use App\Http\Controllers\Admin\FooterGridTwoController;
-use App\Http\Controllers\Admin\FooterInfoController;
-use App\Http\Controllers\Admin\FooterSocialController;
-use App\Http\Controllers\Admin\HomePageSettingController;
-use App\Http\Controllers\Admin\ManageUserController;
-use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\PaymentSettingController;
-use App\Http\Controllers\Admin\PaypalSettingController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ProductImageGalleryController;
-use App\Http\Controllers\Admin\ProductVariantController;
-use App\Http\Controllers\Admin\ProductVariantItemController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\ShippingRuleController;
-use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\StripeSettingController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AdminListController;
+use App\Http\Controllers\Admin\FlashSaleController;
+use App\Http\Controllers\Admin\FooterInfoController;
+use App\Http\Controllers\Admin\ManageUserController;
+use App\Http\Controllers\Admin\VendorListController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubscribersController;
-use App\Http\Controllers\Admin\TermsAndConditionController;
 use App\Http\Controllers\Admin\TransactionController;
-use App\Http\Controllers\Admin\VendorConditionController;
-use App\Http\Controllers\Admin\VendorListController;
+use App\Http\Controllers\Admin\CustomerListController;
+use App\Http\Controllers\Admin\FooterSocialController;
+use App\Http\Controllers\Admin\ShippingRuleController;
+use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\ChildCategoryController;
+use App\Http\Controllers\Admin\FooterGridOneController;
+use App\Http\Controllers\Admin\FooterGridTwoController;
+use App\Http\Controllers\Admin\PaypalSettingController;
+use App\Http\Controllers\Admin\StripeSettingController;
 use App\Http\Controllers\Admin\VendorProductController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PaymentSettingController;
+use App\Http\Controllers\Admin\ProductVariantController;
+use App\Http\Controllers\Admin\HomePageSettingController;
+use App\Http\Controllers\Admin\VendorConditionController;
+use App\Http\Controllers\Admin\TermsAndConditionController;
+use App\Http\Controllers\Admin\AdminVendorProfileController;
+use App\Http\Controllers\Admin\AdminVendorRequestController;
+use App\Http\Controllers\Admin\ProductVariantItemController;
+use App\Http\Controllers\Admin\ProductImageGalleryController;
+use App\Http\Controllers\Admin\WithdrawMethodController;
+use App\Http\Controllers\Admin\WithdrawRequestController;
 
 Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin.'],function (){
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
@@ -134,6 +137,21 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     Route::put('general-setting-update',[SettingController::class,'generalSettingUpdate'])->name('general-setting.update');
     Route::put('email-config/update',[SettingController::class,'emailConfigSettingUpdate'])->name('email-setting-update');
     Route::put('pusher-setting/update',[SettingController::class,'pusherSettingUpdate'])->name('pusher-setting.update');
+    Route::put('logo-setting/update',[SettingController::class,'logoSetting'])->name('logo-setting.update');
+
+    //Withdraw-Method
+    Route::get('withdraw-method', [WithdrawMethodController::class, 'index'])->name('withdraw-method.index');
+    Route::get('withdraw-method/create', [WithdrawMethodController::class, 'create'])->name('withdraw-method.create');
+    Route::post('withdraw-method', [WithdrawMethodController::class, 'store'])->name('withdraw-method.store');
+    Route::get('withdraw-method/{id}', [WithdrawMethodController::class, 'edit'])->name('withdraw-method.edit');
+    Route::put('withdraw-method/{id}', [WithdrawMethodController::class, 'update'])->name('withdraw-method.update');
+    Route::delete('withdraw-method/{id}', [WithdrawMethodController::class, 'destroy'])->name('withdraw-method.destroy');
+
+    //Withdraw-Request
+    Route::get('withdraw-request',[WithdrawRequestController::class,'index'])->name('withdraw-request.index');
+    Route::get('withdraw-request/{$id}',[WithdrawRequestController::class,'show'])->name('withdraw-request.show');
+    Route::put('withdraw-request/{$id}',[WithdrawRequestController::class,'update'])->name('withdraw-request.update');
+
 
     //HomePageSetting
     Route::get('home-page-setting',[HomePageSettingController::class,'index'])->name('home-page-setting.index');
@@ -194,6 +212,11 @@ Route::group(['middleware'=>['auth','role:admin'],'prefix'=>'admin','as'=>'admin
     //VendorCondition
     Route::get('vendor-condition', [VendorConditionController::class, 'index'])->name('vendor-condition.index');
     Route::put('vendor-condition/update', [VendorConditionController::class, 'update'])->name('vendor-condition.update');
+
+    //AdminList
+    Route::get('admin-list',[AdminListController::class,'index'])->name('admin-list.index');
+    Route::put('admin-list/update-status',[AdminListController::class,'changeStatus'])->name('admin-list.update-status');
+    Route::delete('admin-list/destroy/{id}',[AdminListController::class,'destroy'])->name('admin-list.destroy');
 
     //About
     Route::get('about',[AboutController::class,'index'])->name('about.index');

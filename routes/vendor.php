@@ -11,6 +11,7 @@ use App\Http\Controllers\Vendor\VendorProductVariantController;
 use App\Http\Controllers\Vendor\VendorProductVariantItemController;
 use App\Http\Controllers\Vendor\VendorProfileController;
 use App\Http\Controllers\Vendor\VendorShopProfileController;
+use App\Http\Controllers\Vendor\VendorWithdrawController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware'=>['auth','role:vendor'],'prefix'=>'vendor','as'=>'vendor.'],function (){
@@ -55,5 +56,8 @@ Route::group(['middleware'=>['auth','role:vendor'],'prefix'=>'vendor','as'=>'ven
 
     //Vendor-ProductReview
     Route::get('product-review',[VendorProductReviewController::class,'index'])->name('product-review.index');
+
+    //Vendor-Withdraw
+    Route::resource('withdraw', VendorWithdrawController::class);
 });
 

@@ -18,6 +18,19 @@ class AdminListController extends Controller{
     }
 
 
+
+    public function changeStatus(Request $request){
+
+        if($request->id != 1){
+            $admin = User::findOrFail($request->id);
+            $admin->status = $request->status == 'true' ? 'active' : 'inactive';
+            $admin->save();
+
+            return response(['status'=>'success','message'=>'Status has been updated']);
+        }
+    }
+
+
     public function destroy(string $id){
 
         if($id != 1){
@@ -25,8 +38,8 @@ class AdminListController extends Controller{
 
             $products = Product::where('vendor_id',$admin->vendor->id)->get();
             if(count($products)>0){
-                return response(['status'=>'error','message'=>'Admin can\'t be deleted please ban the user insted of delete!'])
-            }
+                return response(['status'=>'error','message'=>'Admin can\'t be deleted please ban the user insted of delete!']);
+            };
 
             Vendor::where('user_id',$admin->id)->delete();
             $admin->delete();

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\EmailConfiguration;
 use App\Models\GeneralSetting;
+use App\Models\LogoSetting;
 use App\Models\PusherSetting;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Config;
@@ -31,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
 
        $generalSetting = GeneralSetting::first();
        $pusherSetting = PusherSetting::first();
+       $logoSetting = LogoSetting::first();
+
 //       $mailSetting = EmailConfiguration::first();
 
         /** set time zone */
@@ -51,8 +54,8 @@ class AppServiceProvider extends ServiceProvider
 //        Config::set('mail.mailers.smtp.password', $mailSetting->password);
 
        //share variable to all views
-        \Illuminate\Support\Facades\View::composer('*',function ($view) use ($generalSetting,$pusherSetting){
-            $view->with(['settings'=>$generalSetting,'pusherSetting'=>$pusherSetting]);
+        \Illuminate\Support\Facades\View::composer('*',function ($view) use ($generalSetting,$pusherSetting,$logoSetting){
+            $view->with(['settings'=>$generalSetting,'pusherSetting'=>$pusherSetting,'logoSetting'=>$logoSetting]);
         });
     }
 }

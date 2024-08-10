@@ -1,5 +1,26 @@
 <script>
     $(document).ready(function (){
+
+        $('.show_product_modal').on('click', function(){
+            let id = $(this).data('id');
+            $.ajax({
+                mehtod: 'GET',
+                url: '{{ route("show-product-modal", ":id" ) }}'.replace(":id", id),
+                beforeSend: function(){
+                    $('.product-modal-content').html('<span class="loader"></span>')
+                },
+                success: function(response){
+                    $('.product-modal-content').html(response)
+                },
+                error: function(xhr, status, error){
+
+                },
+                complete: function(){
+
+                }
+            })
+        });
+
         $('.shopping-cart-form').on('submit',function (e){
             e.preventDefault();
             let formData = $(this).serialize();
@@ -126,11 +147,11 @@
                 data:{
                     id:id
                 },success:function (data){
-                    if (data.status === 'success'){
+                    if(data.status === 'success'){
                         $('.wishlist_count').text(data.count)
-                        toastr.success(data.message)
-                    }else if (data.status === 'error'){
-                        toastr.error(data.message)
+                        toastr.success(data.message);
+                    }else if(data.status === 'error'){
+                        toastr.error(data.message);
                     }
                 },error:function (data){
                     console.error(data)

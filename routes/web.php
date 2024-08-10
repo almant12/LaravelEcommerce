@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\ProductTrackController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckOutController;
 use App\Http\Controllers\User\FlashSaleController;
@@ -83,6 +84,12 @@ Route::get('coupon-calculation',[CartController::class,'couponCalculation'])->na
 //Pages
 Route::get('contact',[PageController::class,'contact'])->name('contact.index');
 Route::post('contact',[PageController::class,'handleContactForm'])->name('handle-contact-form');
+
+/** Product routes */
+Route::get('show-product-modal/{id}', [HomeController::class, 'ShowProductModal'])->name('show-product-modal');
+
+  //Product-Track
+  Route::get('product-track',[ProductTrackController::class,'index'])->name('product-tracking.index');
 
 Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],function (){
     Route::get('dashboard',[UserDashboardController::class,'index'])->name('dashboard');

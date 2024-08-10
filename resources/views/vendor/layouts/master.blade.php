@@ -6,6 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset($logoSetting->favicon)}}">
     <title>
         @yield('title')
     </title>
@@ -57,8 +58,8 @@
 ==============================-->
 <div class="wsus__dashboard_menu">
     <div class="wsusd__dashboard_user">
-        <img src="images/dashboard_user.jpg" alt="img" class="img-fluid">
-        <p>anik roy</p>
+        <img src="{{ asset(auth()->user()->image) }}" alt="img" class="img-fluid">
+        <p>{{ Auth::user()->name.' '.Auth::User()->lastname }}</p>
     </div>
 </div>
 <!--=============================

@@ -34,15 +34,15 @@
 <section id="wsus__product_page">
     <div class="container">
         <div class="row">
+            @if ($productpage_banner_section->banner_one->status == 1)
             <div class="col-xl-12">
                 <div class="wsus__pro_page_bammer">
-                    @if ($productpage_banner_section->banner_one->status == 1)
                         <a href="{{$productpage_banner_section->banner_one->banner_url}}">
                             <img class="img-gluid" src="{{asset($productpage_banner_section->banner_one->banner_image)}}" alt="">
                         </a>
-                    @endif
                 </div>
             </div>
+            @endif
             <div class="col-xl-3 col-lg-4">
                 <div class="wsus__sidebar_filter ">
                     <p>filter</p>

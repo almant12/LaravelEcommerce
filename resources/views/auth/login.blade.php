@@ -61,12 +61,6 @@
                                             <input type="password" name="password" placeholder="Password">
                                         </div>
                                         <div class="wsus__login_save">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox"
-                                                       id="flexSwitchCheckDefault">
-                                                <label class="form-check-label" for="flexSwitchCheckDefault">Remember
-                                                    me</label>
-                                            </div>
                                             <a class="forget_p" href="{{route('password.request')}}">forget password ?</a>
                                         </div>
                                         <button class="common_btn" type="submit">login</button>

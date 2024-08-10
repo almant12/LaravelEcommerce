@@ -166,6 +166,116 @@
                 </a>
             </div>
 
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <a href="">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-info">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Reviews</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalReviews }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <a href="{{route('admin.brand.index')}}">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-info">
+                            <i class="fas fa-copyright"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Brands</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalBrands }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <a href="{{route('admin.category.index')}}">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-info">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Categories</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalCategories }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <a href="{{route('admin.subscriber.index')}}">
+                 <div class="card card-statistic-1">
+                     <div class="card-icon bg-warning">
+                         <i class="far fa-file"></i>
+                     </div>
+                     <div class="card-wrap">
+                         <div class="card-header">
+                             <h4>Total Subscribers</h4>
+                         </div>
+                         <div class="card-body">
+                             {{$totalSubscriber}}
+                         </div>
+                     </div>
+                 </div>
+             </a>
+             </div>
+
+             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <a href="{{route('admin.vendor-list.index')}}">
+                 <div class="card card-statistic-1">
+                     <div class="card-icon bg-warning">
+                         <i class="far fa-file"></i>
+                     </div>
+                     <div class="card-wrap">
+                         <div class="card-header">
+                             <h4>Total Vendors</h4>
+                         </div>
+                         <div class="card-body">
+                             {{$totalVendors}}
+                         </div>
+                     </div>
+                 </div>
+             </a>
+             </div>
+
+             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <a href="{{route('admin.customer.index')}}">
+                 <div class="card card-statistic-1">
+                     <div class="card-icon bg-warning">
+                         <i class="far fa-file"></i>
+                     </div>
+                     <div class="card-wrap">
+                         <div class="card-header">
+                             <h4>Total Users</h4>
+                         </div>
+                         <div class="card-body">
+                             {{$totalUsers}}
+                         </div>
+                     </div>
+                 </div>
+             </a>
+             </div>
+
 {{--            <div class="col-lg-3 col-md-6 col-sm-6 col-12">--}}
 {{--                <a href="{{route('admin.reviews.index')}}">--}}
 {{--                    <div class="card card-statistic-1">--}}

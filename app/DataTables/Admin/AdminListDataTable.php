@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin;
 
 use App\Models\AdminList;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -22,16 +23,41 @@ class AdminListDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'adminlist.action')
+        ->addColumn('action',function($query){
+            if($query->id != 1){
+                $deleteBtn = "<a href='".route('admin.admin-list.destroy',$query->id)."' class='btn btn-danger delete-item '><i class='fas fa-trash-alt'></i>/</a>";
+                return $deleteBtn;
+            }
+        })
+            ->addColumn('status', function($query){
+                if($query->id != 1){
+                    if($query->status == 'active'){
+                        $button = '<label class="custom-switch mt-2">
+                            <input type="checkbox" checked name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status" >
+                            <span class="custom-switch-indicator"></span>
+                        </label>';
+                    }else {
+                        $button = '<label class="custom-switch mt-2">
+                            <input type="checkbox" name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+                            <span class="custom-switch-indicator"></span>
+                        </label>';
+                    }
+                    return $button;
+                }
+            })
+            ->addColumn('shop_name', function($query){
+                return $query->vendor->shop_name;
+            })
+            ->rawColumns(['status','action'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(AdminList $model): QueryBuilder
+    public function query(User $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('role','admin')->newQuery();
     }
 
     /**
@@ -62,15 +88,17 @@ class AdminListDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('email'),
+            Column::make('shop_name'),
+            Column::make('role'),
+            Column::make('status'),
+            Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(100)
+            ->addClass('text-center')
         ];
     }
 

@@ -19,9 +19,8 @@ class VendorListController extends Controller
     public function changeStatus(Request $request){
 
         $customer = User::findOrFail($request->id);
-        $customer->status = $request->status == 'ture' ? 'active' : 'inactive';
+        $customer->status = $request->status == true ? 'active' : 'inactive';
         $customer->save();
-
         return response(['message' => 'Status has been updated!']);
     }
 }

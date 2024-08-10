@@ -14,4 +14,8 @@ class OrderProduct extends Model
     public function vendor(){
         return $this->belongsTo(Vendor::class);
     }
+
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
 }

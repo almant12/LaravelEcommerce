@@ -13,6 +13,10 @@ class CheckOutController extends Controller{
 
 
     public function index(){
+        if(getCartTotal() <= 0){
+            toastr('You Should Pick Up A Product First','error');
+            return redirect()->route('home');
+        }
         $addresses = UserAddress::where('user_id',Auth::user()->id)->get();
         $shippings = ShippingRule::all();
         return view('frontend.pages.checkout',compact('addresses','shippings'));

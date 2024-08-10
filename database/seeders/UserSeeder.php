@@ -15,6 +15,15 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
+                'id'=>1,
+                'name'=>'admin',
+                'lastname'=>'Adminuser',
+                'email'=>'admin@gmail.com',
+                'role'=>'admin',
+                'status'=>'inactive',
+                'password'=>bcrypt('password')
+            ],
+            [
                 'id'=>3,
                 'name'=>'user',
                 'lastname'=>'user',
@@ -30,15 +39,6 @@ class UserSeeder extends Seeder
                 'email'=>'vendor@gmail.com',
                 'role'=>'vendor',
                 'status'=>'active',
-                'password'=>bcrypt('password')
-            ],
-            [
-                'id'=>1,
-                'name'=>'admin',
-                'lastname'=>'Adminuser',
-                'email'=>'admin@gmail.com',
-                'role'=>'admin',
-                'status'=>'inactive',
                 'password'=>bcrypt('password')
             ]
         ]);
