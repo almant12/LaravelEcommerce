@@ -2321,7 +2321,7 @@ pre {
   position: fixed;
   top: 0;
   height: 100%;
-  width: 250px;
+  width: 250px !important;
   background-color: #fff;
   z-index: 880;
   left: 0; }
