@@ -51,7 +51,7 @@ $popularCategories = json_decode($popularCategory->value,true);
                                    $products[] = \App\Models\Product::withAvg('reviews','rating')
                                      ->with(['productVariants','category','imageGalleries'])
                                        ->where('child_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
-
+                                       @dd($products);
                                 }
                             @endphp
                             <button class="{{ $loop->index === 0 ? 'auto_click active' : ''}}" data-filter=".category-{{$loop->index}}">{{$category->name}}</button>
