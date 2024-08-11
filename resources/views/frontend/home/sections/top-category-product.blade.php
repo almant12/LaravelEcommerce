@@ -38,17 +38,17 @@ $popularCategories = json_decode($popularCategory->value,true);
 
                                 if(array_keys($lastKey)[0] === 'category'){
                                     $category = \App\Models\Category::find($lastKey['category']);
-                                      $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
+                                      $products[] = \App\Models\Product::withAvg('reviews','rating')
                                         ->with(['productVariants','category','imageGalleries'])
                                          ->where('category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
                                 }elseif(array_keys($lastKey)[0] === 'sub_category'){
                                     $category = \App\Models\SubCategory::find($lastKey['sub_category']);
-                                     $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
+                                     $products[] = \App\Models\Product::withAvg('reviews','rating')
                                      ->with(['productVariants','category','imageGalleries'])
                                       ->where('sub_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
                                 }else {
                                     $category = \App\Models\ChildCategory::find($lastKey['child_category']);
-                                   $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
+                                   $products[] = \App\Models\Product::withAvg('reviews','rating')
                                      ->with(['productVariants','category','imageGalleries'])
                                        ->where('child_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
 
