@@ -8,7 +8,7 @@
             </div>
             <div class="col-xl-2 col-7 col-md-8 col-lg-2">
                 <div class="wsus_logo_area">
-                    <a class="wsus__header_logo" {{ route('home') }}>
+                    <a class="wsus__header_logo" href="{{route('home')}}">
                         <img src="{{ asset($logoSetting->logo) }}" alt="logo" class="img-fluid w-100">
                     </a>
                 </div>
