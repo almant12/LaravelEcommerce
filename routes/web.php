@@ -91,7 +91,7 @@ Route::get('show-product-modal/{id}', [HomeController::class, 'ShowProductModal'
   //Product-Track
   Route::get('product-track',[ProductTrackController::class,'index'])->name('product-tracking.index');
 
-Route::group(['middleware'=>['auth','verified'],'prefix'=>'user','as'=>'user.'],function (){
+Route::group(['middleware'=>['auth'],'prefix'=>'user','as'=>'user.'],function (){
     Route::get('dashboard',[UserDashboardController::class,'index'])->name('dashboard');
     Route::get('profile',[UserProfileController::class,'index'])->name('profile');
     Route::put('profile',[UserProfileController::class,'updateProfile'])->name('profile.update');
