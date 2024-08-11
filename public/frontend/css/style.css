@@ -66,7 +66,7 @@ p {
   text-transform: capitalize;
   font-weight: 600;
   color: #fff;
-  background: #232323;
+  background: #0b2c3d;
   padding: 12px 25px;
   border: none;
   border-radius: 30px;
@@ -139,7 +139,7 @@ p {
   font-weight: 600;
   color: #fff;
   padding: 10px 15px;
-  background: #232323;
+  background: #0b2c3d;
   border-radius: 3px;
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s ease;
@@ -1621,7 +1621,7 @@ PRODUCT MODAL VIEW END
 
 .wsus__new {
   position: absolute;
-  background: #08C;
+  background: #0b2c3d;
   width: auto;
   height: 25px;
   text-align: center;
