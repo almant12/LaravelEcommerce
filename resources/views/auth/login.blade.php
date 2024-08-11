@@ -76,6 +76,10 @@
                                             <input type="text" placeholder="Name" name="name">
                                         </div>
                                         <div class="wsus__login_input">
+                                            <i class="fas fa-user-tie"></i>
+                                            <input type="text" placeholder="Lastname" name="lastname">
+                                        </div>
+                                        <div class="wsus__login_input">
                                             <i class="far fa-envelope"></i>
                                             <input type="text" placeholder="Email" name="email">
                                         </div>
