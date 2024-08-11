@@ -38,20 +38,20 @@ $popularCategories = json_decode($popularCategory->value,true);
 
                                 if(array_keys($lastKey)[0] === 'category'){
                                     $category = \App\Models\Category::find($lastKey['category']);
-                                      $products[] = \App\Models\Product::withAvg('reviews','rating')
+                                      $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
                                         ->with(['productVariants','category','imageGalleries'])
                                          ->where('category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
                                 }elseif(array_keys($lastKey)[0] === 'sub_category'){
                                     $category = \App\Models\SubCategory::find($lastKey['sub_category']);
-                                     $products[] = \App\Models\Product::withAvg('reviews','rating')
+                                     $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
                                      ->with(['productVariants','category','imageGalleries'])
                                       ->where('sub_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
                                 }else {
                                     $category = \App\Models\ChildCategory::find($lastKey['child_category']);
-                                   $products[] = \App\Models\Product::withAvg('reviews','rating')
+                                   $products = \App\Models\Product::withAvg('reviews','rating')->withCount('reviews')
                                      ->with(['productVariants','category','imageGalleries'])
                                        ->where('child_category_id',$category->id)->orderBy('id','DESC')->take(12)->get();
-                                       @dd($products);
+
                                 }
                             @endphp
                             <button class="{{ $loop->index === 0 ? 'auto_click active' : ''}}" data-filter=".category-{{$loop->index}}">{{$category->name}}</button>
