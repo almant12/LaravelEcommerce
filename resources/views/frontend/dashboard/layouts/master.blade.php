@@ -41,7 +41,6 @@
         key: "{{ $pusherSetting->pusher_key }}",
         cluster: "{{ $pusherSetting->pusher_cluster }}"
     }
-    @dd(PUSHER);
     </script>
 
     @vite(['resources/js/app.js','resources/js/frontend.js'])
@@ -49,6 +48,8 @@
 </head>
 
 <body>
+
+    @dd($pusherSetting->pusher_key);
 
 
 <!--=============================
