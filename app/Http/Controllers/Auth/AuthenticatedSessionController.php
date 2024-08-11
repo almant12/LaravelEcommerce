@@ -36,7 +36,6 @@ class AuthenticatedSessionController extends Controller
             toastr('account has ben banned from website please connect with support!','error','Account Banned');
             return redirect('/');
         }
-
         
         if ($request->user()->role === 'admin'){
             return redirect()->route('admin.dashboard');

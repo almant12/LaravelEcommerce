@@ -49,7 +49,8 @@ class RegisteredUserController extends Controller
         MailHelper::setMailConfig();
         event(new Registered($user));
 
-        toastr('User Created Successfully.Verify Your Email To Activate It','success');
-        return redirect()->route('login');
+        Auth::login($user);
+
+        return redirect()->route('home');
     }
 }
