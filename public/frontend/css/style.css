@@ -1541,6 +1541,12 @@ PRODUCT MODAL VIEW END
   display: flex;
 }
 
+@media (max-width:500px){
+  .simply-countdown{
+    width: 300px;
+  }
+}
+
 .wsus__section_header .simply-amount {
   display: block;
   color: #fff;
