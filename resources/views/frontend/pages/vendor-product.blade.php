@@ -219,7 +219,7 @@
                                                                 @endif
                                                             @endforeach
                                                             <input class="" name="qty" type="hidden" min="1" max="100" value="1" />
-                                                            <button class="add_cart_two mr-2 btn" type="submit">add to cart</button>
+                                                            <button class="add_cart_two mr-2 btn btn-primary" type="submit">add to cart</button>
                                                         </form>
                                                         <li><a href="#"><i class="far fa-heart"></i></a></li>
                                                     </ul>
