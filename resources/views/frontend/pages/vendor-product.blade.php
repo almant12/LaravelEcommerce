@@ -222,7 +222,6 @@
                                                             <button class="add_cart_two mr-2" type="submit">add to cart</button>
                                                         </form>
                                                         <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                                        <li><a href="#"><i class="far fa-random"></i></a>
                                                     </ul>
 
                                                 </div>
