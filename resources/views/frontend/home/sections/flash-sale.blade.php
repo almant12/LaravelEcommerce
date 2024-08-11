@@ -1,6 +1,7 @@
 @php
     $currentDate = \Carbon\Carbon::now();
     $flashDate = \Carbon\Carbon::parse(@$flashSaleDate->end_date);
+    @dd($currentDate,$flashDate);
 @endphp
 
 <section id="wsus__flash_sell" class="wsus__flash_sell_2">
