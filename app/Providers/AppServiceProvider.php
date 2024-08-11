@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         $logoSetting = LogoSetting::first();
 
         /** Set time zone */
-        Config::set('app.timezone', $generalSetting->time_zone ?? 'UTC');
+        Config::set('app.timezone', $generalSetting->time_zone ?? 'Europe/Tirane');
 
         /** Set Broadcasting Config */
         Config::set('broadcasting.connections.pusher.key', $pusherSetting->pusher_key ?? '');
