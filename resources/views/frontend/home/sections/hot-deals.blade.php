@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        @if($homepage_section_banner_three !== null)
+        @if($homepage_section_banner_three->status)
             <section id="wsus__single_banner" class="home_2_single_banner">
                 <div class="container">
                     <div class="row">
