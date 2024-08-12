@@ -13,8 +13,7 @@
                     <div class="col-12">
                         <h4>cart View</h4>
                         <ul>
-                            <li><a href="#">home</a></li>
-                            <li><a href="#">peoduct</a></li>
+                            <li><a href="{{ route('home') }}">home</a></li>
                             <li><a href="#">cart view</a></li>
                         </ul>
                     </div>
@@ -80,7 +79,7 @@
                                             </td>
 
                                             <td class="wsus__pro_name">
-                                                <p>{!! $item->name !!}</p>
+                                                <p>{{ limitText(!! $item->name !!) }}</p>
                                                 @foreach($item->options->variants as $key => $variant)
                                                     <span>{{$key}}: {{$variant['name']}} ({{priceFormat($variant['price'])}}{{$settings->currency_icon}})</span>
                                                 @endforeach
