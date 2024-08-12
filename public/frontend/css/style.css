@@ -9652,8 +9652,6 @@ body {
     border: 5px solid #0b2c3d !important;
 }
 
-.custom-input-group .form-control, 
-.custom-input-group .form-select {
-    flex: unset !important; /* or initial */
-    width: 49px !important; /* or whatever width you prefer */
+.product-qty{
+  flex: unset;
 }
