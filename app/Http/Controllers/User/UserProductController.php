@@ -14,8 +14,8 @@ class UserProductController extends Controller{
 
         $product = Product::with(['vendor','productVariants','imageGalleries','category','brand'])
             ->where('slug',$slug)->where('status',1)->first();
-            dd($product);
         $reviews = ProductReview::where(['product_id'=>$product->id,'status'=>1])->paginate(10);
+        dd($reviews);
         $relatedProducts = Product::where('category_id',$product->category->id)
         ->where('status',1)->where('id','!=',$product->id)->get();
         return view('frontend.pages.product-detail',compact('product','reviews','relatedProducts'));
