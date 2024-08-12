@@ -97,7 +97,7 @@
                                             <td class="wsus__pro_select">
                                                 <div class="input-group product-qyt-wrapper">
                                                     <button type="button" class="btn btn-secondary border-radius decrement"  data-type="minus" data-field="">-</button>
-                                                    <input type="number" data-rowid="{{$item->rowId}}" name="quantity" class="form-control border-radius product-qty" value="{{$item->qty}}" readonly min="1">
+                                                    <input type="number" data-rowid="{{$item->rowId}}" name="quantity" class="border-radius product-qty" value="{{$item->qty}}" readonly min="1">
                                                     <button type="button" class="btn btn-secondary border-radius increment" data-type="plus" data-field="">+</button>
                                                 </div>
                                             </td>
