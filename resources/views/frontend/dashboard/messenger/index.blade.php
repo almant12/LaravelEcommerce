@@ -50,7 +50,7 @@
                                     <div class="wsus__chat_main_area">
                                         <div class="tab-content" id="v-pills-tabContent">
                                             <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                                <div class="wsus__chat_area" style="position: relative;height: 113vh;">
+                                                <div class="wsus__chat_area" style="position: relative;height: 107vh;">
                                                     <div class="wsus__chat_area_header">
                                                         <h2 id="chat-inbox-title"></h2>
                                                     </div>
