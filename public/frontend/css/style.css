@@ -4374,10 +4374,6 @@ CART VIEW PAGE START
   width: 140px;
 }
 
-.wsus__cart_list .wsus__pro_name {
-  width: 250px;
-}
-
 .wsus__cart_list td.wsus__pro_name {
   flex-direction: column;
 }
