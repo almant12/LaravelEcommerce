@@ -2,7 +2,6 @@
 
 $productSectionOne = json_decode($categoryProductSectionOne->value);
 $firstCategory = App\Models\Category::where('id',$productSectionOne->category)->get();
-@dd($firstCategory);
 $lastKey = [];
 
 foreach ($productSectionOne as $key => $category){
@@ -36,7 +35,7 @@ else{
             <div class="col-xl-12">
                 <div class="wsus__section_header">
                     <h3>{{$category->name}}</h3>
-                    <a class="see_btn" href="{{route('products.index',['category'=>$category->slug])}}">see more <i class="fas fa-caret-right"></i></a>
+                    <a class="see_btn" href="{{route('products.index',['category'=>$firstCategory->slug])}}">see more <i class="fas fa-caret-right"></i></a>
                 </div>
             </div>
         </div>
