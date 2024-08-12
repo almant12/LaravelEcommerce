@@ -18,8 +18,8 @@ class FrontendProductController extends Controller
 
     public function productIndex(Request $request){
         if ($request->has('category')){
-            $category = Category::where('slug',$request->category)->get();
-            dd($category);
+            dd($request->category);
+            $category = Category::where('slug',$request->category)->firstOrFail();
             $products = Product::where(['category_id'=>$category->id,'status'=>1,'is_approved'=>1])
                 ->when($request->has('range'),function ($query) use ($request){
                     $price = explode(';',$request->range);
