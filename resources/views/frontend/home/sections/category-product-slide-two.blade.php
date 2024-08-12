@@ -1,5 +1,6 @@
 @php
 $productSectionTwo = json_decode($categoryProductSectionTwo->value);
+$firstCategory = \App\Models\Category::find($productSectionTwo->category);
 $lastKey = [];
 
 foreach ($productSectionTwo as $key => $category){
@@ -33,7 +34,7 @@ if (array_keys($lastKey)[0] === 'category'){
             <div class="col-xl-12">
                 <div class="wsus__section_header">
                     <h3>{{$category->name}}</h3>
-                    <a class="see_btn" href="{{route('products.index',['category'=>$category->slug])}}">see more <i class="fas fa-caret-right"></i></a>
+                    <a class="see_btn" href="{{route('products.index',['category'=>$firstCategory->slug])}}">see more <i class="fas fa-caret-right"></i></a>
                 </div>
             </div>
         </div>
