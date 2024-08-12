@@ -22,7 +22,8 @@
             </div>
         </div>
 
-        @if($homepage_section_banner_three->status)
+        @if($homepage_section_banner_three->banner_one->status &&
+         $homepage_section_banner_three->banner_two->status && $homepage_section_banner_three->banner_three)
             <section id="wsus__single_banner" class="home_2_single_banner">
                 <div class="container">
                     <div class="row">
