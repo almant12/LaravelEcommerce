@@ -2,7 +2,6 @@
 
 $productSectionOne = json_decode($categoryProductSectionOne->value);
 $firstCategory = \App\Models\Category::find($productSectionOne->category);
-@dd($firstCategory->slug);
 $lastKey = [];
 
 foreach ($productSectionOne as $key => $category){
