@@ -1,6 +1,7 @@
 @php
 
 $productSectionOne = json_decode($categoryProductSectionOne->value);
+@dd($productSectionOne);
 $lastKey = [];
 
 foreach ($productSectionOne as $key => $category){
