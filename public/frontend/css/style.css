@@ -9653,5 +9653,6 @@ body {
 }
 
 .product-qty{
-  flex: unset;
+  flex: unset !important;
+  width: 49px !important;
 }
