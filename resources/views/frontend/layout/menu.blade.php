@@ -63,7 +63,6 @@
                         <li><a href="{{route('vendor.dashbaord')}}">Vendor Dashboard</a></li>
                         @elseif (auth()->user()->role === 'admin')
                         <li><a href="{{route('admin.dashboard')}}">Admin Dashboard</a></li>
-
                         @endif
                         @else
 
