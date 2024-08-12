@@ -50,7 +50,7 @@
     </div>
     <div class="wsus__mini_cart">
         <h4>shopping cart <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span></h4>
-        <ul class="mini-cart-wrapper">z
+        <ul class="mini-cart-wrapper">
             @foreach(Cart::content() as $cartItem)
                 @php
                 $product = \App\Models\Product::find($cartItem->id)
