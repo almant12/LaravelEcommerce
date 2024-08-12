@@ -4376,6 +4376,8 @@ CART VIEW PAGE START
 
 .wsus__cart_list td.wsus__pro_name {
   flex-direction: column;
+  width: 108px;
+  margin-left: 4px;
 }
 
 .wsus__cart_list .wsus__pro_status {
