@@ -95,10 +95,10 @@
                     <div class="col-xl-12">
                         <div class="wsus__con_map">
                             <iframe
-  src="https://www.google.com/maps/place/Skanderbeg+Square/@41.328185,19.8186984,17z/data=!4m6!3m5!1s0x1350310ffc27b939:0x91829d7013798f15!8m2!3d41.3284702!4d19.8179283!16s%2Fm%2F09v3md4?entry=ttu"
+  src="{{ $settings->map_url }}"
   width="600"
   height="450"
-  style="border:0;"
+  style="border:0"
   allowfullscreen=""
   loading="lazy"
   referrerpolicy="no-referrer-when-downgrade">
