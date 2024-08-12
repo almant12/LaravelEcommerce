@@ -79,7 +79,7 @@
                                             </td>
 
                                             <td class="wsus__pro_name">
-                                                <p>{{ limitText($item->name) }}</p>
+                                                <strong>{{ limitText($item->name) }}</strong>
                                                 @foreach($item->options->variants as $key => $variant)
                                                     <span>{{$key}}: {{$variant['name']}} ({{priceFormat($variant['price'])}}{{$settings->currency_icon}})</span>
                                                 @endforeach
