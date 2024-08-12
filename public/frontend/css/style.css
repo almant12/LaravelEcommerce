@@ -9656,3 +9656,7 @@ body {
   flex: unset !important;
   width: 49px !important;
 }
+
+.product-qyt-wrapper{
+  margin-left: 23px;
+}
