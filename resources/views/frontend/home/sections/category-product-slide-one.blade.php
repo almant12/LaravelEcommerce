@@ -1,7 +1,7 @@
 @php
 
 $productSectionOne = json_decode($categoryProductSectionOne->value);
-$firstCategory = Category::where('id',$productSectionOne->category)->get();
+$firstCategory = App\Models\Category::where('id',$productSectionOne->category)->get();
 @dd($firstCategory);
 $lastKey = [];
 
