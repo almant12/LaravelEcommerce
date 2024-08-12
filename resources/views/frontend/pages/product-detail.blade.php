@@ -15,8 +15,7 @@
                     <div class="col-12">
                         <h4>products details</h4>
                         <ul>
-                            <li><a href="#">home</a></li>
-                            <li><a href="#">peoduct</a></li>
+                            <li><a href="{{ route('home') }}">home</a></li>
                             <li><a href="#">product details</a></li>
                         </ul>
                     </div>
@@ -123,7 +122,7 @@
                             </div>
                             <ul class="wsus__button_area">
                                 <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
-                                <li><a class="buy_now" href="#">buy now</a></li>
+                                {{-- <li><a class="buy_now" href="#">buy now</a></li> --}}
                                 <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
                                 <li>
                                     <button type="button" style="border: 1px solid gray;
