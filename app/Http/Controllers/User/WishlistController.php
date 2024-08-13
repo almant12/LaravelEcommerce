@@ -17,7 +17,7 @@ class WishlistController extends Controller{
     }
 
     public function addToWishlist(Request $request){
-        dd($request->all());
+        
         if(!Auth::check()){
             return response()->json(['status'=>'error','message'=>'Login before add a product into wishlist'],401);
         }

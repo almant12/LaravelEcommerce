@@ -91,6 +91,9 @@ Route::get('show-product-modal/{id}', [HomeController::class, 'ShowProductModal'
   //Product-Track
   Route::get('product-track',[ProductTrackController::class,'index'])->name('product-tracking.index');
 
+  //WishList
+  Route::post('wishlist/add-product',[WishlistController::class,'addToWishlist'])->name('wishlist.add-product');
+
 Route::group(['middleware'=>['auth'],'prefix'=>'user','as'=>'user.'],function (){
     Route::get('dashboard',[UserDashboardController::class,'index'])->name('dashboard');
     Route::get('profile',[UserProfileController::class,'index'])->name('profile');
@@ -103,7 +106,6 @@ Route::group(['middleware'=>['auth'],'prefix'=>'user','as'=>'user.'],function ()
     Route::get('get-messages',[UserMessageController::class,'getMessages'])->name('get-messages');
     //Wishlist
     Route::get('wishlist',[WishlistController::class,'index'])->name('wishlist.index');
-    Route::post('wishlist/add-product',[WishlistController::class,'addToWishlist'])->name('wishlist.add-product');
     Route::get('wishlist/remove-product/{id}',[WishlistController::class,'destroy'])->name('wishlist.destroy');
 
     //UserAddress

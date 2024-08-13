@@ -143,7 +143,7 @@
 
             $.ajax({
                 method: 'POST',
-                url: '{{route('user.wishlist.add-product')}}',
+                url: '{{route('wishlist.add-product')}}',
                 data:{
                     id:id
                 },success:function (data){
