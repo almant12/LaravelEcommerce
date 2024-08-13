@@ -26,7 +26,7 @@ window.Echo.private('message.'+ USER.id).listen(
                                 <img style="height: 50px;
                                  object-fit: cover;" src="${e.sender_image}">
                                 <div class="chat-details">
-                                    <div class="chat-text">${e.message}</div>
+                                    <div class="chat-text">${e.message.replace(/\n/g, '<br>')}
                                     <div class="chat-time">${formatDateTime(e.date_time)}</div>
                                 </div>
                             </div>
