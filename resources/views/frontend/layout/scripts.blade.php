@@ -148,13 +148,11 @@
                     id:id
                 },success:function (data){
                     if(data.status == 'success'){
-                        $('.wishlist_count').text(data.count)
+                        $('#wishlist_count').text(data.count)
                         toastr.success(data.message);
-                    }else if(data.status == 'error'){
-                        toastr.error(data.message);
                     }
                 },error:function (data){
-                    console.error(data)
+                    toastr.error(data.message);
                 }
             })
         })
