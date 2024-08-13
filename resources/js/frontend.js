@@ -26,7 +26,7 @@ window.Echo.private('message.'+ USER.id).listen(
                         alt="user" class="img-fluid">
                 </div>
                 <div class="wsus__chat_single_text">
-                    <p>${e.message}</p>
+                    <p>${e.message.replace(/\n/g, '<br>')}</p>
                      <span>${formatDateTime(e.date_time)}</span>
                 </div>
             </div>`
