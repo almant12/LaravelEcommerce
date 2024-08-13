@@ -147,6 +147,7 @@
                 data:{
                     id:id
                 },success:function (data){
+                    console.log(data);
                     if(data.status === 'success'){
                         $('.wishlist_count').text(data.count)
                         toastr.success(data.message);
