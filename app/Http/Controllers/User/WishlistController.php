@@ -17,9 +17,8 @@ class WishlistController extends Controller{
     }
 
     public function addToWishlist(Request $request){
-
+        dd($request->all());
         if(!Auth::check()){
-            dd('here');
             return response()->json(['status'=>'error','message'=>'Login before add a product into wishlist'],401);
         }
         $wishlistCount = Wishlist::where(['product_id'=>$request->id,'user_id'=>Auth::user()->id])->count();
