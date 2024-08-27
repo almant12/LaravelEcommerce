@@ -126,9 +126,9 @@
                                 <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
                                 <li>
                                     <button type="button" style="border: 1px solid gray;
-                                        padding: 7px 11px;
-                                        margin-left: 7px;
-                                        border-radius: 100%; background-color: #0088cc" class="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    padding: 7px 11px;
+                                    margin-left: 7px;
+                                    border-radius: 100%; background-color: #0088cc" class="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="far fa-comment-alt text-light"></i>
                                     </button>
 
