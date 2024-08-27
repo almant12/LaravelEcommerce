@@ -18,6 +18,8 @@ window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
     (e)=>{
         console.log(e)
+        var audio = new Audio('public/new-notification-7-210334.mp3');
+        audio.play().catch(e => console.error('Error playing audio:', e));
         let mainChatBox = $('.chat-content')
         if (mainChatBox.attr('data-inbox') == e.sender_id){
             var message = `
@@ -33,10 +35,6 @@ window.Echo.private('message.'+ USER.id).listen(
         }
         mainChatBox.append(message);
         scrollTobottom();
-
-        var audio = new Audio('public/new-notification-7-210334.mp3');
-        audio.play().catch(e => console.error('Error playing audio:', e));
-
 
         $('.chat-user-profile').each(function() {
             let profileUserId = $(this).data('id');
