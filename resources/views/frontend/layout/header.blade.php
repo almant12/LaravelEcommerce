@@ -57,7 +57,7 @@
                 @endphp
                 <li id="mini-cart-{{$cartItem->rowId}}">
                     <div class="wsus__cart_img">
-                        <a href="{{route('product-detail',$cartItem->options->items->slug_name)}}"><img src="{{asset($cartItem->options->image)}}" alt="product" class="img-fluid w-100"></a>
+                        <a href="{{route('product-detail',$cartItem->options->slug_name)}}"><img src="{{asset($cartItem->options->image)}}" alt="product" class="img-fluid w-100"></a>
                         <a class="wsis__del_icon remove-sidebar-product" data-id="{{$cartItem->rowId}}"><i class="fas fa-minus-circle"></i></a>
                     </div>
                     <div class="wsus__cart_text">
