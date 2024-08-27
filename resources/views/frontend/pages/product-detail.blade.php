@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                             <ul class="wsus__button_area">
-                                <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
+                                <li><button type="submit" class="add_cart">add to cart</button></li>
                                 {{-- <li><a class="buy_now" href="#">buy now</a></li> --}}
                                 <li><a class="add_to_wishlist" data-id="{{$product->id}}"><i class="far fa-heart"></i></a></li>
                                 <li>
@@ -372,6 +372,32 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Send Message</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="" class="message_modal">
+                @csrf
+                <div class="form-group">
+                    <label for="">Message</label>
+                    <textarea name="message" class="form-control mt-2 message-box"></textarea>
+                    <input type="hidden" name="receiver_id" value="{{ $product->vendor->user_id }}">
+                  </div>
+    
+                  <button type="submit" class="btn add_cart mt-4 send-button">Send</button>
+    
+              </form>
+    
+            </div>
+    
+          </div>
+        </div>
+      </div>
     <!--============================
         PRODUCT DETAILS END
     ==============================-->
