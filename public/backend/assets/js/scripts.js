@@ -572,7 +572,6 @@ $(function() {
       });
     }
   }
-
   // Timepicker
   if(jQuery().timepicker && $(".timepicker").length) {
     $(".timepicker").timepicker({
