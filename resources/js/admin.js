@@ -34,13 +34,7 @@ window.Echo.private('message.'+ USER.id).listen(
         mainChatBox.append(message);
         scrollTobottom();
 
-        var audio = new Audio('http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_shoot.wav');
-        audio.addEventListener('canplaythrough', () => {
-            console.log('Audio can play through');
-        });
-        audio.addEventListener('error', (e) => {
-            console.error('Error playing audio:', e);
-        });
+        var audio = new Audio('public/new-notification-7-210334.mp3');
         audio.play().catch(e => console.error('Error playing audio:', e));
 
 
