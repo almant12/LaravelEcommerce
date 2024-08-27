@@ -55,7 +55,6 @@
                 @php
                 $product = \App\Models\Product::find($cartItem->id)
                 @endphp
-                @dd($cartItem);
                 <li id="mini-cart-{{$cartItem->rowId}}">
                     <div class="wsus__cart_img">
                         <a href="{{route('product-detail',$cartItem->options->slug_name)}}"><img src="{{asset($cartItem->options->image)}}" alt="product" class="img-fluid w-100"></a>

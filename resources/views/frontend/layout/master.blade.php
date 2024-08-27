@@ -70,7 +70,7 @@
       <button onclick="closeModal()">I Understand</button>
     </div>
   </div>
-
+@dd(Cart::content);
 
 <section class="product_popup_modal">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
