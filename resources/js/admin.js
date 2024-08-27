@@ -17,8 +17,12 @@ function scrollTobottom() {
 window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
     (e)=>{
-        var audio = new Audio('public/new-notification-7-210334.mp3');
-        audio.play();
+        if (userHasInteracted) {
+            var audio = new Audio('/new-notification-7-210334.mp3');
+            audio.play().catch(e => console.error('Error playing audio:', e));
+        } else {
+            console.log('User has not interacted with the document yet, cannot play sound.');
+        }
         let mainChatBox = $('.chat-content')
         if (mainChatBox.attr('data-inbox') == e.sender_id){
             var message = `
