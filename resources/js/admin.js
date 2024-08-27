@@ -14,8 +14,8 @@ function scrollTobottom() {
     mainChatInbox.scrollTop(mainChatInbox.prop("scrollHeight"));
 }
 
- var messageSound = new Audio('/public/new-notification-7-210334.mp3')
-
+   window.soundPath = "{{ asset('new-notification-7-210334.mp3') }}";
+   var messageSound = new Audio(window.soundPath);
 
 window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
@@ -36,7 +36,7 @@ window.Echo.private('message.'+ USER.id).listen(
         }
         mainChatBox.append(message);
         scrollTobottom();
-        
+
         messageSound.play();
 
 
