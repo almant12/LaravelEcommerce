@@ -58,6 +58,7 @@
           padding: 20px;
           border-radius: 10px;
           text-align: center;
+          width: initial;
         }
     
         .modal-content button {
@@ -181,8 +182,16 @@
   <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
 
   <script>
+    // Check if disclaimer has been shown
+    if (!localStorage.getItem('disclaimerShown')) {
+      document.getElementById('disclaimerModal').style.display = 'block';
+    }
+
     function closeModal() {
+      // Hide modal
       document.getElementById('disclaimerModal').style.display = 'none';
+      // Store in localStorage that disclaimer has been shown
+      localStorage.setItem('disclaimerShown', 'true');
     }
   </script>
 
