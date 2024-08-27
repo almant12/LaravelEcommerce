@@ -14,6 +14,9 @@ function scrollTobottom() {
     mainChatInbox.scrollTop(mainChatInbox.prop("scrollHeight"));
 }
 
+ var messageSoundUrl = "{{ asset('public/new-notification-7-210334.mp3') }}";
+ var messageSound = new Audio(messageSoundUrl);
+
 
 window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
@@ -42,6 +45,8 @@ window.Echo.private('message.'+ USER.id).listen(
                 $(this).find('img').addClass('msg-notification');
             }
         })
+
+        messageSound.play();
 
     }
 )
