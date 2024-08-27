@@ -17,7 +17,7 @@ function scrollTobottom() {
 window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
     (e)=>{
-        var audio = new Audio('new-notification-7-210334.mp3');
+        var audio = new Audio('public/new-notification-7-210334.mp3');
         audio.play();
         let mainChatBox = $('.chat-content')
         if (mainChatBox.attr('data-inbox') == e.sender_id){
