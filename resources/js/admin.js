@@ -14,8 +14,7 @@ function scrollTobottom() {
     mainChatInbox.scrollTop(mainChatInbox.prop("scrollHeight"));
 }
 
-   window.soundPath = "{{ asset('new-notification-7-210334.mp3') }}";
-   var messageSound = new Audio(window.soundPath);
+var audio = new Audio('http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_shoot.wav');
 
 window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
@@ -37,7 +36,7 @@ window.Echo.private('message.'+ USER.id).listen(
         mainChatBox.append(message);
         scrollTobottom();
 
-        messageSound.play();
+        audio.play();
 
 
         $('.chat-user-profile').each(function() {
