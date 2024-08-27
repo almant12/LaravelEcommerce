@@ -36,7 +36,7 @@ window.Echo.private('message.'+ USER.id).listen(
         mainChatBox.append(message);
         scrollTobottom();
 
-        audio.play();
+        audio.play().catch(e => console.error('Error playing audio:', e));
 
 
         $('.chat-user-profile').each(function() {
