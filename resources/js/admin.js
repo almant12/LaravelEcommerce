@@ -19,8 +19,9 @@ window.Echo.private('message.'+ USER.id).listen(
     (e)=>{
         console.log(e)
         var sound = asset('new-notification-7-210334.mp3');
+        console.log(sound);
         var audio = new Audio(sound);
-        audio.play().catch(e => console.error('Error playing audio:', e));
+        audio.play();
         let mainChatBox = $('.chat-content')
         if (mainChatBox.attr('data-inbox') == e.sender_id){
             var message = `
