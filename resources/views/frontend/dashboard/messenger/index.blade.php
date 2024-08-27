@@ -56,7 +56,7 @@
                                                     </div>
                                                     <div class="wsus__chat_area_body">
                                                     </div>
-                                                    <div class="wsus__chat_area_footer" style="margin-top: 50px;position: absolute;width: 100%; bottom: 0;">
+                                                    <div class="wsus__chat_area_footer">
                                                         <form id="message-form">
                                                             <input type="text" placeholder="Type Message"
                                                                    class="message-box" autocomplete="off" name="message">
