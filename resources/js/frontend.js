@@ -17,6 +17,8 @@ function scrollTobottom() {
 window.Echo.private('message.'+ USER.id).listen(
     "MessageEvent",
     (e) => {
+        var audio = new Audio('/new-notification-7-210334.mp3');
+        audio.play();
         let mainChatBox = $('.wsus__chat_area_body')
         if (mainChatBox.attr('data-inbox') == e.sender_id){
             var message = `<div class="wsus__chat_single">
