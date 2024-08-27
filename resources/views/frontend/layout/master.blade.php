@@ -95,7 +95,7 @@
 
 @yield('content')
 
-<div id="disclaimerModal">
+<div id="disclaimerModal" style="display: none">
     <div class="modal-content">
       <h2>Disclaimer</h2>
       <p>
@@ -141,7 +141,20 @@
     SCROLL BUTTON  END
 ==============================-->
 
+<script>
+    // Check if disclaimer has been shown
+    if (!localStorage.getItem('disclaimerShown')) {
+      document.getElementById('disclaimerModal').style.display = 'block';
+    }
 
+    function closeModal() {
+      // Hide modal
+      document.getElementById('disclaimerModal').style.display = 'none';
+      // Store in localStorage that disclaimer has been shown
+      localStorage.setItem('disclaimerShown', 'true');
+    }
+  </script>
+  
   <!--jquery library js-->
   <script src="{{asset('frontend/js/jquery-3.6.0.min.js')}}"></script>
   <!--bootstrap js-->
@@ -180,21 +193,6 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!--classycountdown js-->
   <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
-
-  <script>
-    // Check if disclaimer has been shown
-    if (localStorage.getItem('disclaimerShown')) {
-      document.getElementById('disclaimerModal').style.display = 'none';
-    }
-
-    function closeModal() {
-      // Hide modal
-      document.getElementById('disclaimerModal').style.display = 'none';
-      // Store in localStorage that disclaimer has been shown
-      localStorage.setItem('disclaimerShown', 'true');
-    }
-  </script>
-
 
   <!--main/custom js-->
   <script src="{{asset('frontend/js/main.js')}}"></script>
