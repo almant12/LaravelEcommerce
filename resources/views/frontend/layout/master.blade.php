@@ -97,7 +97,10 @@
 <div id="disclaimerModal">
     <div class="modal-content">
       <h2>Disclaimer</h2>
-      <p>The products you see cannot be approached.</p>
+      <p>
+        The products and information displayed on this website are part of a portfolio project and are not available for purchase. All content is for demonstration purposes only to showcase development skills. Prices, descriptions, and availability of the items are fictional and may not reflect real-world products or conditions.
+        
+        Thank you for visiting my portfolio!</p>
       <button onclick="closeModal()">I Understand</button>
     </div>
   </div>
