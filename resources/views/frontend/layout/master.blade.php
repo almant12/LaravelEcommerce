@@ -36,6 +36,40 @@
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
     @vite(['resources/js/app.js'])
+    <style>
+        /* Modal styling */
+        #disclaimerModal {
+          display: block;
+          position: fixed;
+          z-index: 1000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.7);
+        }
+    
+        .modal-content {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: white;
+          padding: 20px;
+          border-radius: 10px;
+          text-align: center;
+        }
+    
+        .modal-content button {
+          margin-top: 20px;
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+      </style>
 </head>
 
 <body>
@@ -59,6 +93,14 @@
 
 
 @yield('content')
+
+<div id="disclaimerModal">
+    <div class="modal-content">
+      <h2>Disclaimer</h2>
+      <p>The products you see cannot be approached.</p>
+      <button onclick="closeModal()">I Understand</button>
+    </div>
+  </div>
 
 
 <section class="product_popup_modal">
@@ -134,6 +176,12 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!--classycountdown js-->
   <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
+
+  <script>
+    function closeModal() {
+      document.getElementById('disclaimerModal').style.display = 'none';
+    }
+  </script>
 
 
   <!--main/custom js-->

@@ -104,6 +104,7 @@
                                     <label>Short Description</label>
                                     <textarea class="form-control" name="short_description"></textarea>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label>Long Description</label>
                                     <textarea class="form-control summernote" name="long_description""></textarea>
