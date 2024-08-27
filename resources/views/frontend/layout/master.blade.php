@@ -61,7 +61,7 @@
 @yield('content')
 
 <div id="disclaimerModal" style="display: none">
-    <div class="modal-content">
+    <div class="modal-content-1">
       <h2>Disclaimer</h2>
       <p>
         The products and information displayed on this website are part of a portfolio project and are not available for purchase. All content is for demonstration purposes only to showcase development skills. Prices, descriptions, and availability of the items are fictional and may not reflect real-world products or conditions.

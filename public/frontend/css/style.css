@@ -9674,7 +9674,7 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.modal-content {
+.modal-content-1 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -9687,12 +9687,12 @@ body {
 }
 
 @media (max-width:768px){
-  .modal-content{
+  .modal-content-1{
     width: inherit;
   }
 }
 
-.modal-content button {
+.modal-content-1 button {
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #4CAF50;
