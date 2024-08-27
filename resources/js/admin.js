@@ -14,10 +14,12 @@ function scrollTobottom() {
     mainChatInbox.scrollTop(mainChatInbox.prop("scrollHeight"));
 }
 
-var audio = new Audio('public/new-notification-7-210334.mp3');
 window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
     (e)=>{
+        var sound = "{{asset('new-notification-7-210334.mp3')}}";
+        console.log(sound);
+        var audio = new Audio(sound);
         audio.play();
         let mainChatBox = $('.chat-content')
         if (mainChatBox.attr('data-inbox') == e.sender_id){
