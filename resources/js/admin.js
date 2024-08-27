@@ -14,8 +14,7 @@ function scrollTobottom() {
     mainChatInbox.scrollTop(mainChatInbox.prop("scrollHeight"));
 }
 
- var messageSoundUrl = "{{ asset('public/new-notification-7-210334.mp3') }}";
- var messageSound = new Audio(messageSoundUrl);
+ var messageSound = new Audio('/public/new-notification-7-210334.mp3')
 
 
 window.Echo.private('message.'+ USER.id).listen(
@@ -37,6 +36,8 @@ window.Echo.private('message.'+ USER.id).listen(
         }
         mainChatBox.append(message);
         scrollTobottom();
+        
+        messageSound.play();
 
 
         $('.chat-user-profile').each(function() {
@@ -44,9 +45,6 @@ window.Echo.private('message.'+ USER.id).listen(
             if(profileUserId == e.sender_id) {
                 $(this).find('img').addClass('msg-notification');
             }
-        })
-
-        messageSound.play();
-
+        });
     }
 )
