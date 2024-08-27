@@ -9688,7 +9688,7 @@ body {
 
 @media (max-width:768px){
   .modal-content{
-    width: unset;
+    width: inherit;
   }
 }
 
