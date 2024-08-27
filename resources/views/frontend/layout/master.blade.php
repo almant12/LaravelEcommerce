@@ -183,8 +183,8 @@
 
   <script>
     // Check if disclaimer has been shown
-    if (!localStorage.getItem('disclaimerShown')) {
-      document.getElementById('disclaimerModal').style.display = 'block';
+    if (localStorage.getItem('disclaimerShown')) {
+      document.getElementById('disclaimerModal').style.display = 'none';
     }
 
     function closeModal() {
