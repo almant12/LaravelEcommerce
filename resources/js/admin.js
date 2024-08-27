@@ -17,8 +17,6 @@ function scrollTobottom() {
 window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
     (e)=>{
-        console.log(e)
-        console.log('ckemi');
         // var sound = asset('new-notification-7-210334.mp3');
         // console.log(sound);
         // var audio = new Audio(sound);

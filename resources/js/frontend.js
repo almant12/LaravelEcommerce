@@ -17,7 +17,6 @@ function scrollTobottom() {
 window.Echo.private('message.'+ USER.id).listen(
     "MessageEvent",
     (e) => {
-        console.log(e);
         let mainChatBox = $('.wsus__chat_area_body')
         if (mainChatBox.attr('data-inbox') == e.sender_id){
             var message = `<div class="wsus__chat_single">
