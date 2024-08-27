@@ -6,6 +6,7 @@
 /public/upload
 /storage/*.key
 /vendor
+/resources/views/ecommerce-frontend-template
 .env
 .env.backup
 .env.production
