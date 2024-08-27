@@ -14,6 +14,7 @@ function scrollTobottom() {
     mainChatInbox.scrollTop(mainChatInbox.prop("scrollHeight"));
 }
 
+let userHasInteracted = false;
 window.Echo.private('message.'+ USER.id).listen(
     'MessageEvent',
     (e)=>{
