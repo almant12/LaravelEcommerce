@@ -22,15 +22,9 @@
     @push('scripts')
         <script src="https://js.stripe.com/v3/"></script>
         <script>
-        const options = {
-  layout: {
-    type: 'tabs',
-    defaultCollapsed: false,
-  }
-};
             var stripe = Stripe("{{$stripeSetting->client_id}}");
             var elements = stripe.elements();
-            var cardElement = elements.create(options);
+            var cardElement = elements.create('card');
             cardElement.mount('#card-element');
 
             function createToken() {
