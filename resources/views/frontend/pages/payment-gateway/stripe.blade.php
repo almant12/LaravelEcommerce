@@ -21,7 +21,7 @@
 @endphp
     @push('scripts')
         <script src="https://js.stripe.com/v3/"></script>
-        <script>]
+        <script>
         const options = {
   layout: {
     type: 'tabs',
