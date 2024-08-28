@@ -31,7 +31,7 @@
             }
         };
 
-            var elements = stripe.elements();
+            var elements = stripe.elements({clientSecret: 'CLIENT_SECRET',});
             var cardElement = elements.create('payment',options);
             cardElement.mount('#card-element');
 
