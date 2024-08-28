@@ -243,8 +243,6 @@ class PaymentController extends Controller{
             'description'=>'bobe'
         ]);
 
-        dd($response->url);
-
         if ($response->status === 'succeeded'){
             $this->storeOrder('stripe','1',$response->id,$paidAmount,$stripeSetting->currency_name);
             $this->clearSession();
